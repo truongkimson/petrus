@@ -17,7 +17,11 @@ namespace petrus
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            var host = CreateHostBuilder(args).Build();
+
+            CreateDb(host);
+
+            host.Run();
         }
 
         private static void CreateDb(IHost host)

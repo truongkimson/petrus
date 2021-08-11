@@ -21,7 +21,7 @@ namespace petrus.Models
         public int PhoneNumber { get; set; }
         [Required]
         public string EmailAddress { get; set; }
-        public ICollection<string> SearchTerms { get; set; }
+        public string SearchTerms { get; set; }
 
         public virtual ICollection<AdoptionListing> AdoptionListings { get; set; }
         public virtual ICollection<AdoptionRequest> AdoptionRequests { get; set; }

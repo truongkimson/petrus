@@ -21,7 +21,7 @@ namespace pwned_shop.Data
                 return;
 
             // populate Users table using data from csv/UserProfile.csv
-            var rows = ReadCsv("Data/csv/UserProfile.csv");
+            var rows = ReadCsv("Data/csv/Users.csv");
             string dateFormat = "d/M/yyyy";
             for (int i = 1; i < rows.Count; i++)
             {
@@ -40,27 +40,27 @@ namespace pwned_shop.Data
             }
 
             // populate Ratings table using data from csv/RatingESRB.csv
-            rows = ReadCsv("Data/csv/RatingESRB.csv");
-            for (int i = 1; i < rows.Count; i++)
-            {
-                var row = rows[i];
-                Admin a = new Admin()
-                {
-                    UserId = row[0],
-                    Password = row[1],
-                    Name = row[2],
-                    PhoneNumber = Convert.ToInt32(row[3]),
-                    EmailAddress = row[4],
-                    SearchTerms = row[5],
-                    AdminId = row[6]
-                };
+            //rows = ReadCsv("Data/csv/Admin.csv");
+            //for (int i = 1; i < rows.Count; i++)
+            //{
+            //    var row = rows[i];
+            //    Admin a = new Admin()
+            //    {
+            //        UserId = row[0],
+            //        Password = row[1],
+            //        Name = row[2],
+            //        PhoneNumber = Convert.ToInt32(row[3]),
+            //        EmailAddress = row[4],
+            //        SearchTerms = row[5],
+            //        AdminId = row[6]
+            //    };
 
-                db.Admins.Add(a);
-            }
+            //    db.Admins.Add(a);
+            //}
             
 
             // populate Products table using data from csv/Product.csv
-            rows = ReadCsv("Data/csv/Product.csv");
+            rows = ReadCsv("Data/csv/AdoptionListing.csv");
             for (int i = 1; i < rows.Count; i++)
             {
                 var row = rows[i];
@@ -84,10 +84,10 @@ namespace pwned_shop.Data
                     Health = row[15],
                     QuantityRepresented = Convert.ToInt32(row[16]),
                     Fee = Convert.ToDouble(row[17]),
-                    VideoBytes = new[] {Convert.ToByte(row[18])},
-                    ImageBytes = new [] {Convert.ToByte(row[19])},
+                    /*VideoBytes = new[] {Convert.ToByte(row[18])},
+                    ImageBytes = new [] {Convert.ToByte(row[19])},*/
                     Description = row[20],
-                    ListingDate = DateTime.ParseExact(row[21], dateFormat, null),
+                    ListingDate = DateTime.Parse(row[21], new CultureInfo("en-SG")),
                     ApplicationStatus = row[22]
                 };
 
@@ -96,7 +96,7 @@ namespace pwned_shop.Data
             db.SaveChanges();
 
             // populate Discounts table using data from csv/Discount.csv
-            rows = ReadCsv("Data/csv/Discount.csv");
+            rows = ReadCsv("Data/csv/AdoptionRequest.csv");
             for (int i = 1; i < rows.Count; i++)
             {
                 var row = rows[i];
@@ -104,7 +104,7 @@ namespace pwned_shop.Data
                 {
                     AdoptionRequestId = row[0],
                     Description = row[1],
-                    RequestDate = DateTime.ParseExact(row[2], dateFormat, null)
+                    RequestDate = DateTime.Parse(row[2], new CultureInfo("en-SG"))
                 };
 
                 db.AdoptionRequests.Add(ar);
