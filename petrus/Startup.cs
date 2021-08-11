@@ -27,14 +27,16 @@ namespace petrus
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDatabaseDeveloperPageExceptionFilter();
-
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
+
+            services.AddDbContext<petrusDb>(options =>
+                options.UseLazyLoadingProxies()
+                    .UseSqlServer(Configuration.GetConnectionString("DbConn")));
+
+
+            services.AddDatabaseDeveloperPageExceptionFilter();
+            services.AddSession();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,7 +45,6 @@ namespace petrus
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseMigrationsEndPoint();
             }
             else
             {
@@ -58,13 +59,13 @@ namespace petrus
 
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
-                endpoints.MapRazorPages();
+                    pattern: "{controller=Product}/{action=Index}/{id?}");
             });
         }
     }
