@@ -28,7 +28,7 @@ namespace pwned_shop.Data
                 var row = rows[i];
                 User u = new User()
                 {
-                    UserId = row[0],
+                    UserID = row[0],
                     Password = row[1],
                     Name = row[2],
                     PhoneNumber = Convert.ToInt32(row[3]),
@@ -66,29 +66,27 @@ namespace pwned_shop.Data
                 var row = rows[i];
                 AdoptionListing al = new AdoptionListing()
                 {
-                    AdoptionId = row[0],
-                    Species = row[1],
+                    AdoptionListingID = row[0],
+                    Species = (Species)Enum.Parse(typeof(Species), row[1]),
                     Name = row[2],
                     Age = Convert.ToInt32(row[3]),
-                    Breed1 = row[4],
-                    Breed2 = row[5],
-                    Gender = row[6],
-                    Color1 = row[7],
-                    Color2 = row[8],
-                    Color3 = row[9],
-                    MaturitySize = row[10],
-                    FurLength = row[11],
-                    Vaccinated = Convert.ToBoolean(row[12]),
-                    Dewormed = Convert.ToBoolean(row[13]),
-                    Sterilized = Convert.ToBoolean(row[14]),
-                    Health = row[15],
+                    Breed1 = (Breed)Enum.Parse(typeof(Breed), row[4]),
+                    Gender = (Gender)Enum.Parse(typeof(Gender), row[6]),
+                    Color1 = (Color)Enum.Parse(typeof(Color), row[7]),
+                    MaturitySize = (MaturitySize)Enum.Parse(typeof(MaturitySize), row[10]),
+                    FurLength = (FurLength)Enum.Parse(typeof(FurLength), row[11]),
+                    Vaccinated = (Vaccinated)Enum.Parse(typeof(Vaccinated), row[12]),
+                    Dewormed = (Dewormed)Enum.Parse(typeof(Dewormed), row[13]),
+                    Sterilized = (Sterilized)Enum.Parse(typeof(Sterilized), row[14]),
+                    Health = (Health)Enum.Parse(typeof(Health), row[15]),
                     QuantityRepresented = Convert.ToInt32(row[16]),
                     Fee = Convert.ToDouble(row[17]),
-                    /*VideoBytes = new[] {Convert.ToByte(row[18])},
-                    ImageBytes = new [] {Convert.ToByte(row[19])},*/
+                    Video = row[18],
+                    Image = row[19],
                     Description = row[20],
                     ListingDate = DateTime.Parse(row[21], new CultureInfo("en-SG")),
-                    ApplicationStatus = row[22]
+                    ApplicationStatus = (ApplicationStatus)Enum.Parse(typeof(ApplicationStatus), row[22]),
+                    UserID = Convert.ToString(row[23])
                 };
 
                 db.AdoptionListings.Add(al);
