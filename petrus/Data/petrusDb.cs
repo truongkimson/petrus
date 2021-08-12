@@ -22,14 +22,14 @@ namespace petrus.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>().HasIndex(u => u.UserId).IsUnique();
+            modelBuilder.Entity<User>().HasIndex(u => u.UserID).IsUnique();
             modelBuilder.Entity<User>().HasMany(u => u.AdoptionRequests);
             modelBuilder.Entity<User>().HasMany(u => u.AdoptionListings);
 
             modelBuilder.Entity<Admin>().HasIndex(a => a.AdminId).IsUnique();
 
-            modelBuilder.Entity<AdoptionListing>().HasIndex(al => al.AdoptionId);
-            modelBuilder.Entity<AdoptionListing>().HasOne(al => al.User);
+            modelBuilder.Entity<AdoptionListing>().HasIndex(al => al.AdoptionListingID);
+            //modelBuilder.Entity<AdoptionListing>().HasOne(al => al.User);
             modelBuilder.Entity<AdoptionListing>().HasMany(al => al.AdoptionRequests);
 
             modelBuilder.Entity<AdoptionRequest>().HasIndex(ar => ar.AdoptionRequestId).IsUnique();
