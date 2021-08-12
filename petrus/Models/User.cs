@@ -12,7 +12,7 @@ namespace petrus.Models
         [Key]
         [Required]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public string UserId { get; set; }
+        public string UserID { get; set; }
         [Required]
         public string Password { get; set; }
         [Required]
