@@ -11,31 +11,42 @@ namespace petrus.Models
     {
         [Key]
         [Required]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Display(Name = "ID")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string AdoptionListingID { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Please enter species")]
         public Species Species { get; set; }
-        [Required]
         public string Name { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Please enter age")]
         public int Age { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Please enter breed")]
+        [Display(Name = "Primary Breed")]
         public Breed Breed1 { get; set; }
         public Breed? Breed2 { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Please enter gender")]
         public Gender  Gender { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Please enter colour")]
+        [Display(Name = "Colour")]
         public Color Color1 { get; set; }
         public Color? Color2 { get; set; }
         public Color? Color3 { get; set; }
+        [Required(ErrorMessage = "Please enter mature size of pet")]
+        [Display(Name = "Size at maturity")]
         public MaturitySize MaturitySize { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Please enter fur length of pet")]
+        [Display(Name = "Fur Length")]
         public FurLength FurLength { get; set; }
+        [Required(ErrorMessage = "Please enter vaccination status")]
         public Vaccinated Vaccinated { get; set; }
+        [Required(ErrorMessage = "Please enter deworming status")]
         public Dewormed Dewormed { get; set; }
+        [Required(ErrorMessage = "Please enter sterilisation status")]
         public Sterilized Sterilized { get; set; }
+        [Required(ErrorMessage = "Please enter health status")]
         public Health Health { get; set; }
+        [Required(ErrorMessage = "Please enter quantity of pets for this adoption listing")]
         public int QuantityRepresented { get; set; }
+        [Required(ErrorMessage = "Please enter adoption fee")]
         public double Fee { get; set; }
         public string Video { get; set; }
         public string Image { get; set; }
