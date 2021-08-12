@@ -1,0 +1,31 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    AdoptionListing listing = (AdoptionListing)ViewData["listing"];
+    string val = "~/videos/" + (string)listing.Video;
+}
+<h2>Adoption Listing @listing.AdoptionListingID</h2>
+<p>Name: @listing.Name</p>
+<p>Photo:</p>
+<div>
+    <img src="~/images/@listing.Image"
+         class="rounded"
+         height="300" />
+</div>
+<br />
+<p>Species: @listing.Species.ToString()</p>
+<p>Breed: @listing.Breed1.ToString() &nbsp; @listing.Breed2.ToString()</p>
+<p>Age: @listing.Age</p>
+<p>Colour: @listing.Color1.ToString() &nbsp; @listing.Color2.ToString() &nbsp; @listing.Color3.ToString()</p>
+<p>Fur length: @listing.FurLength</p>
+<p>Maturity size: @listing.MaturitySize</p>
+<p>Quantity represented: @listing.QuantityRepresented</p>
+<p>Fee: @listing.Fee</p>
+<p>Vaccinated: @listing.Vaccinated.ToString()</p>
+<p>Sterilised: @listing.Sterilized.ToString()</p>
+<p>Dewormed: @listing.Dewormed.ToString()</p>
+<p>Health Condition: @listing.Health.ToString()</p>
+<video style="height:500px;" controls>
+    <source src="@Url.Content(@val)" type="video/mp4" />
+</video>
