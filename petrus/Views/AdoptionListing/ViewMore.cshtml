@@ -5,27 +5,112 @@
     AdoptionListing listing = (AdoptionListing)ViewData["listing"];
     string val = "~/videos/" + (string)listing.Video;
 }
-<h2>Adoption Listing @listing.AdoptionListingID</h2>
-<p>Name: @listing.Name</p>
-<p>Photo:</p>
+<h1>Adoption Listing Details- @listing.AdoptionListingID</h1>
+
 <div>
-    <img src="~/images/@listing.Image"
-         class="rounded"
-         height="300" />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Name:
+        </dt>
+        <dd class="col-sm-10">
+            @listing.Name
+        </dd>
+        <dt class="col-sm-2">
+            Photo:
+        </dt>
+        <dd class="col-sm-10">
+            <img src="~/images/@listing.Image"
+                 class="rounded"
+                 height="300" />
+        </dd>
+        <dt class="col-sm-2">
+            Species:
+        </dt>
+        <dd class="col-sm-10">
+            @listing.Species.ToString()
+        </dd>
+        <dt class="col-sm-2">
+            Breed:
+        </dt>
+        <dd class="col-sm-10">
+            @BreedExtensions.ToFriendlyString(listing.Breed1) &nbsp; @BreedExtensions.ToFriendlyString(listing.Breed2)
+        </dd>
+        <dt class="col-sm-2">
+            Age:
+        </dt>
+        <dd class="col-sm-10">
+            @listing.Age
+        </dd>
+        <dt class="col-sm-2">
+            Colour:
+        </dt>
+        <dd class="col-sm-10">
+            @listing.Color1.ToString() &nbsp; @listing.Color2.ToString() &nbsp; @listing.Color3.ToString()
+        </dd>
+        <dt class="col-sm-2">
+            Fur Length:
+        </dt>
+        <dd class="col-sm-10">
+            @listing.FurLength
+        </dd>
+        <dt class="col-sm-2">
+            Maturity Size:
+        </dt>
+        <dd class="col-sm-10">
+            @listing.MaturitySize
+        </dd>
+        <dt class="col-sm-2">
+            Quantity represented:
+        </dt>
+        <dd class="col-sm-10">
+            @listing.QuantityRepresented
+        </dd>
+        <dt class="col-sm-2">
+            Fee:
+        </dt>
+        <dd class="col-sm-10">
+            @listing.Fee
+        </dd>
+        <dt class="col-sm-2">
+            Vaccinated:
+        </dt>
+        <dd class="col-sm-10">
+            @listing.Vaccinated.ToString()
+        </dd>
+        <dt class="col-sm-2">
+            Sterilised:
+        </dt>
+        <dd class="col-sm-10">
+            @listing.Sterilized.ToString()
+        </dd>
+        <dt class="col-sm-2">
+            Dewormed:
+        </dt>
+        <dd class="col-sm-10">
+            @listing.Dewormed.ToString()
+        </dd>
+        <dt class="col-sm-2">
+            Health Condition:
+        </dt>
+        <dd class="col-sm-10">
+            @listing.Health.ToString()
+        </dd>
+        <dt class="col-sm-2">
+            Video:
+        </dt>
+        <dd class="col-sm-10">
+            <video style="height:500px;" controls>
+                <source src="@Url.Content(@val)" type="video/mp4" />
+            </video>
+        </dd>
+        <dt class="col-sm-2">
+            Application Status:
+        </dt>
+        <dd class="col-sm-10">
+            @listing.ApplicationStatus.ToString()
+        </dd>
+    </dl>
 </div>
-<br />
-<p>Species: @listing.Species.ToString()</p>
-<p>Breed: @listing.Breed1.ToString() &nbsp; @listing.Breed2.ToString()</p>
-<p>Age: @listing.Age</p>
-<p>Colour: @listing.Color1.ToString() &nbsp; @listing.Color2.ToString() &nbsp; @listing.Color3.ToString()</p>
-<p>Fur length: @listing.FurLength</p>
-<p>Maturity size: @listing.MaturitySize</p>
-<p>Quantity represented: @listing.QuantityRepresented</p>
-<p>Fee: @listing.Fee</p>
-<p>Vaccinated: @listing.Vaccinated.ToString()</p>
-<p>Sterilised: @listing.Sterilized.ToString()</p>
-<p>Dewormed: @listing.Dewormed.ToString()</p>
-<p>Health Condition: @listing.Health.ToString()</p>
-<video style="height:500px;" controls>
-    <source src="@Url.Content(@val)" type="video/mp4" />
-</video>
+<div>
+    <a href="/AdoptionListing/Index">Back to List</a>
+</div>
