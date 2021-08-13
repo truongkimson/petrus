@@ -30,7 +30,7 @@
                 <td>@adoptionListing.Name</td>
                 <td>@adoptionListing.Age</td>
                 <td>@adoptionListing.Species.ToString()</td>
-                <td>@adoptionListing.Breed1.ToString()</td>
+                <td>@BreedExtensions.ToFriendlyString(adoptionListing.Breed1)</td>
                 <td>@adoptionListing.Color1.ToString()</td>
             </tr>
         }
