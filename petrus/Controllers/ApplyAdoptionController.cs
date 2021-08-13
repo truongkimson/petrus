@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace petrus.Controllers
 {
-    public class ApplyAdoption : Controller
+    public class ApplyAdoptionController : Controller
     {
         private readonly petrusDb dbContext;
 
-        public ApplyAdoption(petrusDb context)
+        public ApplyAdoptionController(petrusDb context)
         {
             dbContext = context;
         }
