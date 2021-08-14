@@ -5,10 +5,10 @@
 
 <form method="post">
     <div class="container backgroundWhite">
-        <div class="card">
+        <div class="card" style="text-overflow: ellipsis; overflow: hidden;">
             <div class="card-header bg-light text-light ml-0 row container">
                 <div class="col-12 col-md-6">
-                    <h1 class="text-primary"><b style="color: #012169">@listing.Name</b></h1>
+                    <h1 class="text-primary"><b style="color: #012169">About @listing.Name</b></h1>
                 </div>
                 <div class="col-12 col-md-6 text-md-right pt-3">
                     <p class="card-title h5">
@@ -29,6 +29,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <br />
                             <div class="row">
                                 <div class="col-12 col-md-6 pb-1">
                                     <div class="row pl-2">
@@ -38,13 +39,13 @@
                                         <h5 class="text-muted">Breed: @listing.Breed1</h5>
                                     </div>
                                     <div class="row pl-2">
-                                        <h5 class="text-muted">Age: @listing.Age</h5>
+                                        <h5 class="text-muted">Age: @listing.Age years old</h5>
                                     </div>
                                     <div class="row pl-2">
                                         <h5 class="text-muted">Color: @listing.Color1</h5>
                                     </div>
                                     <div class="row pl-2">
-                                        <h5 class="text-muted">Fur Length: @listing.FurLength</h5>
+                                        <h5 class="text-muted">Fur length: @listing.FurLength</h5>
                                     </div>
                                     <div class="row pl-2">
                                         <h5 class="text-muted">Maturity size: @listing.MaturitySize</h5>
@@ -52,10 +53,7 @@
                                 </div>
                                 <div class="col-12 col-md-6 pb-1">
                                     <div class="row pl-2">
-                                        <h5 class="text-muted">Quantity represented: @listing.QuantityRepresented</h5>
-                                    </div>
-                                    <div class="row pl-2">
-                                        <h5 class="text-muted">Fee: @listing.Fee</h5>
+                                        <h5 class="text-muted">Health condition: @listing.Health</h5>
                                     </div>
                                     <div class="row pl-2">
                                         <h5 class="text-muted">Vaccinated: @listing.Vaccinated</h5>
@@ -67,7 +65,10 @@
                                         <h5 class="text-muted">Dewormed: @listing.Dewormed</h5>
                                     </div>
                                     <div class="row pl-2">
-                                        <h5 class="text-muted">Health Condition: @listing.Health</h5>
+                                        <h5 class="text-muted">Quantity represented: @listing.QuantityRepresented</h5>
+                                    </div>
+                                    <div class="row pl-2">
+                                        <h5 class="text-muted">Fee: SGD @listing.Fee</h5>
                                     </div>
                                 </div>
                             </div>
