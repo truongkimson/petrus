@@ -11,7 +11,7 @@ namespace petrus.Models
     {
         [Key]
         [Required]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string AdoptionRequestId { get; set; }
         public string Description { get; set; }
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
