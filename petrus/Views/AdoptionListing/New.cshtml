@@ -46,7 +46,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label asp-for="Age" class="control-label"></label>
-                            <input asp-for="Age" class="form-control" />
+                            <input asp-for="Age" class="form-control" id="age"/>
                             <span asp-validation-for="Age" class="text-danger"></span>
                         </div>
                     </div>
@@ -130,7 +130,8 @@
                             <label asp-for="Sterilized" class="control-label"></label>
                             <select asp-for="Sterilized"
                                     class="form-control"
-                                    asp-items="Html.GetEnumSelectList<Sterilized>()">
+                                    asp-items="Html.GetEnumSelectList<Sterilized>()"
+                                    id="sterilized">
                                 <option value="" disabled selected hidden>Select status</option>
                             </select>
                             <span asp-validation-for="Sterilized" class="text-danger"></span>
@@ -143,7 +144,8 @@
                             <label asp-for="Vaccinated" class="control-label"></label>
                             <select asp-for="Vaccinated"
                                     class="form-control"
-                                    asp-items="Html.GetEnumSelectList<Vaccinated>()">
+                                    asp-items="Html.GetEnumSelectList<Vaccinated>()"
+                                    id="vaccinated">
                                 <option value="" disabled selected hidden>Select status</option>
                             </select>
                             <span asp-validation-for="Vaccinated" class="text-danger"></span>
@@ -208,6 +210,10 @@
                     <a asp-action="Index" class="btn btn-sm btn-primary rounded-0 text-uppercase"><i class="fas fa-fast-backward"></i> Back to List</a>
                 </div>
             </form>
+            <div class="container">
+                <button class="btn btn-primary" onclick="checkAdoptionSpeed();">Check adoption speed</button>
+                <p id="adoption-speed"></p>
+            </div>
         </div>
     </div>
 </div>
