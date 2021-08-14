@@ -1,0 +1,171 @@
+﻿@{
+    AdoptionListing listing = (AdoptionListing)ViewData["listing"];
+    User user = (User)ViewData["user"];
+}
+
+<form method="post" name="myForm"  onsubmit="return ValidateForm()" >
+    <div class="container backgroundWhite">
+        <div class="card" style="text-overflow: ellipsis; overflow: hidden;">
+            <div class="card-header bg-light text-light ml-0 row container">
+                <div class="col-12 col-md-6 text-left text-md-left">
+                    <h1 class="text-primary"><b style="color: #012169">Adopt @listing.Name</b></h1>
+                </div>
+                <div class="col-12 col-md-6 text-md-right text-left pt-2">
+                    <p class="card-title h5">
+                        <span class="badge badge-info pt-2" style="height:30px; width:100px">@listing.ApplicationStatus</span>
+                    </p>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="container rounded p-2">
+                    <div class="row bg-light">
+                        <div class="col-12 col-lg-12">
+                            <div class="row">
+                                <div class="col-12 col-md-6 pb-3 pt-3">
+                                    <div class="row pl-2">
+                                        <h5 class="text-muted">Species: @listing.Species</h5>
+                                    </div>
+                                    <div class="row pl-2">
+                                        <h5 class="text-muted">Breed: @listing.Breed1</h5>
+                                    </div>
+                                    <div class="row pl-2">
+                                        <h5 class="text-muted">Age: @listing.Age years old</h5>
+                                    </div>
+                                    <div class="row pl-2">
+                                        <h5 class="text-muted">Color: @listing.Color1</h5>
+                                    </div>
+                                    <div class="row pl-2">
+                                        <h5 class="text-muted">Fur length: @listing.FurLength</h5>
+                                    </div>
+                                    <div class="row pl-2">
+                                        <h5 class="text-muted">Maturity size: @listing.MaturitySize</h5>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 pb-3 pt-3">
+                                    <div class="row pl-2">
+                                        <h5 class="text-muted">Health condition: @listing.Health</h5>
+                                    </div>
+                                    <div class="row pl-2">
+                                        <h5 class="text-muted">Vaccinated: @listing.Vaccinated</h5>
+                                    </div>
+                                    <div class="row pl-2">
+                                        <h5 class="text-muted">Sterilised: @listing.Sterilized</h5>
+                                    </div>
+                                    <div class="row pl-2">
+                                        <h5 class="text-muted">Dewormed: @listing.Dewormed</h5>
+                                    </div>
+                                    <div class="row pl-2">
+                                        <h5 class="text-muted">Quantity represented: @listing.QuantityRepresented</h5>
+                                    </div>
+                                    <div class="row pl-2">
+                                        <h5 class="text-muted">Fee: SGD @listing.Fee</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @*Actual form*@
+            <div class="card-body">
+                <div class="container rounded p-2">
+                    <div class="row pl-2">
+                        <h3 class="text-muted">Application Form</h3>
+                    </div>
+                    <div class="row bg-light">
+                        <div class="col-12 col-lg-12 col-md-12">
+                            <div class="row">
+                                <div class="col-12 col-md-12 pb-3 pt-3">
+                                    <div class="row pl-2">
+                                        <h5 class="text-muted">Applicant Name:&nbsp;&nbsp; @user.Name</h5>
+                                    </div>
+                                    <br />
+                                    <div class="row pl-2">
+                                        <h5 class="text-muted">
+                                            Type of Residence:&nbsp;&nbsp;
+                                            <input type="radio" class="text-muted" id="hdb" name="residenceType" value="HDB">
+                                            <label for="hdb">HDB</label>
+                                            &nbsp;
+                                            <input type="radio" class="text-muted" id="private" name="residenceType" value="Private">
+                                            <label for="private">Private</label>
+                                        </h5>
+                                    </div>
+                                    <br />
+                                    <div class="row pl-2">
+                                        <h5 class="text-muted">
+                                            Number of @listing.Species Owned:&nbsp;&nbsp;
+                                            <input type="radio" class="text-muted" id="0" name="dogsOwned" value="0">
+                                            <label for="0">0</label>
+                                            &nbsp;
+                                            <input type="radio" class="text-muted" id="1" name="dogsOwned" value="1">
+                                            <label for="1">1</label>
+                                            &nbsp;
+                                            <input type="radio" class="text-muted" id="2" name="dogsOwned" value="2">
+                                            <label for="1">2</label>
+                                            &nbsp;
+                                            <input type="radio" class="text-muted" id="3" name="dogsOwned" value="3">
+                                            <label for="3">3</label>
+                                            &nbsp;
+                                            <input type="radio" class="text-muted" id="3more" name="dogsOwned" value="4">
+                                            <label for="3more">	&gt; 3</label>
+                                        </h5>
+                                    </div>
+                                    <br />
+                                    <div class="row pl-2">
+                                        <h5 class="text-muted" style="text-overflow: ellipsis; overflow: hidden;">
+                                            Tell us what adopting @listing.Name would mean to you:&nbsp;&nbsp;
+                                            <br />
+                                            <input type="text" class="text-muted" id="description" name="description" style="width: 300px; height: 40px" value="Short Write Up ">
+                                            <label for="description"></label>
+                                        </h5>
+                                    </div>
+                                    <br />
+                                    <div> <input type="hidden" id="listingId" name="listingId" value="@listing.AdoptionListingID"> </div>
+                                    <div class="row pl-2">
+                                        <h5 class="text-muted">
+                                            <a href="https://www.hdb.gov.sg/residential/living-in-an-hdb-flat/keeping-pets" target="_blank">HDB Approved Small Breeds</a> &nbsp;
+                                            <a href="https://www.nparks.gov.sg/avs/pets/owning-a-pet/licensing-a-pet/dog-licensing" target="_blank">NParks Dogs Licensing</a>
+                                        </h5>
+                                    </div>
+                                    <br />
+                                    <div class="row pl-2">
+                                        <h5 class="text-muted">
+                                            <input type="checkbox" id="acceptConditions" name="acceptConditions" value="Accept">
+                                            <label for="acceptConditions">I fully understand the conditions required to own a dog in Singapore and have fulfilled all the requisites </label><br>
+                                        </h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-footer">
+                <div class="row">
+                    <div class="col-12 col-md-6 pb-1">
+                        <a asp-action="Details" asp-route-id="@listing.AdoptionListingID" class="btn btn-success form-control  btn-square btn-lg" style="height:50px;">Back</a>
+                    </div>
+                    <div class="col-12 col-md-6 pb-1">
+                        <button type="submit" asp-action="ApplyAdoptionResult" onsubmit="return ValidateForm()" value="Apply Adoption" class="btn btn-primary btn-square btn-lg form-control" style="height:50px;">Apply Adoption</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <script src="/js/ValidateAdoptionApplication.js"></script>
+    <script>
+        $(function () {
+            var current = location.pathname;
+            $('.nav-tabs li a').each(function () {
+                var $this = $(this);
+                if (current.indexOf($this.attr('href')) !== -1) {
+                    $this.addClass('active');
+                }
+            })
+        })
+    </script>
+}
