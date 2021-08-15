@@ -1,5 +1,51 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model IEnumerable<AdoptionListing>
 @{
+    List<AdoptionRequest> adoptionRequests = (List<AdoptionRequest>) ViewData["AdoptionRequests"];
+}
+
+@*Adopton Request*@
+<form method="post" name="myForm">
+    <h4 class="text-center text-uppercase">Your Adoption Requests</h4>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Select</th>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Species</th>
+                <th>Description</th>
+                <th>Requested Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var request in adoptionRequests)
+            {
+                <tr>
+                    <td><input type="radio" id=@request.AdoptionListing.AdoptionListingID name="selected" value="@request.AdoptionRequestId"></td>
+                    <td>
+                        <img src="~/images/@request.AdoptionListing.Image"
+                             class="rounded-circle"
+                             height="40" width="40"
+                             asp-append-version="true" />
+                    </td>
+                    <td>@request.AdoptionListing.Name</td>
+                    <td>@request.AdoptionListing.Age</td>
+                    <td>@request.AdoptionListing.Species.ToString()</td>
+                    <td>@request.Description</td>
+                    <td>@request.RequestDate</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <p>
+        <a asp-action="Index" asp-controller="ApplyAdoption" class="btn btn-sm btn-primary rounded-0 text-uppercase"><i class="fas fa-plus-circle"></i> Back to Adoption</a>&nbsp;&nbsp;
+        <button type="submit" id="removeitem" asp-action="Remove" value="Submit" class="btn btn-sm btn-primary rounded-0 text-uppercase"> Remove</button>&nbsp;&nbsp;
+        <button type="submit" id="viewitem" asp-action="ViewMore" value="Submit" class="btn btn-sm btn-primary rounded-0 text-uppercase"> View More</button>
+    </p>
+</form>
+
+@section scripts{
+    <script src="~/js/adjustRoute.js"></script>
 }

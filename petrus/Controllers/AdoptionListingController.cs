@@ -122,6 +122,8 @@ namespace petrus.Controllers
                 return RedirectToAction("Index");
             return View();
         }
+
+
         private static readonly Dictionary<string, List<byte[]>> _fileSignature =new Dictionary<string, List<byte[]>>
         {
             { ".jpg", new List<byte[]>
