@@ -103,7 +103,7 @@ namespace petrus.Controllers
                     adoptionRequest.AdoptionListing = listing;
                     dbContext.AdoptionRequests.Add(adoptionRequest);
                     dbContext.SaveChanges();
-                    ViewData["reject"] = "You have successfully made a adoption request.";
+                    ViewData["reject"] = "You have successfully made an adoption request.";
                     ViewData["description"] = adoptionRequest.Description;
                     ViewData["request"] = adoptionRequest;
                 }
