@@ -25,10 +25,12 @@ namespace petrus.Models
         public string ServiceCategory { get; set; }
         [Required]
         public List<DateTime> AvailableDate { get; set; }
+        public string Email { get; set; }
         public string Qualifications { get; set; }
         public string Video { get; set; }
         public string Image { get; set; }
         public string Description { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public DateTime ListingDate { get; set; }      
         public string UserID { get; set; } 
     }

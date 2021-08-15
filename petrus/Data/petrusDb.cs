@@ -20,6 +20,8 @@ namespace petrus.Data
         public DbSet<AdoptionListing>AdoptionListings { get; set; }
         public DbSet<AdoptionRequest> AdoptionRequests { get; set; }
 
+        public DbSet<ServiceListing> ServiceListings { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().HasIndex(u => u.UserID).IsUnique();
@@ -35,6 +37,11 @@ namespace petrus.Data
             modelBuilder.Entity<AdoptionRequest>().HasIndex(ar => ar.AdoptionRequestId).IsUnique();
             modelBuilder.Entity<AdoptionRequest>().HasOne(ar => ar.AdoptionListing);
             modelBuilder.Entity<AdoptionRequest>().HasOne(ar => ar.User);
+
+            modelBuilder.Entity<ServiceListing>().HasIndex(al => al.ServiceListingID);
+            modelBuilder.Entity<ServiceListing>().HasMany(al => al.ServiceBookings);
+
+           
 
 
 
