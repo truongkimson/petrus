@@ -80,8 +80,9 @@ namespace petrus.Models
         [Display(Name = "American Hairless Terrier")]
         AmericanHairlessTerrier,
         [Display(Name = "American StaffordShire Terrier")]
-        AmericanStaffordshireTerrier
+        AmericanStaffordshireTerrier     
     }
+
     public enum Gender
     {
         Male, Female, Mixed
@@ -131,5 +132,24 @@ namespace petrus.Models
     { 
         Open,
         Closed
+    }
+    public static class BreedExtensions
+    {
+        public static string ToFriendlyString(this Breed? something)
+        {
+            string output = "";
+            string original = something.ToString();
+            if (something != null)
+            {
+                foreach (char x in original)
+                {
+                    if (Char.IsUpper(x))
+                        output += " " + x;
+                    else
+                        output += x;
+                }
+            }
+            return output;
+        }
     }
 }

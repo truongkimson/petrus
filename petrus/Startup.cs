@@ -32,7 +32,12 @@ namespace petrus
             services.AddDbContext<petrusDb>(options =>
                 options.UseLazyLoadingProxies()
                     .UseSqlServer(Configuration.GetConnectionString("DbConn")));
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddSession();
@@ -45,6 +50,7 @@ namespace petrus
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseMigrationsEndPoint();
             }
             else
             {
@@ -66,6 +72,7 @@ namespace petrus
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
             });
         }
     }

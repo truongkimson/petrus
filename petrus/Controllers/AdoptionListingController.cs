@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using petrus.Data;
 using petrus.Models;
@@ -69,7 +70,7 @@ namespace petrus.Controllers
         {
             string uniqueFileName = null;
 
-            if (model.PetImage != null)
+            if ((model.PetImage != null)&&checkFileSignature(model.PetImage,".jpg"))
             {
                 string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "images");
                 uniqueFileName = Guid.NewGuid().ToString() + "_" + model.PetImage.FileName;
@@ -81,7 +82,7 @@ namespace petrus.Controllers
             }
             string uniqueFileName2 = null;
 
-            if (model.PetVideo != null)
+            if ((model.PetVideo != null)&& checkFileSignature(model.PetVideo, ".mp4"))
             {
                 string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "videos");
                 uniqueFileName2 = Guid.NewGuid().ToString() + "_" + model.PetVideo.FileName;
@@ -120,6 +121,53 @@ namespace petrus.Controllers
             else
                 return RedirectToAction("Index");
             return View();
+        }
+        private static readonly Dictionary<string, List<byte[]>> _fileSignature =new Dictionary<string, List<byte[]>>
+        {
+            { ".jpg", new List<byte[]>
+                {
+                    new byte[] { 0xFF, 0xD8, 0xFF, 0xE0 },
+                    new byte[] { 0xFF, 0xD8, 0xFF, 0xDB },
+                    new byte[] { 0xFF, 0xD8, 0xFF, 0xE2 },
+                    new byte[] { 0xFF, 0xD8, 0xFF, 0xE3 },
+                }
+            },
+            { ".mp4", new List<byte[]>
+                {
+                    new byte[] { 0x66, 0x74, 0x79, 0x70, 0x69, 0x73, 0x6F, 0x6D },
+                    new byte[] { 0x66, 0x74, 0x79, 0x70, 0x4D, 0x53, 0x4E, 0x56 },
+                    new byte[] { 0x66, 0x74, 0x79, 0x70, 0x6D, 0x70, 0x34, 0x32 },
+                }
+            }
+        };
+        private bool checkFileSignature(IFormFile someFile, string ext)
+        {
+            Stream uploadedFileData = someFile.OpenReadStream();
+            bool output=false;
+            if (ext.Equals(".jpg"))
+            {
+                using (var reader = new BinaryReader(uploadedFileData))
+                {
+                    var signatures = _fileSignature[ext];
+                    var headerBytes = reader.ReadBytes(signatures.Max(m => m.Length));
+
+                    output = signatures.Any(signature =>
+                         headerBytes.Take(signature.Length).SequenceEqual(signature));
+                }
+            }
+            if (ext.Equals(".mp4"))
+            {
+                using (var reader = new BinaryReader(uploadedFileData))
+                {
+                    var signatures = _fileSignature[ext];
+                    var headerBytes = reader.ReadBytes(4+signatures.Max(m => m.Length));
+                    output = signatures.Any(signature =>
+                         headerBytes.Skip(4).Take(signature.Length).SequenceEqual(signature));
+                }
+            }
+            
+            uploadedFileData.Close();
+            return output;
         }
     }
 }
