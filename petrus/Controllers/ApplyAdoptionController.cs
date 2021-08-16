@@ -103,6 +103,8 @@ namespace petrus.Controllers
                     adoptionRequest.RequestDate = DateTime.Now;
                     adoptionRequest.User = user;
                     adoptionRequest.AdoptionListing = listing;
+                    adoptionRequest.residenceType = application.residenceType;
+                    adoptionRequest.dogsOwned = application.dogsOwned;
                     dbContext.AdoptionRequests.Add(adoptionRequest);
                     dbContext.SaveChanges();
                     ViewData["reject"] = "You have successfully made an adoption request.";

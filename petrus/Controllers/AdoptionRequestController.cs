@@ -23,9 +23,6 @@ namespace petrus.Controllers
         }
 
 
-
-
-
         //this is to view all the past transactions
         public IActionResult Index()
         {
@@ -67,7 +64,34 @@ namespace petrus.Controllers
             return RedirectToAction("Index"); ;
         }
 
+        [HttpPost]
+        public IActionResult Accept([FromForm] string selected)
+        {
+            if (selected != null)
+            {
+                AdoptionRequest adoptionRequest =
+                    dbContext.AdoptionRequests.FirstOrDefault((x => x.AdoptionRequestId == selected));
+                AdoptionListing adoptionListing = adoptionRequest.AdoptionListing;
+                if (adoptionListing.ApplicationStatus == ApplicationStatus.Open)
+                {
+                    adoptionListing.ApplicationStatus = ApplicationStatus.Closed;
+                    adoptionListing.AcceptedRequest = selected;
+                    adoptionRequest.requestStatus = RequestStatus.Accepted;
+                    dbContext.SaveChanges();
+                }
+                /*else
+                {
+                    //If already closed
+                    return View();
+                }*/
 
+                ViewData["adoptionRequest"] = adoptionRequest;
+            }
+            else
+                return RedirectToAction("Index", "AdoptionListing");
+            return RedirectToAction("Index", "AdoptionListing");
+
+        }
 
 
     }
