@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+
 using petrus.Data;
 using petrus.Models;
 using petrus.ViewModels;
@@ -9,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using petrus.BindingModel;
 
 namespace petrus.Controllers
 {
@@ -54,6 +56,29 @@ namespace petrus.Controllers
                 }
             }
             return RedirectToAction("Index"); ;
+        }
+
+        public IActionResult Details(string id)
+        {
+            User user = dbContext.Users.FirstOrDefault(x => x.UserID == "1");
+
+            if (id != null)
+            {
+                AdoptionRequest request = dbContext.AdoptionRequests.FirstOrDefault(x => x.AdoptionRequestId == id);
+
+                if (request != null)
+                {
+                    ViewData["request"] = request;
+                    ViewData["User"] = user;
+                }
+            }
+
+            else
+            {
+                return RedirectToAction("Index");
+            }
+
+            return View();
         }
     }
 }

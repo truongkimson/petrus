@@ -31,7 +31,7 @@
                                     @foreach (var details in item.AdoptionListing)
                                     {
                                         <br />
-                                        <h3>@details.Name</h3>
+                                        <a asp-controller="ApplyAdoption" asp-action="Details" asp-route-id="@details.AdoptionListingID"><h3>@details.Name</h3></a>
                                         <br />
                                         <h5>Species: @details.Species</h5>
                                         <h5>Breed: @details.Breed1</h5>
@@ -41,7 +41,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-12 col-md-12 pb-1 text-md-right">
-                                    <button class="btn btn-primary btn-square btn-lg" style="height:50px;">Update</button>
+                                    <a asp-controller="AdoptionRequest" asp-action="Details" asp-route-id="@item.AdoptionRequest." class="btn btn-primary btn-square btn-lg" style="height:50px;">Details</a>
                                     <a asp-action="Delete" asp-route-id="@item.AdoptionRequest.AdoptionRequestId" onclick="return confirm('Are you sure you want to delete this request?')" class="btn btn-danger btn-square btn-lg">Delete</a>
                                 </div>
                             </div>
