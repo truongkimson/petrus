@@ -41,5 +41,19 @@ namespace petrus.Controllers
 
             return View(requestDetailsVM.OrderByDescending(r => r.AdoptionRequest.RequestDate).ToList());
         }
+
+        public IActionResult Delete(string id)
+        {
+            if (id != null)
+            {
+                AdoptionRequest request = dbContext.AdoptionRequests.FirstOrDefault(x => x.AdoptionRequestId == id);
+                if (request != null)
+                {
+                    dbContext.AdoptionRequests.Remove(request);
+                    dbContext.SaveChanges();
+                }
+            }
+            return RedirectToAction("Index"); ;
+        }
     }
 }
