@@ -1,12 +1,16 @@
+
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 
 using petrus.Data;
 using petrus.Models;
 using petrus.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -78,7 +82,28 @@ namespace petrus.Controllers
                 return RedirectToAction("Index");
             }
 
+
             return View();
         }
+
+        [HttpPost]
+        public IActionResult Remove([FromForm] string selected)
+        {
+            if (selected != null)
+            {
+                AdoptionRequest adoptionRequest =
+                    dbContext.AdoptionRequests.FirstOrDefault((x => x.AdoptionRequestId == selected));
+                if (adoptionRequest != null)
+                {
+                    dbContext.AdoptionRequests.Remove(adoptionRequest);
+                    dbContext.SaveChanges();
+                }
+            }
+            return RedirectToAction("Index"); ;
+        }
+
+
+
+
     }
 }
