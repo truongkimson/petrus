@@ -78,25 +78,29 @@ namespace petrus.Controllers
 
                     if (species.Equals("Dog"))
                     {
-                        if (application.residenceType.Equals("HDB")&&application.dogsOwned>0)
+                        if (application.residenceType == Residence.HDB && application.dogsOwned>0)
                         {
                             ViewData["reject"] = "Unfortunately for HDB residence you can only own one dog";
                             approve = false;
                         }
-                        else if (application.residenceType.Equals("Private") && application.dogsOwned > 2)
+                        else if (application.residenceType == Residence.Private && (int)application.dogsOwned > 2)
                         {
                             ViewData["reject"] = "Unfortunately for private residence you can only own a maximum of three dogs";
                             approve = false;
                         }
                     }
-                    else if (species.Equals("Cat")&&application.residenceType.Equals("HDB"))
+                    else if (species.Equals("Cat")&&application.residenceType== Residence.HDB)
                     {
                         ViewData["reject"] = "Unfortunately you are not allowed to keep cats in HDB residences";
                         approve = false;
                     }
                 }
                 User user = dbContext.Users.FirstOrDefault(x => x.UserID == "1");
-                if (approve == true)
+                if (user.AdoptionRequests.Any(o => o.AdoptionListing == listing))
+                {
+                    ViewData["reject"] = "You have already applied to this listing";
+                }
+                else if (approve == true)
                 {
                     AdoptionRequest adoptionRequest = new AdoptionRequest();
                     adoptionRequest.Description = application.description;
