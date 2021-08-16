@@ -41,7 +41,7 @@ namespace petrus.Controllers
 
         public IActionResult Application(String id)
         {
-            User user = dbContext.Users.FirstOrDefault(x => x.UserID == id);
+            User user = dbContext.Users.FirstOrDefault(x => x.UserID == "1");
 
             if (id != null)
             {
@@ -74,6 +74,8 @@ namespace petrus.Controllers
                     string species = listing.Species.ToString();
                     ViewData["listing"] = listing;
                     ViewData["reject"] = "Unfortunately your application is not successful";
+                    ViewData["description"] = "Not successful";
+
                     if (species.Equals("Dog"))
                     {
                         if (application.residenceType.Equals("HDB")&&application.dogsOwned>0)

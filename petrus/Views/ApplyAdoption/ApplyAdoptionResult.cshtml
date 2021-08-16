@@ -2,7 +2,6 @@
     AdoptionListing listing = (AdoptionListing)ViewData["listing"];
     string acceptance = (string) ViewData["reject"];
     string request = (string) ViewData["description"];
-    AdoptionRequest adoptionRequest = (AdoptionRequest) ViewData["request"];
 }
 
 <form method="post">
@@ -47,10 +46,10 @@
                                         <h5 class="text-muted">Maturity size: @listing.MaturitySize</h5>
                                     </div>
                                     <br />
-                                    @if (adoptionRequest.Description != null)
+                                    @if (request != null)
                                     {
                                         <div class="row pl-2">
-                                            <h5 class="text-muted">Request: @adoptionRequest.Description</h5>
+                                            <h5 class="text-muted">Request: @request</h5>
                                         </div>
                                     }
 
