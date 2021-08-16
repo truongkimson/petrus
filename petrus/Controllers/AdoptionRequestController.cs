@@ -78,18 +78,51 @@ namespace petrus.Controllers
                     adoptionListing.AcceptedRequest = selected;
                     adoptionRequest.requestStatus = RequestStatus.Accepted;
                     dbContext.SaveChanges();
+                    ViewData["result"] = "You have successfully accepted the request.";
+                    ViewData["list"] = adoptionRequest;
                 }
-                /*else
+                else
                 {
-                    //If already closed
+                    ViewData["result"] = "You have already accepted this request.";
                     return View();
-                }*/
+                }
 
                 ViewData["adoptionRequest"] = adoptionRequest;
             }
             else
                 return RedirectToAction("Index", "AdoptionListing");
-            return RedirectToAction("Index", "AdoptionListing");
+
+            return View();
+
+        }
+
+        [HttpPost]
+        public IActionResult Reject([FromForm] string selected)
+        {
+            if (selected != null)
+            {
+                AdoptionRequest adoptionRequest =
+                    dbContext.AdoptionRequests.FirstOrDefault((x => x.AdoptionRequestId == selected));
+                AdoptionListing adoptionListing = adoptionRequest.AdoptionListing;
+                if (adoptionListing.ApplicationStatus == ApplicationStatus.Open)
+                {
+                    adoptionRequest.requestStatus = RequestStatus.Rejected;
+                    dbContext.SaveChanges();
+                    ViewData["result"] = "You have successfully rejected the request.";
+                    ViewData["list"] = adoptionRequest;
+                }
+                else
+                {
+                    ViewData["result"] = "You have already accepted this request.";
+                    return View("Accept");
+                }
+
+                ViewData["adoptionRequest"] = adoptionRequest;
+            }
+            else
+                return RedirectToAction("Index", "AdoptionListing");
+
+            return View("Accept");
 
         }
 

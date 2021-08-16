@@ -1,6 +1,6 @@
 ﻿@{
     List<AdoptionRequest> adoptionRequests = (List<AdoptionRequest>)ViewData["requests"];
-    AdoptionListing listing = (AdoptionListing) ViewData["listing"];
+    AdoptionListing listing = (AdoptionListing)ViewData["listing"];
 }
 
 @*Adopton Request*@
@@ -36,7 +36,7 @@
             </div>
         </div>
     </div>
-    
+
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -45,6 +45,7 @@
                 <th>Residence Type</th>
                 <th>Description</th>
                 <th>Requested Date</th>
+                <th>Status</th>
             </tr>
         </thead>
         <tbody>
@@ -56,6 +57,7 @@
                     <td>@request.residenceType</td>
                     <td>@request.Description</td>
                     <td>@request.RequestDate</td>
+                    <td>@request.requestStatus</td>
                 </tr>
             }
         </tbody>
@@ -63,11 +65,11 @@
 
     <p>
         <a asp-action="Index" asp-controller="AdoptionRequest" class="btn btn-sm btn-primary rounded-0 text-uppercase"><i class="fas fa-plus-circle"></i> Back to Adoption</a>&nbsp;&nbsp;
-        <button type="submit" id="removeitem" asp-controller="AdoptionRequest" asp-action="Reject" value="Submit" class="btn btn-sm btn-primary rounded-0 text-uppercase"> Reject</button>&nbsp;&nbsp;
-        <button type="submit" id="viewitem" asp-controller="AdoptionRequest"  asp-action="Accept" value="Submit" class="btn btn-sm btn-primary rounded-0 text-uppercase"> Accept</button>
+        <button type="submit" id="removeitem" name ="Reject" asp-controller="AdoptionRequest" asp-action="Reject" value="Reject" class="btn btn-sm btn-primary rounded-0 text-uppercase"> Reject</button>&nbsp;&nbsp;
+        <button type="submit" id="viewitem" name ="Accept" asp-controller="AdoptionRequest" asp-action="Accept" value="Accept" class="btn btn-sm btn-primary rounded-0 text-uppercase"> Accept</button>
     </p>
 </form>
-`
+
 @section scripts{
-    <script src="~/js/adjustRoute.js"></script>
+    @*<script src="~/js/adjustRoute.js"></script>*@
 }

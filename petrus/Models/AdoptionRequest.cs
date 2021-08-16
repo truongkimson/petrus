@@ -27,12 +27,12 @@ namespace petrus.Models
 
     public enum Residence
     {
-        HDB, Private
+        Pending, HDB, Private
     }
 
     public enum RequestStatus
     {
-        Accepted,Rejected
+        Pending, Accepted,Rejected
     }
 
 }
