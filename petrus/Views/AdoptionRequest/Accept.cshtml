@@ -1,0 +1,50 @@
+﻿@{
+    AdoptionRequest request = (AdoptionRequest)ViewData["list"];
+    string result = (string)ViewData["result"];
+}
+
+@*Adopton Request*@
+<form method="post" name="myForm">
+    <h4 class="text-center text-uppercase">Your Adoption Requests</h4>
+    <h5 class="text-center text-uppercase">@result</h5>
+    <table class="table table-bordered">
+        <thead>
+        @if (request != null)
+        {
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Species</th>
+                <th>Description</th>
+                <th>Requested Date</th>
+                <th>Status</th>
+            </tr>
+        }
+        </thead>
+        @if (request != null)
+        {
+            <tbody>
+            <tr>
+                <td>
+                    <img src="~/images/@request.AdoptionListing.Image"
+                         class="rounded-circle"
+                         height="40" width="40"
+                         asp-append-version="true" />
+                </td>
+                <td>@request.AdoptionListing.Name</td>
+                <td>@request.AdoptionListing.Age</td>
+                <td>@request.AdoptionListing.Species.ToString()</td>
+                <td>@request.Description</td>
+                <td>@request.RequestDate</td>
+                <td>@request.requestStatus </td>
+            </tr>
+            </tbody>
+        }
+        
+    </table>
+
+    <p>
+        <button type="submit" id="viewitem" asp-controller="AdoptionListing"asp-action="Index" value="Submit" class="btn btn-sm btn-primary rounded-0 text-uppercase"> Back to Adoption Listings</button>
+    </p>
+</form>

@@ -41,7 +41,7 @@ namespace petrus.Controllers
 
         public IActionResult Application(String id)
         {
-            User user = dbContext.Users.FirstOrDefault(x => x.UserID == id);
+            User user = dbContext.Users.FirstOrDefault(x => x.UserID == "1");
 
             if (id != null)
             {
@@ -74,33 +74,41 @@ namespace petrus.Controllers
                     string species = listing.Species.ToString();
                     ViewData["listing"] = listing;
                     ViewData["reject"] = "Unfortunately your application is not successful";
+                    ViewData["description"] = "Not successful";
+
                     if (species.Equals("Dog"))
                     {
-                        if (application.residenceType.Equals("HDB")&&application.dogsOwned>0)
+                        if (application.residenceType == Residence.HDB && application.dogsOwned>0)
                         {
                             ViewData["reject"] = "Unfortunately for HDB residence you can only own one dog";
                             approve = false;
                         }
-                        else if (application.residenceType.Equals("Private") && application.dogsOwned > 2)
+                        else if (application.residenceType == Residence.Private && (int)application.dogsOwned > 2)
                         {
                             ViewData["reject"] = "Unfortunately for private residence you can only own a maximum of three dogs";
                             approve = false;
                         }
                     }
-                    else if (species.Equals("Cat")&&application.residenceType.Equals("HDB"))
+                    else if (species.Equals("Cat")&&application.residenceType== Residence.HDB)
                     {
                         ViewData["reject"] = "Unfortunately you are not allowed to keep cats in HDB residences";
                         approve = false;
                     }
                 }
                 User user = dbContext.Users.FirstOrDefault(x => x.UserID == "1");
-                if (approve == true)
+                if (user.AdoptionRequests.Any(o => o.AdoptionListing == listing))
+                {
+                    ViewData["reject"] = "You have already applied to this listing";
+                }
+                else if (approve == true)
                 {
                     AdoptionRequest adoptionRequest = new AdoptionRequest();
                     adoptionRequest.Description = application.description;
                     adoptionRequest.RequestDate = DateTime.Now;
                     adoptionRequest.User = user;
                     adoptionRequest.AdoptionListing = listing;
+                    adoptionRequest.residenceType = application.residenceType;
+                    adoptionRequest.dogsOwned = application.dogsOwned;
                     dbContext.AdoptionRequests.Add(adoptionRequest);
                     dbContext.SaveChanges();
                     ViewData["reject"] = "You have successfully made an adoption request.";

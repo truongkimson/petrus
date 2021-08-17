@@ -54,6 +54,7 @@ namespace petrus.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public DateTime ListingDate { get; set; }
         public ApplicationStatus ApplicationStatus { get; set; }
+        public string AcceptedRequest { get; set; }
         public string UserID { get; set; }
         public virtual User User { get; set; }
         public virtual ICollection<AdoptionRequest> AdoptionRequests { get; set; }

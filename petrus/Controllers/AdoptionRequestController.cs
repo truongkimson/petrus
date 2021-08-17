@@ -45,6 +45,7 @@ namespace petrus.Controllers
 
             }
 
+
             return View(requestDetailsVM.OrderByDescending(r => r.AdoptionRequest.RequestDate).ToList());
         }
 
@@ -102,7 +103,67 @@ namespace petrus.Controllers
             return RedirectToAction("Index"); ;
         }
 
+        [HttpPost]
+        public IActionResult Accept([FromForm] string selected)
+        {
+            if (selected != null)
+            {
+                AdoptionRequest adoptionRequest =
+                    dbContext.AdoptionRequests.FirstOrDefault((x => x.AdoptionRequestId == selected));
+                AdoptionListing adoptionListing = adoptionRequest.AdoptionListing;
+                if (adoptionListing.ApplicationStatus == ApplicationStatus.Open)
+                {
+                    adoptionListing.ApplicationStatus = ApplicationStatus.Closed;
+                    adoptionListing.AcceptedRequest = selected;
+                    adoptionRequest.requestStatus = RequestStatus.Accepted;
+                    dbContext.SaveChanges();
+                    ViewData["result"] = "You have successfully accepted the request.";
+                    ViewData["list"] = adoptionRequest;
+                }
+                else
+                {
+                    ViewData["result"] = "You have already accepted this request.";
+                    return View();
+                }
 
+                ViewData["adoptionRequest"] = adoptionRequest;
+            }
+            else
+                return RedirectToAction("Index", "AdoptionListing");
+
+            return View();
+
+        }
+
+        [HttpPost]
+        public IActionResult Reject([FromForm] string selected)
+        {
+            if (selected != null)
+            {
+                AdoptionRequest adoptionRequest =
+                    dbContext.AdoptionRequests.FirstOrDefault((x => x.AdoptionRequestId == selected));
+                AdoptionListing adoptionListing = adoptionRequest.AdoptionListing;
+                if (adoptionListing.ApplicationStatus == ApplicationStatus.Open)
+                {
+                    adoptionRequest.requestStatus = RequestStatus.Rejected;
+                    dbContext.SaveChanges();
+                    ViewData["result"] = "You have successfully rejected the request.";
+                    ViewData["list"] = adoptionRequest;
+                }
+                else
+                {
+                    ViewData["result"] = "You have already accepted this request.";
+                    return View("Accept");
+                }
+
+                ViewData["adoptionRequest"] = adoptionRequest;
+            }
+            else
+                return RedirectToAction("Index", "AdoptionListing");
+
+            return View("Accept");
+
+        }
 
         [HttpPost]
         public IActionResult UpdateAdoptionRequest([FromForm] AdoptionApplicationBinding application)

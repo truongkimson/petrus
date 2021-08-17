@@ -1,0 +1,76 @@
+﻿@{
+    List<AdoptionRequest> adoptionRequests = (List<AdoptionRequest>)ViewData["requests"];
+    AdoptionListing listing = (AdoptionListing)ViewData["listing"];
+}
+
+@*Adopton Request*@
+<form method="post" name="requestForm">
+    <h4 class="text-center text-uppercase">Your Listing Requests</h4>
+    <div class="card-body">
+        <div class="container rounded p-2">
+            <div class="row">
+                <div class="col-12 col-lg-12">
+                    <div class="row">
+                        <div class="col-12 col-md-12 pb-1">
+                            <div class="row pl-2">
+                                <h5 class="text-muted">Species: @listing.Species</h5>
+                            </div>
+                            <div class="row pl-2">
+                                <h5 class="text-muted">Breed: @listing.Breed1</h5>
+                            </div>
+                            <div class="row pl-2">
+                                <h5 class="text-muted">Age: @listing.Age years old</h5>
+                            </div>
+                            <div class="row pl-2">
+                                <h5 class="text-muted">Color: @listing.Color1</h5>
+                            </div>
+                            <div class="row pl-2">
+                                <h5 class="text-muted">Fur length: @listing.FurLength</h5>
+                            </div>
+                            <div class="row pl-2">
+                                <h5 class="text-muted">Maturity size: @listing.MaturitySize</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Select</th>
+                <th>Name of Adopter</th>
+                <th>Residence Type</th>
+                <th>Description</th>
+                <th>Requested Date</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var request in adoptionRequests)
+            {
+                <tr>
+                    <td><input type="radio" id="@request.AdoptionRequestId" name="selected" value="@request.AdoptionRequestId" required></td>
+                    <td>@request.User.Name</td>
+                    <td>@request.residenceType</td>
+                    <td>@request.Description</td>
+                    <td>@request.RequestDate</td>
+                    <td>@request.requestStatus</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <p>
+        <a asp-action="Index" asp-controller="AdoptionRequest" class="btn btn-sm btn-primary rounded-0 text-uppercase"><i class="fas fa-plus-circle"></i> Back to Adoption</a>&nbsp;&nbsp;
+        <button type="submit" id="removeitem" name ="Reject" asp-controller="AdoptionRequest" asp-action="Reject" value="Reject" class="btn btn-sm btn-primary rounded-0 text-uppercase"> Reject</button>&nbsp;&nbsp;
+        <button type="submit" id="viewitem" name ="Accept" asp-controller="AdoptionRequest" asp-action="Accept" value="Accept" class="btn btn-sm btn-primary rounded-0 text-uppercase"> Accept</button>
+    </p>
+</form>
+
+@section scripts{
+    @*<script src="~/js/adjustRoute.js"></script>*@
+
+}
