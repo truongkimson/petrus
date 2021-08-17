@@ -23,7 +23,7 @@
             @foreach (var adoptionListing in Model)
             {
                 <tr>
-                    <td><input type="radio" id=@adoptionListing.AdoptionListingID name="selected" value=@adoptionListing.AdoptionListingID></td>
+                    <td><input type="radio" id=@adoptionListing.AdoptionListingID name="selected" value=@adoptionListing.AdoptionListingID required></td>
                     <td>
                         <img src="~/images/@adoptionListing.Image"
                              class="rounded-circle"

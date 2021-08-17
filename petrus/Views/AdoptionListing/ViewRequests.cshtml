@@ -4,7 +4,7 @@
 }
 
 @*Adopton Request*@
-<form method="post" name="myForm">
+<form method="post" name="requestForm">
     <h4 class="text-center text-uppercase">Your Listing Requests</h4>
     <div class="card-body">
         <div class="container rounded p-2">
@@ -52,7 +52,7 @@
             @foreach (var request in adoptionRequests)
             {
                 <tr>
-                    <td><input type="radio" id=@request.AdoptionListing.AdoptionListingID name="selected" value="@request.AdoptionRequestId"></td>
+                    <td><input type="radio" id="@request.AdoptionRequestId" name="selected" value="@request.AdoptionRequestId" required></td>
                     <td>@request.User.Name</td>
                     <td>@request.residenceType</td>
                     <td>@request.Description</td>
@@ -72,4 +72,5 @@
 
 @section scripts{
     @*<script src="~/js/adjustRoute.js"></script>*@
+
 }
