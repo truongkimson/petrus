@@ -41,7 +41,7 @@ namespace petrus.Controllers
 
         public IActionResult Application(String id)
         {
-            User user = dbContext.Users.FirstOrDefault(x => x.UserID == "1");
+            User user = dbContext.Users.FirstOrDefault(x => x.UserID == id);
 
             if (id != null)
             {

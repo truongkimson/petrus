@@ -16,22 +16,9 @@ namespace petrus.Models
         public string Description { get; set; }
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public DateTime RequestDate { get; set; }
-        public Residence residenceType { get; set; }
-        public RequestStatus requestStatus { get; set; }
-        public int dogsOwned { get; set; }
-
+        
         public virtual User User { get; set; }
         public virtual AdoptionListing AdoptionListing { get; set; }
 
-    }
-
-    public enum Residence
-    {
-        Pending, HDB, Private
-    }
-
-    public enum RequestStatus
-    {
-        Pending, Accepted, Rejected
     }
 }
