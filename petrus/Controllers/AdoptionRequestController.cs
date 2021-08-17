@@ -1,8 +1,8 @@
 
-﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 
 using petrus.Data;
@@ -33,7 +33,7 @@ namespace petrus.Controllers
 
             List<AdoptionRequest> adoptionRequestList = await dbContext.AdoptionRequests.Include(x => x.User).Where(u => u.User.UserID == "1").OrderByDescending(t => t.RequestDate).ToListAsync();
 
-            foreach(AdoptionRequest item in adoptionRequestList)
+            foreach (AdoptionRequest item in adoptionRequestList)
             {
                 RequestDetailsViewModel individual = new RequestDetailsViewModel
                 {
@@ -139,27 +139,23 @@ namespace petrus.Controllers
                         approve = false;
                     }
                 }
-                
+
                 if (approve == true)
                 {
                     AdoptionRequest adoptionRequest = dbContext.AdoptionRequests.FirstOrDefault(x => x.AdoptionRequestId == id);
+                    adoptionRequest.Description = application.description;
+                    adoptionRequest.AdoptionListing = listing;
+                    adoptionRequest.residenceType = application.residenceType;
+                    adoptionRequest.dogsOwned = application.dogsOwned;
+                    dbContext.AdoptionRequests.Update(adoptionRequest);
+                    dbContext.SaveChanges();
+                    ViewData["reject"] = "You have successfully updated your adoption request.";
+                    ViewData["description"] = adoptionRequest.Description;
+                    ViewData["request"] = adoptionRequest;
+                }
 
-                    if (adoptionRequest != null)
-                    {
-                        adoptionRequest.Description = application.description;
-                        adoptionRequest.AdoptionListing = listing;
-                        adoptionRequest.residenceType = application.residenceType;
-                        adoptionRequest.dogsOwned = application.dogsOwned;
-                        dbContext.AdoptionRequests.Update(adoptionRequest);
-                        dbContext.SaveChanges();
-                        ViewData["reject"] = "You have successfully updated your adoption request.";
-                        ViewData["description"] = adoptionRequest.Description;
-                        ViewData["request"] = adoptionRequest;
-                    }
-                } 
+            }
 
-            } 
-            
             else
             {
                 return RedirectToAction("Index");
