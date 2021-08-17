@@ -102,8 +102,61 @@ namespace petrus.Controllers
             return RedirectToAction("Index"); ;
         }
 
+        [HttpPost]
+        public IActionResult UpdateAdoptionRequest([FromForm] AdoptionApplicationBinding application)
+        {
+            //this boolean can be used in the future if we want to have separate views for acceptance or not
+            bool approve = true;
+            string id = application.listingId;
+            if (id != null)
+            {
+                AdoptionListing listing = dbContext.AdoptionListings.FirstOrDefault(x => x.AdoptionListingID == id);
+                if (listing != null)
+                {
+                    string species = listing.Species.ToString();
+                    ViewData["listing"] = listing;
+                    ViewData["reject"] = "Unfortunately your application is not updated successful";
+                    if (species.Equals("Dog"))
+                    {
+                        if (application.residenceType.Equals("HDB") && application.dogsOwned > 0)
+                        {
+                            ViewData["reject"] = "Unfortunately for HDB residence you can only own one dog";
+                            approve = false;
+                        }
+                        else if (application.residenceType.Equals("Private") && application.dogsOwned > 2)
+                        {
+                            ViewData["reject"] = "Unfortunately for private residence you can only own a maximum of three dogs";
+                            approve = false;
+                        }
+                    }
+                    else if (species.Equals("Cat") && application.residenceType.Equals("HDB"))
+                    {
+                        ViewData["reject"] = "Unfortunately you are not allowed to keep cats in HDB residences";
+                        approve = false;
+                    }
+                }
+
+                if (approve == true)
+                {
+                    AdoptionRequest adoptionRequest = dbContext.AdoptionRequests.FirstOrDefault(x => x.AdoptionRequestId == id);
+                    adoptionRequest.Description = application.description;
+                    adoptionRequest.AdoptionListing = listing;
+                    dbContext.AdoptionRequests.Update(adoptionRequest);
+                    dbContext.SaveChanges();
+                    ViewData["reject"] = "You have successfully updated your adoption request.";
+                    ViewData["description"] = adoptionRequest.Description;
+                    ViewData["request"] = adoptionRequest;
+                }
+            }
 
 
+            else
+            {
+                return RedirectToAction("Index");
+            }
+
+            return View();
+        }
 
     }
 }
