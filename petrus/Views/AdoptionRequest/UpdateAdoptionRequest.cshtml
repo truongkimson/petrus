@@ -1,7 +1,8 @@
-@{
+﻿@{
     AdoptionListing listing = (AdoptionListing)ViewData["listing"];
-    string acceptance = (string) ViewData["reject"];
-    string request = (string) ViewData["description"];
+    string acceptance = (string)ViewData["reject"];
+    string request = (string)ViewData["description"];
+    AdoptionRequest adoptionRequest = (AdoptionRequest)ViewData["request"];
 }
 
 <form method="post">
@@ -61,7 +62,7 @@
             <div class="card-footer">
                 <div class="row">
                     <div class="col-12 col-md-12 pb-1 text-center">
-                        <a asp-action="Index" class="btn btn-primary btn-square btn-lg" style="height:50px;">Back to Listing</a>
+                        <a asp-action="Index" class="btn btn-primary btn-square btn-lg" style="height:50px;">Back to Request</a>
                     </div>
                 </div>
             </div>

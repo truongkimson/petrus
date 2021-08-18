@@ -1,7 +1,6 @@
+@model List<petrus.ViewModels.RequestDetailsViewModel>
 
-@*﻿@model List<petrus.ViewModels.RequestDetailsViewModel>*@
-
-<h1><b style="color: #2c3e50">My Adoption Requests</b></h1>
+<h1><b style="color: #2c3e50">My Adoption Request</b></h1>
 
 @if (Model.Count() > 0)
 {
@@ -30,7 +29,7 @@
                                 <h4><b style="color: #012169">@details.Name </b></h4>
                             </div>
                             <div class="col-12 col-md-6 text-right text-md-right">
-                                <p class="card-title h5 text-right"><span class="badge badge-pill badge-primary pt-2" style="height:30px; width:100px">Status</span></p>
+                                <p class="card-title h5 text-right"><span class="badge badge-pill badge-primary pt-2" style="height:30px; width:130px">@item.AdoptionRequest.requestStatus</span></p>
                             </div>
                         </div>
                             <h5>Species: @details.Species</h5>
@@ -41,7 +40,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12 col-md-12 text-right">
-                        <a asp-controller="AdoptionRequest" asp-action="Details" asp-route-id="@item.AdoptionRequest." class="btn btn-outline-primary btn-square">Details</a>
+                        <a asp-controller="AdoptionRequest" asp-action="Details" asp-route-id="@item.AdoptionRequest.AdoptionRequestId" class="btn btn-outline-primary btn-square">Details</a>
                         &nbsp;&nbsp;
                         <a asp-action="Delete" asp-route-id="@item.AdoptionRequest.AdoptionRequestId" onclick="return confirm('Are you sure you want to delete this request?')" class="btn btn-outline-danger btn-square">Delete</a>
                     </div>

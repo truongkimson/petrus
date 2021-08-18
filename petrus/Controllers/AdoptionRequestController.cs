@@ -1,8 +1,8 @@
 
-﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 
 using petrus.Data;
@@ -33,7 +33,7 @@ namespace petrus.Controllers
 
             List<AdoptionRequest> adoptionRequestList = await dbContext.AdoptionRequests.Include(x => x.User).Where(u => u.User.UserID == "1").OrderByDescending(t => t.RequestDate).ToListAsync();
 
-            foreach(AdoptionRequest item in adoptionRequestList)
+            foreach (AdoptionRequest item in adoptionRequestList)
             {
                 RequestDetailsViewModel individual = new RequestDetailsViewModel
                 {
@@ -163,6 +163,66 @@ namespace petrus.Controllers
 
             return View("Accept");
 
+        }
+
+        [HttpPost]
+        public IActionResult UpdateAdoptionRequest([FromForm] AdoptionApplicationBinding application)
+        {
+            //this boolean can be used in the future if we want to have separate views for acceptance or not
+            bool approve = true;
+            string id = application.listingId;
+            if (id != null)
+            {
+                AdoptionListing listing = dbContext.AdoptionListings.FirstOrDefault(x => x.AdoptionListingID == id);
+                if (listing != null)
+                {
+                    string species = listing.Species.ToString();
+                    ViewData["listing"] = listing;
+                    ViewData["reject"] = "Unfortunately, your application is not updated successfully.";
+                    ViewData["description"] = "Not successful";
+
+                    if (species.Equals("Dog"))
+                    {
+                        if (application.residenceType == Residence.HDB && application.dogsOwned > 0)
+                        {
+                            ViewData["reject"] = "For HDB residence, you can only own one dog.";
+                            approve = false;
+                        }
+                        else if (application.residenceType == Residence.Private && (int)application.dogsOwned > 2)
+                        {
+                            ViewData["reject"] = "For private residence, you can only own a maximum of three dogs.";
+                            approve = false;
+                        }
+                    }
+                    else if (species.Equals("Cat") && application.residenceType == Residence.HDB)
+                    {
+                        ViewData["reject"] = "You are not allowed to keep cats in HDB residences.";
+                        approve = false;
+                    }
+                }
+
+                if (approve == true)
+                {
+                    AdoptionRequest adoptionRequest = dbContext.AdoptionRequests.FirstOrDefault(x => x.AdoptionRequestId == id);
+                    adoptionRequest.Description = application.description;
+                    adoptionRequest.AdoptionListing = listing;
+                    adoptionRequest.residenceType = application.residenceType;
+                    adoptionRequest.dogsOwned = application.dogsOwned;
+                    dbContext.AdoptionRequests.Update(adoptionRequest);
+                    dbContext.SaveChanges();
+                    ViewData["reject"] = "You have successfully updated your adoption request.";
+                    ViewData["description"] = adoptionRequest.Description;
+                    ViewData["request"] = adoptionRequest;
+                }
+
+            }
+
+            else
+            {
+                return RedirectToAction("Index");
+            }
+
+            return View();
         }
 
 
