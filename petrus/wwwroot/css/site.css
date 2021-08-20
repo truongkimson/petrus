@@ -260,13 +260,4 @@ footer {
         text-decoration: none;
     }
 
-.details-button:active, .details-button:hover, .details-button:focus {
-    color: var(--yellow-color);
-    background-color: #0275d8;
-}
-
-.btn-primary:active:hover:focus {
-    color: var(--yellow-color);
-    background-color: #0275d8;
-}
 
