@@ -5,53 +5,56 @@
     AdoptionRequest adoptionRequest = (AdoptionRequest)ViewData["request"];
 }
 
+<br />
 <form method="post">
-    <div class="container backgroundWhite">
-        <div class="card" style="text-overflow:ellipsis; overflow:hidden">
-            <div class="card-header bg-light text-light ml-0 row container">
+    <div class="container pt-4">
+        <div style="text-overflow:ellipsis; overflow:hidden">
+            <div class="row">
                 <div class="col-12 col-md-6 text-left text-md-left">
-                    <h1 class="text-primary"><b style="color: #012169">Adopt @listing.Name</b></h1>
+                    <h1 class="primary-color font-roboto"><b>Adopt @listing.Name</b></h1>
                 </div>
+                <br />
                 <div class="col-12 col-md-6 text-left text-md-right pt-2">
-                    <p class="card-title h5">
-                        <span class="badge badge-pill badge-primary pt-2" style="height:30px; width:130px">@listing.ApplicationStatus</span>
+                    <p class="card-title h5 font-roboto">
+                        <span class="badge badge-pill badge-primary pt-2 yellow-color" style="height:30px; width:130px">@listing.ApplicationStatus</span>
                     </p>
                 </div>
             </div>
-            <div class="card-body">
-                <div class="container rounded p-2">
+            <br />
+            <div>
+                <div class="container p-2">
                     <div class="row">
                         <div class="col-12 col-lg-12">
-                            <div class="row">
+                            <div class="row" style="padding-bottom:25px">
                                 <div class="col-12 col-md-12 pb-1">
                                     <div class="row pl-2">
-                                        <h2 class="text-muted">@acceptance </h2>
+                                        <h2 class="font-roboto">@acceptance </h2>
                                     </div>
                                     <br />
                                     @if (request != null)
                                     {
                                         <div class="row pl-2">
-                                            <h5 class="text-muted">Request: @request</h5>
+                                            <h5 class="font-roboto">Request: @request</h5>
                                         </div>
                                     }
                                     <br />
                                     <div class="row pl-2">
-                                        <h5 class="text-muted">Species: @listing.Species</h5>
+                                        <h5 class="font-roboto">Species: @listing.Species</h5>
                                     </div>
                                     <div class="row pl-2">
-                                        <h5 class="text-muted">Breed: @listing.Breed1</h5>
+                                        <h5 class="font-roboto">Breed: @listing.Breed1</h5>
                                     </div>
                                     <div class="row pl-2">
-                                        <h5 class="text-muted">Age: @listing.Age years old</h5>
+                                        <h5 class="font-roboto">Age: @listing.Age years old</h5>
                                     </div>
                                     <div class="row pl-2">
-                                        <h5 class="text-muted">Color: @listing.Color1</h5>
+                                        <h5 class="font-roboto">Color: @listing.Color1</h5>
                                     </div>
                                     <div class="row pl-2">
-                                        <h5 class="text-muted">Fur length: @listing.FurLength</h5>
+                                        <h5 class="font-roboto">Fur length: @listing.FurLength</h5>
                                     </div>
                                     <div class="row pl-2">
-                                        <h5 class="text-muted">Maturity size: @listing.MaturitySize</h5>
+                                        <h5 class="font-roboto">Maturity size: @listing.MaturitySize</h5>
                                     </div>
                                 </div>
                             </div>
@@ -59,13 +62,15 @@
                     </div>
                 </div>
             </div>
-            <div class="card-footer">
+            <br />
+            <div>
                 <div class="row">
-                    <div class="col-12 col-md-12 pb-1 text-center">
-                        <a asp-action="Index" class="btn btn-primary btn-square btn-lg" style="height:50px;">Back to Request</a>
+                    <div class="col-12 col-md-12 pb-1 text-left font-roboto">
+                        <a asp-action="Index" class="details-button yellow-color btn btn-primary btn-square btn-lg" style="height:50px;"><b>Back to Request</b></a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </form>
+<br />

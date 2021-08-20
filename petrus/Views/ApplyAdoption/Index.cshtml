@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<AdoptionListing>
 
+<<<<<<< Updated upstream
     <div class="container pt-3" style="font-family: --var(lato);">
         <div>
             <h1><b style="color: #2c3e50">Adoption</b></h1>
@@ -34,10 +35,53 @@
                             <div>
                                 <a asp-action="Details" class="btn btn-primary form-control" asp-route-id="@listing.AdoptionListingID">Details</a>
                             </div>
+=======
+<div class="container pt-3">
+    <div>
+        <h1 class="primary-color font-roboto"><b>Adoption</b></h1>
+        <h4 class="primary-color font-roboto">Find your new best friend.</h4>
+    </div>
+    <br />
+    <div class="row pb-3 backgroundWhite">
+        @foreach (var listing in Model)
+        {
+            <div class="col-lg-3 col-md-6">
+                <div class="row p-2">
+                    <div class="col-12 p-1" style="border: 0px solid #0064a4; border-radius: 5px; ">
+                        <div class="card" style="border:0px;">
+                            <img src="~/images/@listing.Image" class="card-img-top rounded" />
+                            <div class="pl-1">
+                                <br />
+                                <p class="card-title h5 primary-color font-roboto">
+                                    <b>@listing.Name</b>
+                                    <span class="badge badge-pill badge-primary pt-2 yellow-color" style="height:30px; width:80px">@listing.ApplicationStatus</span>
+                                </p>
+                            </div>
+                            <div style="padding-left:5px;">
+                                <p class="font-roboto">
+                                    @listing.Breed1
+                                    <br />
+                                    Color: @listing.Color1
+                                    <br />
+                                    Age: @listing.Age years old
+                                </p>
+                            </div>
+                        </div>
+                        <div class="text-right font-roboto">
+                            <a asp-action="Details" class="btn btn-primary form-control yellow-color details-button" asp-route-id="@listing.AdoptionListingID"><b>Details</b></a>
+>>>>>>> Stashed changes
                         </div>
                     </div>
                 </div>
+<<<<<<< Updated upstream
             }
 
         </div>
     </div>
+=======
+            </div>
+        }
+
+    </div>
+</div>
+>>>>>>> Stashed changes

@@ -1,52 +1,58 @@
 @model List<petrus.ViewModels.RequestDetailsViewModel>
 
-<h1><b style="color: #2c3e50">My Adoption Request</b></h1>
+<div class="container pt-3">
+    <div>
+        <h1 class="primary-color font-roboto"><b>My Adoption Request</b></h1>
+    </div>
+    <br />
+    <br />
 
-@if (Model.Count() > 0)
-{
-    @foreach (var item in Model)
+    @if (Model.Count() > 0)
     {
-        <br />
-        <div class="card" style="text-overflow: ellipsis; overflow: hidden;">
-            <div class="card-header bg-light text-dark ml-0 row container-fluid">
-                <div class="col-12 col-md-12 text-right py-2">
-                    <h5>Requested on: @item.AdoptionRequest.RequestDate</h5>
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="d-md-block col-3 col-md-3">
-                        @foreach (var details in item.AdoptionListing)
-                        {
-                            <img src="~/images/@details.Image" class="rounded" width="100%" />
-                        }
+        @foreach (var item in Model)
+        {
+            <div style="text-overflow: ellipsis; overflow: hidden;">
+                <div class="card ml-0 bg-primary-color container-fluid" style="border: 0px solid #0064a4; border-radius: 5px;">
+                    <div class="col-12 col-md-12 text-right py-2">
+                        <h5 class="font-roboto text-white">Requested on: @item.AdoptionRequest.RequestDate</h5>
                     </div>
-                    <div class="col-9 col-md-9">
-                        @foreach (var details in item.AdoptionListing)
-                        {
-                        <div class="row">
-                            <div class="col-12 col-md-6 text-left text-md-left">
-                                <h4><b style="color: #012169">@details.Name </b></h4>
-                            </div>
-                            <div class="col-12 col-md-6 text-right text-md-right">
-                                <p class="card-title h5 text-right"><span class="badge badge-pill badge-primary pt-2" style="height:30px; width:130px">@item.AdoptionRequest.requestStatus</span></p>
-                            </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="d-md-block col-3 col-md-3">
+                            @foreach (var details in item.AdoptionListing)
+                            {
+                                <img src="~/images/@details.Image" class="rounded" width="100%" />
+                            }
                         </div>
-                            <h5>Species: @details.Species</h5>
-                            <h5>Breed: @details.Breed1</h5>
-                            <h5>Age: @details.Age years old</h5>
-                        }
+                        <div class="col-9 col-md-9">
+                            @foreach (var details in item.AdoptionListing)
+                            {
+                                <div class="row">
+                                    <div class="col-12 col-md-6 text-left text-md-left">
+                                        <h4 class="primary-color font-roboto"><b>@details.Name </b></h4>
+                                    </div>
+                                    <div class="col-12 col-md-6 text-right text-md-right">
+                                        <p class="card-title h5 text-right font-roboto"><span class="yellow-color badge badge-pill badge-primary pt-2" style="height:30px; width:130px">@item.AdoptionRequest.requestStatus</span></p>
+                                    </div>
+                                </div>
+                                <h5 class="font-roboto">Species: @details.Species</h5>
+                                <h5 class="font-roboto">Breed: @details.Breed1</h5>
+                                <h5 class="font-roboto">Age: @details.Age years old</h5>
+                            }
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-12 col-md-12 text-right">
-                        <a asp-controller="AdoptionRequest" asp-action="Details" asp-route-id="@item.AdoptionRequest.AdoptionRequestId" class="btn btn-outline-primary btn-square">Details</a>
-                        &nbsp;&nbsp;
-                        <a asp-action="Delete" asp-route-id="@item.AdoptionRequest.AdoptionRequestId" onclick="return confirm('Are you sure you want to delete this request?')" class="btn btn-outline-danger btn-square">Delete</a>
+                    <div class="row">
+                        <div class="col-12 col-md-12 text-right font-roboto">
+                            <a asp-controller="AdoptionRequest" asp-action="Details" asp-route-id="@item.AdoptionRequest.AdoptionRequestId" class="btn btn-primary yellow-color details-button btn-square"><b>Details</b></a>
+                            &nbsp;&nbsp;
+                            <a asp-action="Delete" asp-route-id="@item.AdoptionRequest.AdoptionRequestId" onclick="return confirm('Are you sure you want to delete this request?')" class="btn btn-primary yellow-color details-button btn-square"><b>Delete</b></a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+            <br />
+        }
     }
-}
+</div>
 

@@ -3,21 +3,24 @@
     string val = "~/videos/" + (string)listing.Video;
 }
 
+<br />
 <form method="post">
-    <div class="container backgroundWhite">
-        <div class="card" style="text-overflow: ellipsis; overflow: hidden;">
-            <div class="card-header bg-light text-light ml-0 row container">
+    <div class="container pt-4">
+        <div style="text-overflow: ellipsis; overflow: hidden;">
+            <div class="row">
                 <div class="col-12 col-md-6 text-left text-md-left">
-                    <h1 class="text-primary"><b style="color: #012169">About @listing.Name</b></h1>
+                    <h1 class="primary-color font-roboto"><b>About @listing.Name</b></h1>
                 </div>
+                <br />
                 <div class="col-12 col-md-6 text-left text-md-right pt-2">
-                    <p class="card-title h5">
-                        <span class="badge badge-pill badge-primary pt-2" style="height:30px; width:130px">@listing.ApplicationStatus</span>
+                    <p class="card-title h5 font-roboto">
+                        <span class="badge badge-pill badge-primary pt-2 yellow-color" style="height:30px; width:130px">@listing.ApplicationStatus</span>
                     </p>
                 </div>
             </div>
-            <div class="card-body">
-                <div class="container rounded p-2">
+            <br />
+            <div>
+                <div class="container p-2">
                     <div class="row">
                         <div class="col-12 col-lg-12">
                             <div class="row" style="padding-bottom:25px">
@@ -33,42 +36,42 @@
                             <div class="row">
                                 <div class="col-12 col-md-6 pb-1">
                                     <div class="row pl-2">
-                                        <h5 class="text-muted">Species: @listing.Species</h5>
+                                        <h5 class="font-roboto">Species: @listing.Species</h5>
                                     </div>
                                     <div class="row pl-2">
-                                        <h5 class="text-muted">Breed: @listing.Breed1</h5>
+                                        <h5 class="font-roboto">Breed: @listing.Breed1</h5>
                                     </div>
                                     <div class="row pl-2">
-                                        <h5 class="text-muted">Age: @listing.Age years old</h5>
+                                        <h5 class="font-roboto">Age: @listing.Age years old</h5>
                                     </div>
                                     <div class="row pl-2">
-                                        <h5 class="text-muted">Color: @listing.Color1</h5>
+                                        <h5 class="font-roboto">Color: @listing.Color1</h5>
                                     </div>
                                     <div class="row pl-2">
-                                        <h5 class="text-muted">Fur length: @listing.FurLength</h5>
+                                        <h5 class="font-roboto">Fur length: @listing.FurLength</h5>
                                     </div>
                                     <div class="row pl-2">
-                                        <h5 class="text-muted">Maturity size: @listing.MaturitySize</h5>
+                                        <h5 class="font-roboto">Maturity size: @listing.MaturitySize</h5>
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 pb-1">
                                     <div class="row pl-2">
-                                        <h5 class="text-muted">Health condition: @listing.Health</h5>
+                                        <h5 class="font-roboto">Health condition: @listing.Health</h5>
                                     </div>
                                     <div class="row pl-2">
-                                        <h5 class="text-muted">Vaccinated: @listing.Vaccinated</h5>
+                                        <h5 class="font-roboto">Vaccinated: @listing.Vaccinated</h5>
                                     </div>
                                     <div class="row pl-2">
-                                        <h5 class="text-muted">Sterilised: @listing.Sterilized</h5>
+                                        <h5 class="font-roboto">Sterilised: @listing.Sterilized</h5>
                                     </div>
                                     <div class="row pl-2">
-                                        <h5 class="text-muted">Dewormed: @listing.Dewormed</h5>
+                                        <h5 class="font-roboto">Dewormed: @listing.Dewormed</h5>
                                     </div>
                                     <div class="row pl-2">
-                                        <h5 class="text-muted">Quantity represented: @listing.QuantityRepresented</h5>
+                                        <h5 class="font-roboto">Quantity represented: @listing.QuantityRepresented</h5>
                                     </div>
                                     <div class="row pl-2">
-                                        <h5 class="text-muted">Fee: SGD @listing.Fee</h5>
+                                        <h5 class="font-roboto">Fee: SGD @listing.Fee</h5>
                                     </div>
                                 </div>
                             </div>
@@ -76,16 +79,18 @@
                     </div>
                 </div>
             </div>
-            <div class="card-footer">
+            <br />
+            <div>
                 <div class="row">
-                    <div class="col-12 col-md-6 pb-1">
-                        <a asp-action="Index" class="btn btn-primary form-control  btn-square btn-lg" style="height:50px;">Back to Listing</a>
+                    <div class="col-12 col-md-6 pb-1 text-left font-roboto">
+                        <a asp-action="Index" class="details-button btn btn-primary form-control btn-square btn-lg yellow-color" style="height:50px;"><b>Back to Listing</b></a>
                     </div>
-                    <div class="col-12 col-md-6 pb-1" >
-                        <button type="submit" asp-action="Application" asp-route-id="@listing.AdoptionListingID" value="Apply Adoption" class="btn btn-primary btn-square btn-lg form-control" style="height:50px;">Apply Adoption</button>
+                    <div class="col-12 col-md-6 pb-1 text-right font-roboto">
+                        <button type="submit" asp-action="Application" asp-route-id="@listing.AdoptionListingID" value="Apply Adoption" class="details-button btn btn-primary form-control btn-square btn-lg yellow-color" style="height:50px;"><b>Apply Adoption</b></button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </form>
+<br />
