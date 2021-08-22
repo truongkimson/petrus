@@ -4,47 +4,55 @@
 }
 
 @*Adopton Request*@
-<form method="post" name="myForm">
-    <h4 class="text-center text-uppercase">Your Adoption Requests</h4>
-    <h5 class="text-center text-uppercase">@result</h5>
-    <table class="table table-bordered">
-        <thead>
-        @if (request != null)
-        {
-            <tr>
-                <th>Image</th>
-                <th>Name</th>
-                <th>Age</th>
-                <th>Species</th>
-                <th>Description</th>
-                <th>Requested Date</th>
-                <th>Status</th>
-            </tr>
-        }
-        </thead>
-        @if (request != null)
-        {
-            <tbody>
-            <tr>
-                <td>
-                    <img src="~/images/@request.AdoptionListing.Image"
-                         class="rounded-circle"
-                         height="40" width="40"
-                         asp-append-version="true" />
-                </td>
-                <td>@request.AdoptionListing.Name</td>
-                <td>@request.AdoptionListing.Age</td>
-                <td>@request.AdoptionListing.Species.ToString()</td>
-                <td>@request.Description</td>
-                <td>@request.RequestDate</td>
-                <td>@request.requestStatus </td>
-            </tr>
-            </tbody>
-        }
-        
-    </table>
+<div class="container pt-3">
+    <br />
+    <div class="row">
+        <div class="col-12 col-md-12 pb-1 text-left font-roboto text-left">
+            <a type="submit" id="viewitem" asp-controller="AdoptionListing" asp-action="Index" value="Submit" class="btn btn-sm btn-primary rounded-0 text-uppercase"> Back to Adoption Listings</a>
+        </div>
+    </div>
+    <br />
+    <form method="post" name="myForm">
+        <h1 class="primary-color font-roboto"><b>Your Listing Requests</b></h1>
+        <h3 class="primary-color font-roboto">@result</h3>
+        <br />
+        <div class="table-responsive">
+            <table class="table font-roboto">
+                <thead class="thead-light">
+                    @if (request != null)
+                    {
+                        <tr>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Age</th>
+                            <th>Species</th>
+                            <th>Description</th>
+                            <th>Requested Date</th>
+                            <th>Status</th>
+                        </tr>
+                    }
+                </thead>
+                @if (request != null)
+                {
+                    <tbody>
+                        <tr>
+                            <td>
+                                <img src="~/images/@request.AdoptionListing.Image"
+                                     class="rounded-circle"
+                                     height="40" width="40"
+                                     asp-append-version="true" />
+                            </td>
+                            <td>@request.AdoptionListing.Name</td>
+                            <td>@request.AdoptionListing.Age</td>
+                            <td>@request.AdoptionListing.Species.ToString()</td>
+                            <td>@request.Description</td>
+                            <td>@request.RequestDate</td>
+                            <td>@request.requestStatus </td>
+                        </tr>
+                    </tbody>
+                }
 
-    <p>
-        <button type="submit" id="viewitem" asp-controller="AdoptionListing"asp-action="Index" value="Submit" class="btn btn-sm btn-primary rounded-0 text-uppercase"> Back to Adoption Listings</button>
-    </p>
-</form>
+            </table>
+        </div>
+    </form>
+</div>

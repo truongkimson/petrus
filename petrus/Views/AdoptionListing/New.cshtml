@@ -5,11 +5,17 @@
 @{
 }
 <div class="col-md-10 mx-auto py-4">
-    <div class="card">
-        <div class="card-header bg-primary text-uppercase text-white">
-            <h4>Add New </h4>
+    <div class="row">
+        <div class="col-12 col-md-12 pb-1 text-left font-roboto text-left">
+            <a asp-action="Index" class="btn btn-sm btn-primary rounded-0 text-uppercase"><i class="fas fa-fast-backward"></i> Back to List</a>
         </div>
-        <div class="card-body">
+    </div>
+    <br />
+    <div class="card font-roboto">
+        <div class="card-header bg-primary-color text-uppercase text-white">
+            <h2 class="font-roboto"><b>Add New</b></h2>
+        </div>
+        <div class="card-body font-roboto" >
             <form enctype="multipart/form-data" asp-action="New">
                 <div class="row">
                     <div class="col-md-6">
@@ -46,7 +52,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label asp-for="Age" class="control-label"></label>
-                            <input asp-for="Age" class="form-control" id="age"/>
+                            <input asp-for="Age" class="form-control" id="age" />
                             <span asp-validation-for="Age" class="text-danger"></span>
                         </div>
                     </div>
@@ -205,15 +211,17 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <input type="submit" value="submit" class="btn btn-sm btn-primary rounded-0 text-uppercase" />
-                    <a asp-action="Index" class="btn btn-sm btn-primary rounded-0 text-uppercase"><i class="fas fa-fast-backward"></i> Back to List</a>
+                <br />
+                <div class="row">
+                    <div class="col-12 col-md-6 pb-1 text-left font-roboto text-left">
+                        <button class="btn btn-sm btn-primary rounded-0 text-uppercase" onclick="checkAdoptionSpeed();">Check adoption speed</button>
+                        <p id="adoption-speed"></p>
+                    </div>
+                    <div class="col-12 col-md-6 pb-1 text-right font-roboto text-right">
+                        <input type="submit" value="submit" class="btn btn-sm btn-primary rounded-0 text-uppercase" />
+                    </div>
                 </div>
             </form>
-            <div class="container">
-                <button class="btn btn-primary" onclick="checkAdoptionSpeed();">Check adoption speed</button>
-                <p id="adoption-speed"></p>
-            </div>
         </div>
     </div>
 </div>
