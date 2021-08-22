@@ -122,6 +122,8 @@ namespace petrus.Controllers
                 return RedirectToAction("Index");
             return View();
         }
+
+
         private static readonly Dictionary<string, List<byte[]>> _fileSignature =new Dictionary<string, List<byte[]>>
         {
             { ".jpg", new List<byte[]>
@@ -169,6 +171,31 @@ namespace petrus.Controllers
             uploadedFileData.Close();
             return output;
         }
+
+        [HttpPost]
+        public IActionResult ViewRequests([FromForm] string selected)
+        {
+            if (selected != null)
+            {
+                AdoptionListing listing = dbContext.AdoptionListings.FirstOrDefault(x => x.AdoptionListingID == selected);
+                if (listing.AdoptionRequests.Count > 0)
+                {
+                    if (listing != null)
+                    {
+                        List<AdoptionRequest> requests = listing.AdoptionRequests.ToList();
+                        ViewData["requests"] = requests;
+                        ViewData["listing"] = listing;
+                    }
+                }
+                else
+                    return RedirectToAction("Index");
+            }
+            else
+                return RedirectToAction("Index");
+            return View();
+        }
+
+
     }
 }
 

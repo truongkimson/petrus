@@ -4,43 +4,50 @@
 }
 
 <h4 class="text-center text-uppercase">Your Adoption Listings</h4>
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Select</th>
-            <th>@Html.DisplayNameFor(model => model.Image)</th>
-            <th>@Html.DisplayNameFor(model => model.Name)</th>
-            <th>@Html.DisplayNameFor(model => model.Age)</th>
-            <th>@Html.DisplayNameFor(model => model.Species)</th>
-            <th>@Html.DisplayNameFor(model => model.Breed1)</th>
-            <th>@Html.DisplayNameFor(model => model.Color1)</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var adoptionListing in Model)
-        {
+<form method="post" name="myForm">
+    <table class="table table-bordered">
+        <thead>
             <tr>
-                <td><input type="radio" id=@adoptionListing.AdoptionListingID name="selected" value=@adoptionListing.AdoptionListingID></td>
-                <td>
-                    <img src="~/images/@adoptionListing.Image"
-                         class="rounded-circle"
-                         height="40" width="40"
-                         asp-append-version="true" />
-                </td>
-                <td>@adoptionListing.Name</td>
-                <td>@adoptionListing.Age</td>
-                <td>@adoptionListing.Species.ToString()</td>
-                <td>@BreedExtensions.ToFriendlyString(adoptionListing.Breed1)</td>
-                <td>@adoptionListing.Color1.ToString()</td>
+                <th>Select</th>
+                <th>@Html.DisplayNameFor(model => model.Image)</th>
+                <th>@Html.DisplayNameFor(model => model.Name)</th>
+                <th>@Html.DisplayNameFor(model => model.Age)</th>
+                <th>@Html.DisplayNameFor(model => model.Species)</th>
+                <th>@Html.DisplayNameFor(model => model.Breed1)</th>
+                <th>@Html.DisplayNameFor(model => model.Color1)</th>
+                <th>@Html.DisplayNameFor(model => model.AdoptionRequests.Count)</th>
+                <th>@Html.DisplayNameFor(model => model.ApplicationStatus)</th>
             </tr>
-        }
-    </tbody>
-</table>
-<p>
-    <a asp-action="New" class="btn btn-sm btn-primary rounded-0 text-uppercase"><i class="fas fa-plus-circle"></i> Create</a>&nbsp;&nbsp;
-    <a id="removeitem" onclick="routeByCheckedBox(this.id)" href="/adoptionlisting/remove" class="btn btn-sm btn-primary rounded-0 text-uppercase"><i class="fas fa-plus-circle"></i> Remove</a>&nbsp;&nbsp;
-    <a id="viewitem" onclick="routeByCheckedBox(this.id)" href="/adoptionlisting/viewmore" class="btn btn-sm btn-primary rounded-0 text-uppercase"><i class="fas fa-plus-circle"></i> View More</a>
-</p>
+        </thead>
+        <tbody>
+            @foreach (var adoptionListing in Model)
+            {
+                <tr>
+                    <td><input type="radio" id=@adoptionListing.AdoptionListingID name="selected" value=@adoptionListing.AdoptionListingID required></td>
+                    <td>
+                        <img src="~/images/@adoptionListing.Image"
+                             class="rounded-circle"
+                             height="40" width="40"
+                             asp-append-version="true" />
+                    </td>
+                    <td>@adoptionListing.Name</td>
+                    <td>@adoptionListing.Age</td>
+                    <td>@adoptionListing.Species.ToString()</td>
+                    <td>@BreedExtensions.ToFriendlyString(adoptionListing.Breed1)</td>
+                    <td>@adoptionListing.Color1.ToString()</td>
+                    <td>@adoptionListing.AdoptionRequests.Count</td>
+                    <td>@adoptionListing.ApplicationStatus</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <p>
+        <a asp-action="New" class="btn btn-sm btn-primary rounded-0 text-uppercase"><i class="fas fa-plus-circle"></i> Create</a>&nbsp;&nbsp;
+        <a id="removeitem" onclick="routeByCheckedBox(this.id)" href="/adoptionlisting/remove" class="btn btn-sm btn-primary rounded-0 text-uppercase"><i class="fas fa-plus-circle"></i> Remove</a>&nbsp;&nbsp;
+        <a id="viewitem" onclick="routeByCheckedBox(this.id)" href="/adoptionlisting/viewmore" class="btn btn-sm btn-primary rounded-0 text-uppercase"><i class="fas fa-plus-circle"></i> Listing Details</a>
+        <button type="submit" id="viewitem" asp-controller="AdoptionListing" asp-action="ViewRequests" value="Submit" class="btn btn-sm btn-primary rounded-0 text-uppercase"> View Adoption Requests</button>
+    </p>
+</form>
 
 @section scripts{
     <script src="~/js/adjustRoute.js"></script>

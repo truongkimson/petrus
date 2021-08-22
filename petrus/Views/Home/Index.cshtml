@@ -2,7 +2,51 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="site-slider" style="position: relative;">
+    <div class="slider-one">
+        <div>
+            <img src="~/images/image_11.png" class="img-fluid" style="width:100%" alt="Banner 1" />
+        </div>
+        <div>
+            <img src="~/images/image_15.png" class="img-fluid" style="width:100%" alt="Banner 2" />
+        </div>
+        <div>
+            <img src="~/images/image_14.png" class="img-fluid" style="width:100%" alt="Banner 3" />
+        </div>
+    </div>
+    <div class="slider-btn">
+        <span class="prev position-top">
+            <i class="fas fa-chevron-left"></i>
+        </span>
+        <span class="next position-top right-0">
+            <i class="fas fa-chevron-right"></i>
+        </span>
+    </div>
 </div>
+
+<div class="container-fluid">
+    <div class="site-slider-two">
+        <div class="row text-center">
+            <div class="col-md-4 col-12 pt-5">
+                <img src="~/images/dog-1.png" alt="Product 1"
+                     style="width: 80%; margin: auto;" />
+                <a class="category" asp-area="" asp-controller="ApplyAdoption" asp-action="Index">ADOPTION</a>
+            </div>
+            <div class="col-md-4 col-12 pt-5">
+                <img src="~/images/dog-2.png" alt="Product 2"
+                     style="width: 80%; margin: auto;" />
+                <span class="category">PRODUCTS</span>
+            </div>
+            <div class="col-md-4 col-12 pt-5">
+                <img src="~/images/dog-3.png" alt="Product 3"
+                     style="width: 80%; margin: auto;" />
+                <span class="category">SERVICES</span>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+
+
+
+
