@@ -23,7 +23,7 @@ namespace petrus.Controllers
         }
         public IActionResult Index()
         {
-            var listings = dbContext.AdoptionListings.ToList();
+            var listings = dbContext.AdoptionListings.OrderBy(o=>o.AdoptionListingID.Length).ThenBy(a=>a.AdoptionListingID).ToList();
             return View(listings);
         }
         public IActionResult New()

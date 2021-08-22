@@ -26,7 +26,7 @@ namespace petrus.Controllers
         [Route("")]
         public async Task<IActionResult> Get()
         {
-            var listings = await dbContext.AdoptionListings.ToListAsync();
+            var listings = await dbContext.AdoptionListings.OrderBy(o => o.AdoptionListingID.Length).ThenBy(a => a.AdoptionListingID).ToListAsync();
 
             return Ok(listings);
         }
