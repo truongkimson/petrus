@@ -4,71 +4,86 @@
 }
 
 @*Adopton Request*@
-<form method="post" name="requestForm">
-    <h4 class="text-center text-uppercase">Your Listing Requests</h4>
-    <div class="card-body">
-        <div class="container rounded p-2">
-            <div class="row">
-                <div class="col-12 col-lg-12">
-                    <div class="row">
-                        <div class="col-12 col-md-12 pb-1">
-                            <div class="row pl-2">
-                                <h5 class="text-muted">Species: @listing.Species</h5>
-                            </div>
-                            <div class="row pl-2">
-                                <h5 class="text-muted">Breed: @listing.Breed1</h5>
-                            </div>
-                            <div class="row pl-2">
-                                <h5 class="text-muted">Age: @listing.Age years old</h5>
-                            </div>
-                            <div class="row pl-2">
-                                <h5 class="text-muted">Color: @listing.Color1</h5>
-                            </div>
-                            <div class="row pl-2">
-                                <h5 class="text-muted">Fur length: @listing.FurLength</h5>
-                            </div>
-                            <div class="row pl-2">
-                                <h5 class="text-muted">Maturity size: @listing.MaturitySize</h5>
+
+<div class="container pt-3">
+    <br />
+    <div class="row">
+        <div class="col-12 col-md-12 pb-1 text-left font-roboto text-left">
+            <a asp-action="Index" asp-controller="AdoptionRequest" class="btn btn-sm btn-primary rounded-0 text-uppercase"><i class="fas fa-plus-circle"></i> Back to Adoption</a>
+        </div>
+    </div>
+    <br />
+    <form method="post" name="requestForm">
+        <h1 class="primary-color font-roboto"><b>Your Listing Requests</b></h1>
+        <div>
+            <div class="container p-2">
+                <div class="row">
+                    <div class="col-12 col-lg-12">
+                        <div class="row" style="padding-bottom:25px">
+                            <div class="col-12 col-md-12 pb-1">
+                                <div class="row pl-2">
+                                    <h5 class="font-roboto">Species: @listing.Species</h5>
+                                </div>
+                                <div class="row pl-2">
+                                    <h5 class="font-roboto">Breed: @listing.Breed1</h5>
+                                </div>
+                                <div class="row pl-2">
+                                    <h5 class="font-roboto">Age: @listing.Age years old</h5>
+                                </div>
+                                <div class="row pl-2">
+                                    <h5 class="font-roboto">Color: @listing.Color1</h5>
+                                </div>
+                                <div class="row pl-2">
+                                    <h5 class="font-roboto">Fur length: @listing.FurLength</h5>
+                                </div>
+                                <div class="row pl-2">
+                                    <h5 class="font-roboto">Maturity size: @listing.MaturitySize</h5>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Select</th>
-                <th>Name of Adopter</th>
-                <th>Residence Type</th>
-                <th>Description</th>
-                <th>Requested Date</th>
-                <th>Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var request in adoptionRequests)
-            {
+        <div class="table-responsive">
+        <table class="table font-roboto">
+            <thead class="thead-light">
                 <tr>
-                    <td><input type="radio" id="@request.AdoptionRequestId" name="selected" value="@request.AdoptionRequestId" required></td>
-                    <td>@request.User.Name</td>
-                    <td>@request.residenceType</td>
-                    <td>@request.Description</td>
-                    <td>@request.RequestDate</td>
-                    <td>@request.requestStatus</td>
+                    <th>Select</th>
+                    <th>Name of Adopter</th>
+                    <th>Residence Type</th>
+                    <th>Description</th>
+                    <th>Requested Date</th>
+                    <th>Status</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var request in adoptionRequests)
+                {
+                    <tr>
+                        <td><input type="radio" id="@request.AdoptionRequestId" name="selected" value="@request.AdoptionRequestId" required></td>
+                        <td>@request.User.Name</td>
+                        <td>@request.residenceType</td>
+                        <td>@request.Description</td>
+                        <td>@request.RequestDate</td>
+                        <td>@request.requestStatus</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        </div>
 
-    <p>
-        <a asp-action="Index" asp-controller="AdoptionRequest" class="btn btn-sm btn-primary rounded-0 text-uppercase"><i class="fas fa-plus-circle"></i> Back to Adoption</a>&nbsp;&nbsp;
-        <button type="submit" id="removeitem" name ="Reject" asp-controller="AdoptionRequest" asp-action="Reject" value="Reject" class="btn btn-sm btn-primary rounded-0 text-uppercase"> Reject</button>&nbsp;&nbsp;
-        <button type="submit" id="viewitem" name ="Accept" asp-controller="AdoptionRequest" asp-action="Accept" value="Accept" class="btn btn-sm btn-primary rounded-0 text-uppercase"> Accept</button>
-    </p>
-</form>
+        <p>
+            <div class="row">
+                <div class="col-12 col-md-6 pb-1 text-left font-roboto text-left">
+                    <button type="submit" id="removeitem" name="Reject" asp-controller="AdoptionRequest" asp-action="Reject" value="Reject" class="btn btn-sm btn-primary rounded-0 text-uppercase"> Reject</button>&nbsp;&nbsp;
+                    <button type="submit" id="viewitem" name="Accept" asp-controller="AdoptionRequest" asp-action="Accept" value="Accept" class="btn btn-sm btn-primary rounded-0 text-uppercase"> Accept</button>
+                </div>
+            </div>
+        </p>
+    </form>
+</div>
 
 @section scripts{
     @*<script src="~/js/adjustRoute.js"></script>*@

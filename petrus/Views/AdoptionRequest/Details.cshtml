@@ -1,64 +1,67 @@
 ﻿@{
-    AdoptionRequest request= (AdoptionRequest)ViewData["request"];
+    AdoptionRequest request = (AdoptionRequest)ViewData["request"];
     User user = (User)ViewData["user"];
 }
 
+<br />
 <form method="post" name="myForm" onsubmit="return ValidateForm()">
-    <div class="container backgroundWhite">
-        <div class="card" style="text-overflow: ellipsis; overflow: hidden;">
-            <div class="card-header bg-light text-light ml-0 row container">
+    <div class="container pt-4">
+        <div style="text-overflow: ellipsis; overflow: hidden;">
+            <div class="row">
                 <div class="col-12 col-md-6 text-left text-md-left">
-                    <h1 class="text-primary"><b style="color: #012169">Adopt @request.AdoptionListing.Name</b></h1>
+                    <h1 class="primary-color font-roboto"><b>Adopt @request.AdoptionListing.Name</b></h1>
                 </div>
+                <br />
                 <div class="col-12 col-md-6 text-md-right text-left pt-2">
-                    <p class="card-title h5">
+                    <p class="card-title h5 font-roboto">
                         <span class="badge badge-pill badge-primary pt-2" style="height:30px; width:130px">@request.AdoptionListing.ApplicationStatus</span>
                     </p>
                 </div>
             </div>
-            <div class="card-body">
-                <div class="container rounded p-2">
-                    <div class="row bg-light">
+            <br />
+            <div>
+                <div class="container p-2">
+                    <div class="row">
                         <div class="col-12 col-lg-12">
-                            <div class="row">
-                                <div class="col-12 col-md-6 pb-3 pt-3">
-                                    <div class="row pl-2">
-                                        <h5 class="text-muted">Species: @request.AdoptionListing.Species</h5>
+                            <div class="row" style="padding-bottom:25px">
+                                <div class="col-12 col-md-6 pb-1">
+                                    <div class="row pl-3">
+                                        <h5 class="font-roboto">Species: @request.AdoptionListing.Species</h5>
                                     </div>
-                                    <div class="row pl-2">
-                                        <h5 class="text-muted">Breed: @request.AdoptionListing.Breed1</h5>
+                                    <div class="row pl-3">
+                                        <h5 class="font-roboto">Breed: @request.AdoptionListing.Breed1</h5>
                                     </div>
-                                    <div class="row pl-2">
-                                        <h5 class="text-muted">Age: @request.AdoptionListing.Age years old</h5>
+                                    <div class="row pl-3">
+                                        <h5 class="font-roboto">Age: @request.AdoptionListing.Age years old</h5>
                                     </div>
-                                    <div class="row pl-2">
-                                        <h5 class="text-muted">Color: @request.AdoptionListing.Color1</h5>
+                                    <div class="row pl-3">
+                                        <h5 class="font-roboto">Color: @request.AdoptionListing.Color1</h5>
                                     </div>
-                                    <div class="row pl-2">
-                                        <h5 class="text-muted">Fur length: @request.AdoptionListing.FurLength</h5>
+                                    <div class="row pl-3">
+                                        <h5 class="font-roboto">Fur length: @request.AdoptionListing.FurLength</h5>
                                     </div>
-                                    <div class="row pl-2">
-                                        <h5 class="text-muted">Maturity size: @request.AdoptionListing.MaturitySize</h5>
+                                    <div class="row pl-3">
+                                        <h5 class="font-roboto">Maturity size: @request.AdoptionListing.MaturitySize</h5>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-6 pb-3 pt-3">
-                                    <div class="row pl-2">
-                                        <h5 class="text-muted">Health condition: @request.AdoptionListing.Health</h5>
+                                <div class="col-12 col-md-6 pb-1">
+                                    <div class="row pl-3">
+                                        <h5 class="font-roboto">Health condition: @request.AdoptionListing.Health</h5>
                                     </div>
-                                    <div class="row pl-2">
-                                        <h5 class="text-muted">Vaccinated: @request.AdoptionListing.Vaccinated</h5>
+                                    <div class="row pl-3">
+                                        <h5 class="font-roboto">Vaccinated: @request.AdoptionListing.Vaccinated</h5>
                                     </div>
-                                    <div class="row pl-2">
-                                        <h5 class="text-muted">Sterilised: @request.AdoptionListing.Sterilized</h5>
+                                    <div class="row pl-3">
+                                        <h5 class="font-roboto">Sterilised: @request.AdoptionListing.Sterilized</h5>
                                     </div>
-                                    <div class="row pl-2">
-                                        <h5 class="text-muted">Dewormed: @request.AdoptionListing.Dewormed</h5>
+                                    <div class="row pl-3">
+                                        <h5 class="font-roboto">Dewormed: @request.AdoptionListing.Dewormed</h5>
                                     </div>
-                                    <div class="row pl-2">
-                                        <h5 class="text-muted">Quantity represented: @request.AdoptionListing.QuantityRepresented</h5>
+                                    <div class="row pl-3">
+                                        <h5 class="font-roboto">Quantity represented: @request.AdoptionListing.QuantityRepresented</h5>
                                     </div>
-                                    <div class="row pl-2">
-                                        <h5 class="text-muted">Fee: SGD @request.AdoptionListing.Fee</h5>
+                                    <div class="row pl-3">
+                                        <h5 class="font-roboto">Fee: SGD @request.AdoptionListing.Fee</h5>
                                     </div>
                                 </div>
                             </div>
@@ -66,30 +69,31 @@
                     </div>
                 </div>
             </div>
+            <br />
             @*Actual form*@
-            <div class="card-body">
-                <div class="container rounded p-2">
-                    <div class="row pl-2">
-                        <h3 class="text-muted">Application Form</h3>
-                    </div>
-                    <div class="row bg-light">
+            <div>
+                <div class="container p-2">
+                    <div class="row">
                         <div class="col-12 col-lg-12 col-md-12">
+                            <div class="row pl-2">
+                                <h3 class="font-roboto primary-color"><b>Application Form</b></h3>
+                            </div>
                             <div class="row">
                                 <div class="col-12 col-md-12 pb-3 pt-3">
-                                    <div class="row pl-2">
+                                    <div class="row">
                                         <div class="col-12 col-md-6 pt-1 pt-md-3">
-                                            <h5 class="text-muted">Applicant Name:</h5>
+                                            <h5 class="font-roboto">Applicant Name:</h5>
                                         </div>
                                         <div class="col-12 col-md-6 pt-md-3">
-                                            <h5 class="text-muted">@user.Name</h5>
+                                            <h5 class="font-roboto">@user.Name</h5>
                                         </div>
                                     </div>
-                                    <div class="row pl-2">
+                                    <div class="row">
                                         <div class="col-12 col-md-6 pt-1 pt-md-3">
-                                            <h5 class="text-muted">Type of Residence:</h5>
+                                            <h5 class="font-roboto">Type of Residence:</h5>
                                         </div>
                                         <div class="col-12 col-md-6 pt-md-3">
-                                            <h5 class="text-muted">
+                                            <h5 class="font-roboto">
                                                 @{
                                                     Residence r = request.residenceType;
 
@@ -123,14 +127,14 @@
                                             </h5>
                                         </div>
                                     </div>
-                                    <div class="row pl-2">
+                                    <div class="row">
                                         <div class="col-12 col-md-6 pt-1 pt-md-3">
-                                            <h5 class="text-muted">
+                                            <h5 class="font-roboto">
                                                 Number of @request.AdoptionListing.Species Owned:
                                             </h5>
                                         </div>
                                         <div class="col-12 col-md-6 pt-md-3">
-                                            <h5 class="text-muted">
+                                            <h5 class="font-roboto">
                                                 @{
                                                     int x = request.dogsOwned;
 
@@ -242,9 +246,9 @@
                                             </h5>
                                         </div>
                                     </div>
-                                    <div class="row pl-2">
+                                    <div class="row">
                                         <div class="col-12 col-md-6 pt-1 pt-md-3">
-                                            <h5 class="text-muted">
+                                            <h5 class="font-roboto">
                                                 Tell us what adopting @request.AdoptionListing.Name would mean to you:
                                             </h5>
                                         </div>
@@ -254,24 +258,24 @@
                                         </div>
                                     </div>
                                     <div> <input type="hidden" id="listingId" name="listingId" value="@request.AdoptionListing.AdoptionListingID"> </div>
-                                    <div class="row pl-2">
+                                    <div class="row">
                                         <div class="col-12 col-md-12 pt-1 pt-md-3">
-                                            <h5 class="text-muted">
+                                            <h5 class="font-roboto">
                                                 <input type="checkbox" id="acceptConditions" name="acceptConditions" value="Accept">
                                                 <label for="acceptConditions">I fully understand the conditions required to own a dog in Singapore and have fulfilled all the requisites. </label><br>
                                             </h5>
                                         </div>
                                     </div>
-                                    <div class="row pl-2">
+                                    <div class="row">
                                         <div class="col-12 col-md-12 pt-1 pt-md-1">
-                                            <h5 class="text-muted">
+                                            <h5 class="font-roboto">
                                                 <a href="https://www.hdb.gov.sg/residential/living-in-an-hdb-flat/keeping-pets" target="_blank">HDB Approved Small Breeds</a>
                                             </h5>
                                         </div>
                                     </div>
-                                    <div class="row pl-2">
+                                    <div class="row">
                                         <div class="col-12 col-md-12">
-                                            <h5 class="text-muted">
+                                            <h5 class="font-roboto">
                                                 <a href="https://www.nparks.gov.sg/avs/pets/owning-a-pet/licensing-a-pet/dog-licensing" target="_blank">NParks Dogs Licensing</a>
                                             </h5>
                                         </div>
@@ -282,19 +286,21 @@
                     </div>
                 </div>
             </div>
-            <div class="card-footer">
+            <br />
+            <div>
                 <div class="row">
-                    <div class="col-12 col-md-6 pb-1">
-                        <a asp-action="Index" class="btn btn-primary form-control  btn-square btn-lg" style="height:50px;">Back</a>
+                    <div class="col-12 col-md-6 pb-1 text-left font-roboto">
+                        <a asp-action="Index" class="details-button btn btn-primary form-control btn-square btn-lg" style="height:50px;"><b>Back</b></a>
                     </div>
-                    <div class="col-12 col-md-6 pb-1">
-                        <button type="submit" asp-action="UpdateAdoptionRequest" onsubmit="return ValidateForm()" value="Adoption Request" class="btn btn-primary btn-square btn-lg form-control" style="height:50px;">Update Request</button>
+                    <div class="col-12 col-md-6 pb-1 text-right font-roboto">
+                        <button type="submit" asp-action="UpdateAdoptionRequest" onsubmit="return ValidateForm()" value="Adoption Request" class="details-button btn btn-primary btn-square form-control btn-lg" style="height:50px;"><b>Update Request</b></button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </form>
+<br />
 
 @section Scripts {
     <script src="/js/ValidateAdoptionApplication.js"></script>
