@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace petrus.Controllers
 {
-    public class AdminController : Controller
+    public class AdminDashController : Controller
     {
         public IActionResult Index()
         {

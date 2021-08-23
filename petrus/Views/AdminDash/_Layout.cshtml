@@ -202,7 +202,7 @@
                         <!-- Add icons to the links using the .nav-icon class
                         with font-awesome or any other icon font library -->
                         <li class="nav-item">
-                            <a href="#" class="nav-link active">
+                            <a asp-action="Index" class="nav-link active">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     Dashboard
@@ -211,7 +211,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a asp-controller="AdminUserCRUD" asp-action="Index" class="nav-link">
                                 <i class="nav-icon fas fa-user"></i>
                                 <p>
                                     Users
@@ -279,5 +279,6 @@
     <script src="~/dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <!--<script src="~/dist/js/demo.js"></script>-->
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
