@@ -2,77 +2,82 @@
 for details on configuring this project to bundle and minify static web assets. */
 
 a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
 }
 
 /* Provide sufficient contrast against white background */
 a {
-  color: #0366d6;
+    color: #0366d6;
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
+
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .border-top {
-  border-top: 1px solid #e5e5e5;
+    border-top: 1px solid #e5e5e5;
 }
+
 .border-bottom {
-  border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
 }
 
 .box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
 
 button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
+    font-size: 1rem;
+    line-height: inherit;
 }
 
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
 }
+
 .footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px; /* Vertically center the text there */
 }
 
 :root {
     --light-gray: #2b3032a1;
     --primary-color: #0064a4;
+    --yellow-color: #fff002;
+    --gray-color: #F2F2F2; 
     --border: #2b30321;
     --text-color: #ff686f;
     --anton: 'Anton', sans-serif;
@@ -86,15 +91,31 @@ body {
     color: var(--primary-color);
 }
 
+.yellow-color {
+    color: var(--yellow-color);
+}
+
+.gray-color {
+    color: var(--gray-color);
+}
+
+.bg-gray-color {
+    background-color: var(--gray-color) !important;
+}
+
+.bg-yellow-color {
+    background-color: var(--yellow-color) !important;
+}
+
 .bg-primary-color {
     background-color: var(--primary-color) !important;
 }
 
-.text-color{
+.text-color {
     color: var(--text-color);
 }
 
-.font-roboto{
+.font-roboto {
     font-family: var(--roboto);
 }
 
@@ -115,16 +136,16 @@ header {
     font-size: 0.7em;
 }
 
-.header-links a{
+.header-links a {
     font-size: 0.9em;
     text-decoration: none;
     color: white;
 }
 
-.header-links a:hover {
-    color: white;
-    text-decoration: underline;
-}
+    .header-links a:hover {
+        color: white;
+        text-decoration: underline;
+    }
 
 .navbar-nav {
     padding: 0.8em 0em;
@@ -134,12 +155,12 @@ header {
     font-size: 0.9em;
     color: #0064a4 !important;
     text-decoration: none;
-    font-weight:bold;
+    font-weight: bold;
 }
 
-.nav-link:hover {
-    text-decoration: underline;
-}
+    .nav-link:hover {
+        text-decoration: underline;
+    }
 
 .site-slider {
     position: relative;
@@ -191,34 +212,34 @@ header {
     right: 50%;
 }
 
-.slick-dots li{
-    margin: 0 0.6rem;
-}
+    .slick-dots li {
+        margin: 0 0.6rem;
+    }
 
-.slick-dots button {
-    display: block;
-    width: 0.5rem;
-    height: 0.5rem;
-    padding: 0;
-    border: none;
-    background-color: white;
-    text-indent: -99999px;
-    border-radius: 100%;
-}
+    .slick-dots button {
+        display: block;
+        width: 0.5rem;
+        height: 0.5rem;
+        padding: 0;
+        border: none;
+        background-color: white;
+        text-indent: -99999px;
+        border-radius: 100%;
+    }
 
-.slick-dots li.slick-active button {
-    transform: scale(2.5);
-    box-shadow: 0px 3px 5px 1px rgba(0, 0, 0, 0.205);
-    outline:none;
-}
+    .slick-dots li.slick-active button {
+        transform: scale(2.5);
+        box-shadow: 0px 3px 5px 1px rgba(0, 0, 0, 0.205);
+        outline: none;
+    }
 
 .site-slider-two {
     position: relative;
     height: 30%;
 }
 
-.slick-track.product:hover span{
-    background-color:var(--primary-color);
+.slick-track.product:hover span {
+    background-color: var(--primary-color);
 }
 
 footer {
@@ -235,6 +256,8 @@ footer {
     font-weight: bold;
 }
 
-.category:hover {
-    text-decoration:none;
-}
+    .category:hover {
+        text-decoration: none;
+    }
+
+
