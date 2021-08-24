@@ -89,77 +89,71 @@
 </div>
 
 
-    @*line chart*@
-    <script>
-    const labelList = [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-    ];
+@*line chart*@
+<script>
+    const BASE_URL = 'https://localhost:44327/';
 
-    const data = {
-        labels: labelList,
-        datasets: [{
-            label: 'Average adoption speed',
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
-            data: [10, 5, 2, 20, 30, 45],
-        }]
-    };
+    function createLineChart(fetchedData) {
+        const labelList = fetchedData.labels;
 
-    const config = {
-        type: 'line',
-        data,
-        options: {
-            scales: {
-                y: {
-                    max: 100
-                }
-            }
-        }
-    };
-
-    var myChart = new Chart(
-        document.getElementById('myChart'),
-        config
-    );
-
-    function updateData(chart, newDatum) {
-        chart.data.datasets.forEach((dataset) => {
-            dataset.data.shift();
-        });
-        chart.update('none');
-
-        chart.data.datasets.forEach((dataset) => dataset.data.push(newDatum));
-        chart.update('none');
-    }
-
-    function fetchAndUpdate() {
-        @*var fetchedData = Array.from({ length: 6 }, () => Math.floor(Math.random() * 40));*@
-        var currData = myChart.data.datasets[0].data;
-        var newDatum = currData[currData.length - 1]
-            + Math.floor(Math.random() * 5) * (Math.round(Math.random()) * 2 - 1);
-        updateData(myChart, newDatum);
-    }
-
-    setInterval(fetchAndUpdate, 1000);
-
-    </script>
-
-    @*donut chart*@
-    <script>
-        const typeData = {
-            labels: [
-                'Dog',
-                'Cat',
-                'Others'
-            ],
+        const data = {
+            labels: labelList,
             datasets: [{
-                label: 'Adoption Listings by Animal',
-                data: [300, 500, 100],
+                label: 'Day(s)',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: fetchedData.data,
+            }]
+        };
+
+        const config = {
+            type: 'line',
+            data,
+            @*options: {
+                scales: {
+                    y: {
+                        max: 100
+                    }
+                }
+            }*@
+        };
+
+        var myChart = new Chart(
+            document.getElementById('myChart'),
+            config
+        );
+
+        function fetchAndUpdate() {
+            fetch(BASE_URL + 'api/admin/curr-adoption-speed')
+                .then(res => res.text())
+                .then(data => {
+                    updateData(myChart, data);
+                });
+        }
+
+        setInterval(fetchAndUpdate, 1000);
+
+        function updateData(chart, newDatum) {
+            chart.data.datasets.forEach((dataset) => {
+                dataset.data.pop();
+            });
+            chart.update();
+
+            chart.data.datasets.forEach((dataset) => dataset.data.push(newDatum));
+            chart.update('none');
+        }
+    }
+</script>
+
+@*donut chart*@
+<script>
+
+    function createDonutChart(fetchedData) {
+        const typeData = {
+            labels: fetchedData.labels,
+            datasets: [{
+                label: 'Listings',
+                data: fetchedData.data,
                 backgroundColor: [
                     'rgb(255, 99, 132)',
                     'rgb(54, 162, 235)',
@@ -183,33 +177,31 @@
             chart.data.datasets.forEach(dataset => {
                 dataset.data = newData;
             });
-            chart.update('none');
+            chart.update();
         }
 
         function fetchAndUpdateDonut() {
-            var currData = donutChart.data.datasets[0].data;
-            var newData = currData.map(datum => datum + Math.floor(Math.random() * 50 * (Math.round(Math.random()) * 2 - 1)));
-            updateDonutData(donutChart, newData);
-            console.log(newData);
+            fetch(BASE_URL + 'api/admin/adoptions-by-species')
+                .then(res => res.json())
+                .then(data => {
+                    updateDonutData(donutChart, data.data);
+                });
         }
 
         setInterval(fetchAndUpdateDonut, 1000);
-    </script>
+    }
+</script>
 
-    @*bar chart*@
-    <script>
-        const labels = ['February',
-            'March',
-            'April',
-            'May',
-            'June',
-            'July',
-            'August',];
+@*bar chart*@
+<script>
+    function createBarChart(fetchedData) {
+        const labels = fetchedData.labels;
+
         const barData = {
             labels: labels,
             datasets: [{
-                label: 'Adoptions by month',
-                data: [65, 59, 80, 81, 56, 55, 40],
+                label: 'Adoptions',
+                data: fetchedData.data,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(255, 159, 64, 0.2)',
@@ -217,7 +209,6 @@
                     'rgba(75, 192, 192, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
                     'rgba(153, 102, 255, 0.2)',
-                    'rgba(201, 203, 207, 0.2)'
                 ],
                 borderColor: [
                     'rgb(255, 99, 132)',
@@ -226,7 +217,6 @@
                     'rgb(75, 192, 192)',
                     'rgb(54, 162, 235)',
                     'rgb(153, 102, 255)',
-                    'rgb(201, 203, 207)'
                 ],
                 borderWidth: 1
             }]
@@ -248,4 +238,47 @@
             document.getElementById('barChart'),
             barConfig
         );
-    </script>
+
+        function fetchAndUpdate() {
+            fetch(BASE_URL + 'api/admin/curr-month-adoption')
+                .then(res => res.text())
+                .then(data => {
+                    console.log(data);
+                    updateData(barChart, data);
+                });
+        }
+
+        setInterval(fetchAndUpdate, 1000);
+
+        function updateData(chart, newDatum) {
+            chart.data.datasets.forEach((dataset) => {
+                dataset.data.pop();
+            });
+            chart.update();
+
+            chart.data.datasets.forEach((dataset) => dataset.data.push(newDatum));
+            chart.update('none');
+        }
+    }
+</script>
+
+<script>
+    fetch(BASE_URL + 'api/admin/adoption-speed')
+        .then(res => res.json())
+        .then(data => {
+            createLineChart(data);
+        });
+
+    fetch(BASE_URL + 'api/admin/adoptions-by-species')
+        .then(res => res.json())
+        .then(data => {
+            createDonutChart(data);
+        });
+
+    fetch(BASE_URL + 'api/admin/adoptions-by-month')
+        .then(res => res.json())
+        .then(data => {
+            createBarChart(data);
+            console.log(data);
+        });
+</script>
