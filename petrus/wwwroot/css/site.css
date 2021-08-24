@@ -151,7 +151,7 @@ header {
     padding: 0.8em 0em;
 }
 
-.nav-link {
+.nav-link1 {
     font-size: 0.9em;
     color: #0064a4 !important;
     text-decoration: none;
@@ -259,5 +259,6 @@ footer {
     .category:hover {
         text-decoration: none;
     }
+
 
 

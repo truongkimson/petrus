@@ -8,13 +8,14 @@
     <br />
     <div class="row">
         <div class="col-12 col-md-12 pb-1 text-left font-roboto text-left">
-            <a type="submit" id="viewitem" asp-controller="AdoptionListing" asp-action="Index" value="Submit" class="btn btn-sm btn-primary rounded-0 text-uppercase"> Back to Adoption Listings</a>
+            <a asp-action="Index" asp-controller="AdoptionListing" class="btn btn-sm btn-primary rounded-0 text-uppercase"><i class="fas fa-fast-backward"></i> Back to List</a>
         </div>
     </div>
     <br />
     <form method="post" name="myForm">
         <h1 class="primary-color font-roboto"><b>Your Listing Requests</b></h1>
-        <h3 class="primary-color font-roboto">@result</h3>
+        <h4 class="primary-color font-roboto">@result</h4>
+        <br />
         <br />
         <div class="table-responsive">
             <table class="table font-roboto">
