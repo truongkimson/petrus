@@ -15,7 +15,7 @@
         <div class="card-header bg-light text-uppercase text-white">
             <h2 class="font-roboto primary-color"><b>Add New</b></h2>
         </div>
-        <div class="card-body font-roboto" >
+        <div class="card-body font-roboto">
             <form enctype="multipart/form-data" asp-action="New">
                 <div class="row">
                     <div class="col-md-6">
@@ -225,3 +225,11 @@
         </div>
     </div>
 </div>
+@section scripts{
+    <script type="text/javascript">
+        $(".custom-file-input").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
+}

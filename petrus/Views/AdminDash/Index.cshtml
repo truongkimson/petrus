@@ -1,0 +1,251 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<h1>Admin Dashboard</h1>
+
+
+<div class="container">
+    <div class="row my-3">
+        <div class="col-4">
+            <h5>Average adoption speed</h5>
+            <canvas class="m-3" id="myChart" width="400" height="400"></canvas>
+        </div>
+        <div class="col-4">
+            <h5>Adoption listings by Species</h5>
+            <canvas class="m-3" id="donutChart" width="400" height="400"></canvas>
+        </div>
+        <div class="col-4">
+            <h5>Adoption by month</h5>
+            <canvas id="barChart" width="400" height="400"></canvas>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+            <h5>Latest adoptions</h5>
+            <div class="row-cols-1">
+                <div class="card mb-3 h-100">
+                    <div class="row no-gutters">
+                        <div class="col-md-4">
+                            <img src="https://post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/02/322868_1100-800x825.jpg" class="card-img" alt="..." style="width: 100%; height: 10vw; object-fit: cover;">
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card-body">
+                                <h5 class="card-title mb-2 text-bold">Karlee</h5>
+                                <ul class="card-text" style="list-style: none; padding-left: 0;">
+                                    <li>Species: Dog</li>
+                                    <li>Age: 2</li>
+                                    <li>Breed: American Eskimo Dog</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card-body pl-1">
+                                <h5 class="card-title mb-2 text-bold">Adopter</h5>
+                                <ul class="card-text" style="list-style: none; padding-left: 0;">
+                                    <li>Name:</li>
+                                    <li>Email:</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <h5>Slow adoption</h5>
+            <div class="row-cols-1">
+                <div class="card mb-3 h-100">
+                    <div class="row no-gutters">
+                        <div class="col-md-4">
+                            <img src="https://post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/02/322868_1100-800x825.jpg" class="card-img" alt="..." style="width: 100%; height: 10vw; object-fit: cover;">
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card-body">
+                                <h5 class="card-title mb-2 text-bold">Karlee</h5>
+                                <ul class="card-text" style="list-style: none; padding-left: 0;">
+                                    <li>Species: Dog</li>
+                                    <li>Age: 2</li>
+                                    <li>Breed: American Eskimo Dog</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card-body pl-1">
+                                <h5 class="card-title mb-2 text-bold">Days elapsed</h5>
+                                <ul class="card-text" style="list-style: none; padding-left: 0;">
+                                    <li>15 days</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    @*line chart*@
+    <script>
+    const labelList = [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+    ];
+
+    const data = {
+        labels: labelList,
+        datasets: [{
+            label: 'Average adoption speed',
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: [10, 5, 2, 20, 30, 45],
+        }]
+    };
+
+    const config = {
+        type: 'line',
+        data,
+        options: {
+            scales: {
+                y: {
+                    max: 100
+                }
+            }
+        }
+    };
+
+    var myChart = new Chart(
+        document.getElementById('myChart'),
+        config
+    );
+
+    function updateData(chart, newDatum) {
+        chart.data.datasets.forEach((dataset) => {
+            dataset.data.shift();
+        });
+        chart.update('none');
+
+        chart.data.datasets.forEach((dataset) => dataset.data.push(newDatum));
+        chart.update('none');
+    }
+
+    function fetchAndUpdate() {
+        @*var fetchedData = Array.from({ length: 6 }, () => Math.floor(Math.random() * 40));*@
+        var currData = myChart.data.datasets[0].data;
+        var newDatum = currData[currData.length - 1]
+            + Math.floor(Math.random() * 5) * (Math.round(Math.random()) * 2 - 1);
+        updateData(myChart, newDatum);
+    }
+
+    setInterval(fetchAndUpdate, 1000);
+
+    </script>
+
+    @*donut chart*@
+    <script>
+        const typeData = {
+            labels: [
+                'Dog',
+                'Cat',
+                'Others'
+            ],
+            datasets: [{
+                label: 'Adoption Listings by Animal',
+                data: [300, 500, 100],
+                backgroundColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(54, 162, 235)',
+                    'rgb(255, 205, 86)'
+                ],
+                hoverOffset: 4
+            }]
+        };
+
+        const typeConfig = {
+            type: 'doughnut',
+            data: typeData,
+        };
+
+        var donutChart = new Chart(
+            document.getElementById('donutChart'),
+            typeConfig
+        );
+
+        function updateDonutData(chart, newData) {
+            chart.data.datasets.forEach(dataset => {
+                dataset.data = newData;
+            });
+            chart.update('none');
+        }
+
+        function fetchAndUpdateDonut() {
+            var currData = donutChart.data.datasets[0].data;
+            var newData = currData.map(datum => datum + Math.floor(Math.random() * 50 * (Math.round(Math.random()) * 2 - 1)));
+            updateDonutData(donutChart, newData);
+            console.log(newData);
+        }
+
+        setInterval(fetchAndUpdateDonut, 1000);
+    </script>
+
+    @*bar chart*@
+    <script>
+        const labels = ['February',
+            'March',
+            'April',
+            'May',
+            'June',
+            'July',
+            'August',];
+        const barData = {
+            labels: labels,
+            datasets: [{
+                label: 'Adoptions by month',
+                data: [65, 59, 80, 81, 56, 55, 40],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 205, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(201, 203, 207, 0.2)'
+                ],
+                borderColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(255, 159, 64)',
+                    'rgb(255, 205, 86)',
+                    'rgb(75, 192, 192)',
+                    'rgb(54, 162, 235)',
+                    'rgb(153, 102, 255)',
+                    'rgb(201, 203, 207)'
+                ],
+                borderWidth: 1
+            }]
+        };
+
+        const barConfig = {
+            type: 'bar',
+            data: barData,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            },
+        };
+
+        var barChart = new Chart(
+            document.getElementById('barChart'),
+            barConfig
+        );
+    </script>

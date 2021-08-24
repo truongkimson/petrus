@@ -10,6 +10,7 @@ namespace petrus.ViewModels
 {
     public class AdoptionListingViewModel
     {
+        public int? id { get; set; }
         [Required(ErrorMessage = "Please enter species")]
         public Species Species { get; set; }
         public string Name { get; set; }
@@ -48,9 +49,9 @@ namespace petrus.ViewModels
         [Required(ErrorMessage = "Please enter adoption fee")]
         public double Fee { get; set; }
         public string Description { get; set; }
-        [Display(Name = "Pet Image")]
+        [Display(Name = "Pet Image (.jpg files only)")]
         public IFormFile PetImage { get; set; }
-        [Display(Name = "Pet Video")]
+        [Display(Name = "Pet Video (.mp4 files only)")]
         public IFormFile PetVideo { get; set; }
     }
 }
