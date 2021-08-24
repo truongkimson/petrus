@@ -1,0 +1,236 @@
+﻿@model petrus.ViewModels.AdoptionListingViewModel
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    AdoptionListing myListing = (AdoptionListing)ViewData["listing"];
+}
+<div class="col-md-10 mx-auto py-4">
+    <div class="row">
+        <div class="col-12 col-md-12 pb-1 text-left font-roboto text-left">
+            <a asp-action="Index" class="btn btn-sm btn-primary rounded-0 text-uppercase"><i class="fas fa-fast-backward"></i> Back to List</a>
+        </div>
+    </div>
+    <br />
+    <div class="card font-roboto">
+        <div class="card-header bg-primary-color text-uppercase text-white">
+            <h2 class="font-roboto"><b>Update adoption listing</b></h2>
+        </div>
+        <div class="card-body font-roboto">
+            <form enctype="multipart/form-data" asp-action="Update">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Species" class="control-label"></label>
+                            <select asp-for="Species"
+                                    class="form-control"
+                                    asp-items="Html.GetEnumSelectList<Species>()">
+                                <option value=@myListing.Species>@myListing.Species.ToString()</option>
+                            </select>
+                            <span asp-validation-for="Species" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Name" class="control-label"></label>
+                            <input asp-for="Name" class="form-control" value=@myListing.Name>
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Gender" class="control-label"></label>
+                            <select asp-for="Gender"
+                                    class="form-control"
+                                    asp-items="Html.GetEnumSelectList<Gender>()">
+                                <option value=@myListing.Gender>@myListing.Gender.ToString()</option>
+                            </select>
+                            <span asp-validation-for="Gender" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Age" class="control-label"></label>
+                            <input asp-for="Age" class="form-control" id="age" value=@myListing.Age />
+                            <span asp-validation-for="Age" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Breed1" class="control-label"></label>
+                            <select asp-for="Breed1"
+                                    class="form-control"
+                                    asp-items="Html.GetEnumSelectList<Breed>()">
+                                <option value=@myListing.Breed1>@BreedExtensions.ToFriendlyString(myListing.Breed1)</option>
+                            </select>
+                            <span asp-validation-for="Breed1" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Breed2" class="control-label"></label>
+                            <select asp-for="Breed2"
+                                    class="form-control"
+                                    asp-items="Html.GetEnumSelectList<Breed>()">
+                                <option value=@myListing.Breed2>@BreedExtensions.ToFriendlyString(myListing.Breed2)</option>
+                            </select>
+                            <span asp-validation-for="Breed2" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Color1" class="control-label"></label>
+                            <select asp-for="Color1"
+                                    class="form-control"
+                                    asp-items="Html.GetEnumSelectList<Color>()">
+                                <option value=@myListing.Color1>@myListing.Color1.ToString()</option>
+                            </select>
+                            <span asp-validation-for="Color1" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="Color2" class="control-label"></label>
+                        <select asp-for="Color2"
+                                class="form-control"
+                                asp-items="Html.GetEnumSelectList<Color>()">
+                            <option value=@myListing.Color2>@myListing.Color2.ToString()</option>
+                        </select>
+                        <span asp-validation-for="Color2" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Color3" class="control-label"></label>
+                            <select asp-for="Color3"
+                                    class="form-control"
+                                    asp-items="Html.GetEnumSelectList<Color>()">
+                                <option value=@myListing.Color3>@myListing.Color3.ToString()</option>
+                            </select>
+                            <span asp-validation-for="Color3" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Fee" class="control-label"></label>
+                            <input asp-for="Fee" class="form-control" value=@myListing.Fee />
+                            <span asp-validation-for="Fee" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Quantity" class="control-label"></label>
+                            <input asp-for="Quantity" class="form-control" value=@myListing.QuantityRepresented />
+                            <span asp-validation-for="Quantity" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Sterilized" class="control-label"></label>
+                            <select asp-for="Sterilized"
+                                    class="form-control"
+                                    asp-items="Html.GetEnumSelectList<Sterilized>()"
+                                    id="sterilized">
+                                <option value=@myListing.Sterilized>@myListing.Sterilized.ToString()</option>
+                            </select>
+                            <span asp-validation-for="Sterilized" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Vaccinated" class="control-label"></label>
+                            <select asp-for="Vaccinated"
+                                    class="form-control"
+                                    asp-items="Html.GetEnumSelectList<Vaccinated>()"
+                                    id="vaccinated">
+                                <option value=@myListing.Vaccinated>@myListing.Vaccinated.ToString()</option>
+                            </select>
+                            <span asp-validation-for="Vaccinated" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Dewormed" class="control-label"></label>
+                            <select asp-for="Dewormed"
+                                    class="form-control"
+                                    asp-items="Html.GetEnumSelectList<Dewormed>()">
+                                <option value=@myListing.Dewormed>@myListing.Dewormed.ToString()</option>
+                            </select>
+                            <span asp-validation-for="Dewormed" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Health" class="control-label"></label>
+                            <select asp-for="Health"
+                                    class="form-control"
+                                    asp-items="Html.GetEnumSelectList<Health>()">
+                                <option value=@myListing.Health>@myListing.Health.ToString()</option>
+                            </select>
+                            <span asp-validation-for="Health" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Description" class="control-label"></label>
+                            <input asp-for="Description" class="form-control" value=@myListing.Description />
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="PetVideo" class="control-label"></label>
+                            <div class="custom-file">
+                                <input asp-for="PetVideo" class="custom-file-input" id="customFile0">
+                                <label class="custom-file-label" for="customFile">@myListing.Video</label>
+                            </div>
+                            <span asp-validation-for="PetVideo" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="PetImage" class="control-label"></label>
+                            <div class="custom-file">
+                                <input asp-for="PetImage" class="custom-file-input" id="customFile1">
+                                <label class="custom-file-label" for="customFile">@myListing.Image</label>
+                            </div>
+                            <span asp-validation-for="PetImage" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input asp-for="id" class="form-control" type="hidden" value=@myListing.AdoptionListingID />
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-12 col-md-6 pb-1 text-left font-roboto text-left">
+                        <input type="submit" value="submit" class="btn btn-sm btn-primary rounded-0 text-uppercase" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript">
+        $(".custom-file-input").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
+}
+
