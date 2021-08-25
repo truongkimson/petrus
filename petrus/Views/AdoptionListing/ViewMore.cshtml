@@ -90,9 +90,14 @@
                             <div class="row">
                                 <div class="col-12 col-md-12 pb-1">
                                     <div class="row pl-2 text-center">
-                                        <img src="~/images/@listing.Image"
-                                             class="rounded"
-                                             height="300" />
+                                        @if (listing.Image != null)
+                                        {
+                                            <img src="~/images/@listing.Image" class="rounded" width="60%"/>
+                                        }
+                                        else
+                                        {
+                                            <img src="~/images/noimage2.png" class="rounded" width="60%" />
+                                        }
                                     </div>
                                 </div>
                             </div>

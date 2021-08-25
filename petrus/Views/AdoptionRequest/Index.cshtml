@@ -22,7 +22,15 @@
                         <div class="d-md-block col-3 col-md-3">
                             @foreach (var details in item.AdoptionListing)
                             {
-                                <img src="~/images/@details.Image" class="rounded" width="100%" />
+                                if (details.Image != null)
+                                {
+                                    <img src="~/images/@details.Image" class="rounded" width="100%" />
+                                }
+
+                                else
+                                {
+                                    <img src="~/images/noimage2.png" class="rounded" width="100%" />
+                                }
                             }
                         </div>
                         <div class="col-9 col-md-9">
