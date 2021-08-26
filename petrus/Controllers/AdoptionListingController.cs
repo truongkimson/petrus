@@ -16,6 +16,7 @@ namespace petrus.Controllers
     {
         private readonly petrusDb dbContext;
         private readonly IWebHostEnvironment webHostEnvironment;
+        private string userId;
         public AdoptionListingController(petrusDb context, IWebHostEnvironment hostEnvironment)
         {
             dbContext = context;
@@ -23,7 +24,10 @@ namespace petrus.Controllers
         }
         public IActionResult Index()
         {
-            var listings = dbContext.AdoptionListings.ToList();
+            //hard coded for now, have to retrieve user data from login details to determine id.
+            userId = "10";
+            var listings = dbContext.AdoptionListings.Where(x=>x.UserID==userId).OrderBy(o=>o.AdoptionListingID.Length).ThenBy(a=>a.AdoptionListingID).ToList();
+
             return View(listings);
         }
         public IActionResult New()
@@ -194,8 +198,81 @@ namespace petrus.Controllers
                 return RedirectToAction("Index");
             return View();
         }
-
-
+        public IActionResult Update(string id)
+        {
+            if (id != null)
+            {
+                AdoptionListing listing = dbContext.AdoptionListings.FirstOrDefault(x => x.AdoptionListingID == id);
+                if (listing != null)
+                {
+                    ViewData["listing"] = listing;
+                }
+            }
+            else
+                return RedirectToAction("Index");
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Update(AdoptionListingViewModel model)
+        {
+            AdoptionListing myOldListing = dbContext.AdoptionListings.FirstOrDefault(x => x.AdoptionListingID == Convert.ToString(model.id));
+            if (ModelState.IsValid)
+            {
+                deleteFile(myOldListing.Image);
+                deleteFile(myOldListing.Video);
+                string[] uniqueFileNames = UploadedFile(model);
+                myOldListing.Species = model.Species;
+                myOldListing.Name = model.Name;
+                myOldListing.Breed1 = model.Breed1;
+                myOldListing.Breed2 = model.Breed2;
+                myOldListing.Color1 = model.Color1;
+                myOldListing.Color2 = model.Color2;
+                myOldListing.Gender = model.Gender;
+                myOldListing.Age = model.Age;
+                myOldListing.QuantityRepresented = model.Quantity;
+                myOldListing.Fee = model.Fee;
+                myOldListing.Vaccinated = model.Vaccinated;
+                myOldListing.Dewormed = model.Dewormed;
+                myOldListing.Sterilized = model.Sterilized;
+                myOldListing.Health = model.Health;
+                myOldListing.FurLength = model.FurLength;
+                myOldListing.Image = uniqueFileNames[0];
+                myOldListing.Video = uniqueFileNames[1];
+                myOldListing.ListingDate = DateTime.Now;
+                dbContext.AdoptionListings.Update(myOldListing);
+                await dbContext.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                return View();
+            }
+            
+        }
+        protected void deleteFile(String name)
+        {
+            if (name.Contains("png") || name.Contains("jpg"))
+            {
+                string fileFolder = Path.Combine(webHostEnvironment.WebRootPath, "images");
+                string filePath = Path.Combine(fileFolder, name);
+                FileInfo file = new FileInfo(filePath);
+                if (file.Exists)
+                {
+                    file.Delete();
+                }
+            }
+            if (name.Contains("mp4"))
+            {
+                string fileFolder = Path.Combine(webHostEnvironment.WebRootPath, "videos");
+                string filePath = Path.Combine(fileFolder, name);
+                FileInfo file = new FileInfo(filePath);
+                if (file.Exists) 
+                {
+                    file.Delete();
+                }
+            }
+        }
     }
+            
 }
-
