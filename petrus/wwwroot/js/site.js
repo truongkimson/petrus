@@ -8,18 +8,38 @@ const xhr = new XMLHttpRequest();
 
 const checkAdoptionSpeed = () => {
     console.log('adoption speed clicked');
-    let age = document.getElementById('age').value,
-        vaccinated = document.getElementById('vaccinated').value,
-        sterilized = document.getElementById('sterilized').value;
-
-    console.log(age, vaccinated, sterilized);
+    let type = parseInt($('#type')[0].value),
+        age = parseInt($('#age')[0].value),
+        gender = parseInt($('#gender')[0].value),
+        maturitySize = parseInt($('#maturity-size')[0].value),
+        furLength = parseInt($('#fur-length')[0].value),
+        qty = parseInt($('#qty')[0].value),
+        fee = parseInt($('#fee')[0].value),
+        desc = parseInt($('#desc')[0].value.length),
+        color1 = parseInt($('#desc')[0].value),
+        vaccinated = parseInt($('#vaccinated')[0].value),
+        dewormed = parseInt($('#dewormed')[0].value),
+        sterilized = parseInt($('#sterilized')[0].value),
+        health = parseInt($('#health')[0].value);
 
     const payload = {
-        age: age,
-        notVaccinated: vaccinated == 1 ? 1 : 0,
-        notSterilized: sterilized == 1 ? 1 : 0
+        type,
+        age,
+        gender,
+        maturitySize,
+        furLength,
+        qty,
+        fee,
+        desc,
+        color1,
+        vaccinated,
+        dewormed,
+        sterilized,
+        health
     }
-    
+
+    console.log(payload);
+
     xhr.open("POST", 'http://127.0.0.1:5000/api/adoption-speed', true);
     xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
