@@ -13,5 +13,7 @@ namespace petrus.Resources
         public int age { get; set; }
         public string breed { get; set; }
         public int days_elapsed { get; set; }
+        public string listing_id { get; set; }
+        public string img { get; set; }
     }
 }

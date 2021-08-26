@@ -11,7 +11,7 @@ namespace petrus.Services
     {
         ChartData GetAvgAdoptionSpeed();
         int GetCurrMonthAdoptionSpeed();
-        ChartData GetAdoptionsBySpecies();
+        ChartData GetAdoptionListingsBySpecies();
         ChartData GetAdoptionsByMonth();
         int GetCurrMonthAdoptions();
         IEnumerable<AdoptionData> GetLatestAdoptions();

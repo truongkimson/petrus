@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using petrus.Models;
 
 namespace petrus.Resources
 {
@@ -13,5 +14,6 @@ namespace petrus.Resources
         public string breed { get; set; }
         public string adopter_name { get; set; }
         public string email { get; set; }
+        public string img { get; set; }
     }
 }

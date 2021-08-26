@@ -36,7 +36,7 @@ namespace petrus.Controllers
         [Route("adoptions-by-species")]
         public IActionResult AdoptionsBySpecies()
         {
-            return Ok(_service.GetAdoptionsBySpecies());
+            return Ok(_service.GetAdoptionListingsBySpecies());
         }
 
         [HttpGet]

@@ -6,7 +6,6 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <h1>Admin Dashboard</h1>
 
-
 <div class="container">
     <div class="row my-3">
         <div class="col-4">
@@ -25,20 +24,20 @@
 
     <div class="row">
         <div class="col-6">
-            <h5>Latest adoptions</h5>
+            <h5>Latest adoption</h5>
             <div class="row-cols-1">
                 <div class="card mb-3 h-100">
                     <div class="row no-gutters">
                         <div class="col-md-4">
-                            <img src="https://post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/02/322868_1100-800x825.jpg" class="card-img" alt="..." style="width: 100%; height: 10vw; object-fit: cover;">
+                            <img id="latest-img" src="https://post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/02/322868_1100-800x825.jpg" class="card-img" alt="..." style="width: 100%; height: 10vw; object-fit: cover;">
                         </div>
                         <div class="col-md-4">
                             <div class="card-body">
-                                <h5 class="card-title mb-2 text-bold">Karlee</h5>
+                                <h5 class="card-title mb-2 text-bold" id="latest-name">Karlee</h5>
                                 <ul class="card-text" style="list-style: none; padding-left: 0;">
-                                    <li>Species: Dog</li>
-                                    <li>Age: 2</li>
-                                    <li>Breed: American Eskimo Dog</li>
+                                    <li>Species: <span id="latest-species">Dog</span></li>
+                                    <li>Age: <span id="latest-age">2</span></li>
+                                    <li>Breed: <span id="latest-breed">American Eskimo Dog</span></li>
                                 </ul>
                             </div>
                         </div>
@@ -46,8 +45,8 @@
                             <div class="card-body pl-1">
                                 <h5 class="card-title mb-2 text-bold">Adopter</h5>
                                 <ul class="card-text" style="list-style: none; padding-left: 0;">
-                                    <li>Name:</li>
-                                    <li>Email:</li>
+                                    <li>Name: <span id="adopter-name"></span></li>
+                                    <li>Email: <span id="adopter-email"></span></li>
                                 </ul>
                             </div>
                         </div>
@@ -58,31 +57,33 @@
         <div class="col-6">
             <h5>Slow adoption</h5>
             <div class="row-cols-1">
-                <div class="card mb-3 h-100">
-                    <div class="row no-gutters">
-                        <div class="col-md-4">
-                            <img src="https://post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/02/322868_1100-800x825.jpg" class="card-img" alt="..." style="width: 100%; height: 10vw; object-fit: cover;">
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card-body">
-                                <h5 class="card-title mb-2 text-bold">Karlee</h5>
-                                <ul class="card-text" style="list-style: none; padding-left: 0;">
-                                    <li>Species: Dog</li>
-                                    <li>Age: 2</li>
-                                    <li>Breed: American Eskimo Dog</li>
-                                </ul>
+                <a id="slow-href" href="#">
+                    <div class="card mb-3 h-100">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                                <img id="slow-img" src="https://post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/02/322868_1100-800x825.jpg" class="card-img" alt="..." style="width: 100%; height: 10vw; object-fit: cover;">
                             </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card-body pl-1">
-                                <h5 class="card-title mb-2 text-bold">Days elapsed</h5>
-                                <ul class="card-text" style="list-style: none; padding-left: 0;">
-                                    <li>15 days</li>
-                                </ul>
+                            <div class="col-md-4">
+                                <div class="card-body">
+                                    <h5 class="card-title mb-2 text-bold" id="slow-name">Karlee</h5>
+                                    <ul class="card-text" style="list-style: none; padding-left: 0;">
+                                        <li>Species: <span id="slow-species">Dog</span></li>
+                                        <li>Age: <span id="slow-age">2</span></li>
+                                        <li>Breed: <span id="slow-breed">American Eskimo Dog</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card-body pl-1">
+                                    <h5 class="card-title mb-2 text-bold">Days elapsed</h5>
+                                    <ul class="card-text" style="list-style: none; padding-left: 0;">
+                                        <li id="days-elapsed">15 days</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
     </div>
@@ -243,7 +244,6 @@
             fetch(BASE_URL + 'api/admin/curr-month-adoption')
                 .then(res => res.text())
                 .then(data => {
-                    console.log(data);
                     updateData(barChart, data);
                 });
         }
@@ -254,11 +254,49 @@
             chart.data.datasets.forEach((dataset) => {
                 dataset.data.pop();
             });
-            chart.update();
+            chart.update('none');
 
             chart.data.datasets.forEach((dataset) => dataset.data.push(newDatum));
             chart.update('none');
         }
+    }
+</script>
+
+<script>
+    function showLatestAdoption(data) {
+        let name = $('#latest-name')[0];
+        let species = $('#latest-species')[0];
+        let age = $('#latest-age')[0];
+        let breed = $('#latest-breed')[0];
+        let adopterName = $('#adopter-name')[0];
+        let adopterEmail = $('#adopter-email')[0];
+        let img = $('#latest-img')[0];
+
+        name.innerHTML = data.name;
+        species.innerHTML = data.species;
+        age.innerHTML = data.age;
+        breed.innerHTML = data.breed;
+        adopterName.innerHTML = data.adopter_name;
+        adopterEmail.innerHTML = data.email;
+        img.src = `/images/${data.img}`;
+    }
+
+    function showSlowAdoptionListing(data) {
+        let name = $('#slow-name')[0];
+        let species = $('#slow-species')[0];
+        let age = $('#slow-age')[0];
+        let breed = $('#slow-breed')[0];
+        let days = $('#days-elapsed')[0];
+        let href = $('#slow-href')[0];
+        let img = $('#slow-img')[0];
+
+        name.innerHTML = data.name;
+        species.innerHTML = data.species;
+        age.innerHTML = data.age;
+        breed.innerHTML = data.breed;
+        days.innerHTML = data.days_elapsed;
+        href.href = `/ApplyAdoption/Details/${data.listing_id}`;
+        img.src = `/images/${data.img}`;
     }
 </script>
 
@@ -273,6 +311,7 @@
         .then(res => res.json())
         .then(data => {
             createDonutChart(data);
+            console.log(data);
         });
 
     fetch(BASE_URL + 'api/admin/adoptions-by-month')
@@ -280,5 +319,46 @@
         .then(data => {
             createBarChart(data);
             console.log(data);
+        });
+
+    fetch(BASE_URL + 'api/admin/latest-adoptions')
+        .then(res => res.json())
+        .then(data => {
+            data = data[0];
+
+            showLatestAdoption(data);
+
+            function fetchAndUpdate() {
+                fetch(BASE_URL + 'api/admin/latest-adoptions')
+                    .then(res => res.json())
+                    .then(data => {
+                        data = data[0];
+
+                        showLatestAdoption(data);
+                    });
+            }
+
+            setInterval(fetchAndUpdate, 1000);
+        });
+
+
+    fetch(BASE_URL + 'api/admin/slow-adoption-listings')
+        .then(res => res.json())
+        .then(data => {
+            data = data[0];
+
+            showSlowAdoptionListing(data);
+
+            function fetchAndUpdate() {
+                fetch(BASE_URL + 'api/admin/slow-adoption-listings')
+                    .then(res => res.json())
+                    .then(data => {
+                        data = data[0];
+
+                        showSlowAdoptionListing(data);
+                    });
+            }
+
+            setInterval(fetchAndUpdate, 1000);
         });
 </script>
