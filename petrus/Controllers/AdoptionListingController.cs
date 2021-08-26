@@ -24,7 +24,9 @@ namespace petrus.Controllers
         }
         public IActionResult Index()
         {
-            var listings = dbContext.AdoptionListings.OrderBy(o=>o.AdoptionListingID.Length).ThenBy(a=>a.AdoptionListingID).ToList();
+            //hard coded for now, have to retrieve user data from login details to determine id.
+            userId = "10";
+            var listings = dbContext.AdoptionListings.Where(x=>x.UserID==userId).OrderBy(o=>o.AdoptionListingID.Length).ThenBy(a=>a.AdoptionListingID).ToList();
 
             return View(listings);
         }
