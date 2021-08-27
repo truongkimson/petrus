@@ -18,11 +18,21 @@ namespace petrus.Models
         public DateTime RequestDate { get; set; }
         public Residence residenceType { get; set; }
         public RequestStatus requestStatus { get; set; }
+        public DateTime OutcomeDateTime { get; set; }
         public int dogsOwned { get; set; }
 
         public virtual User User { get; set; }
         public virtual AdoptionListing AdoptionListing { get; set; }
 
+        public int GetAdoptionSpeed()
+        {
+            if (requestStatus != RequestStatus.Accepted)
+            {
+                return -1;
+            }
+
+            return (OutcomeDateTime - AdoptionListing.ListingDate).Days;
+        }
     }
 
     public enum Residence
@@ -32,7 +42,7 @@ namespace petrus.Models
 
     public enum RequestStatus
     {
-        Pending, Accepted,Rejected
+        Pending, Accepted, Rejected
     }
 
 }

@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using petrus.Services;
 
 namespace petrus
 {
@@ -42,10 +43,10 @@ namespace petrus
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddSession();
 
+            services.AddTransient<IAdminService, AdminService>();
             services.AddControllers().AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
             );
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

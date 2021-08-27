@@ -115,6 +115,7 @@ namespace petrus.Controllers
                     adoptionListing.ApplicationStatus = ApplicationStatus.Closed;
                     adoptionListing.AcceptedRequest = selected;
                     adoptionRequest.requestStatus = RequestStatus.Accepted;
+                    adoptionRequest.OutcomeDateTime = DateTime.Now;
                     dbContext.SaveChanges();
                     ViewData["result"] = "You have successfully accepted the request.";
                     ViewData["list"] = adoptionRequest;
