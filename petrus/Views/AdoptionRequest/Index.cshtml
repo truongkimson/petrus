@@ -5,13 +5,24 @@
         <h1 class="primary-color font-roboto"><b>My Adoption Request</b></h1>
     </div>
     <br />
+    <div class="text-center">
+        <button class="btn btn-outline-primary filter-button" data-filter="all">All</button>
+        <button class="btn btn-outline-primary filter-button" data-filter="@RequestStatus.Pending">
+            @RequestStatus.Pending
+        </button>
+        <button class="btn btn-outline-primary filter-button" data-filter="@RequestStatus.Accepted">
+            @RequestStatus.Accepted
+        </button>
+        <button class="btn btn-outline-primary filter-button" data-filter="@RequestStatus.Rejected">
+            @RequestStatus.Rejected
+        </button>
+    </div>
     <br />
-
     @if (Model.Count() > 0)
     {
         @foreach (var item in Model)
         {
-            <div style="text-overflow: ellipsis; overflow: hidden;">
+            <div style="text-overflow: ellipsis; overflow: hidden;" class="filter @item.AdoptionRequest.requestStatus">
                 <div class="card ml-0 bg-gray-color" style="border: 0px solid #0064a4; border-radius: 5px;">
                     <div class="col-12 col-md-12 text-right py-2">
                         <h5 class="font-roboto primary-color"><b>Requested on: @item.AdoptionRequest.RequestDate</b></h5>
@@ -63,4 +74,22 @@
         }
     }
 </div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+
+            $(".filter-button").click(function () {
+                var value = $(this).attr('data-filter');
+                if (value == "all") {
+                    $('.filter').show('1000');
+                }
+
+                else {
+                    $(".filter").not('.' + value).hide('3000');
+                    $('.filter').filter('.' + value).show('3000');
+                }
+            });
+        });
+    </script> }
 
