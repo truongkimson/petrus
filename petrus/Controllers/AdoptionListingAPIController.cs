@@ -33,14 +33,34 @@ namespace petrus.Controllers
             return Ok(listings);
         }
 
-        [HttpGet]
-        [Route("{adoptionListingId}/request")]
-        public async Task<IActionResult> GetAdoptionRequestByListing(string adoptionListingId)
+        [HttpPost]
+        [Route("request")]
+        public async Task<IActionResult> GetAdoptionRequestByListing([FromBody] AdoptionRequestAPIBinding adoptionRequestApiBinding)
         {
-            var listing = await dbContext.AdoptionRequests.Include(x => x.AdoptionListing).Where(u => u.AdoptionListing.AdoptionListingID == adoptionListingId).ToListAsync();
+            /*var listing = await dbContext.AdoptionRequests.Include(x => x.AdoptionListing).Where(u => u.AdoptionListing.AdoptionListingID == adoptionListingId && u.User.UserID=).ToListAsync();*/
+            var requests = await dbContext.AdoptionRequests.Where(u => u.User.UserID==adoptionRequestApiBinding.userId).ToListAsync();
 
-            return Ok(listing);
+            if (requests != null)
+            {
+                return Ok(requests);
+            }
+
+            return null;
         }
+
+        [HttpGet]
+        [Route("request/delete")]
+        public async Task<IActionResult> DeleteAdoptionRequestById([FromBody] AdoptionRequestDeleteBinding adoptionRequestDeleteBinding)
+        {
+            var request = await dbContext.AdoptionRequests.FirstOrDefaultAsync(u => u.AdoptionRequestId == adoptionRequestDeleteBinding.requestId);
+            dbContext.Remove(request);
+            await dbContext.SaveChangesAsync();
+            return Ok("success");
+        }
+
+
+
+
         [HttpPost]
         [Route("login")]
         public async Task<IActionResult> IsUserValid([FromBody] LoginAttempt loginAttempt)
@@ -50,6 +70,7 @@ namespace petrus.Controllers
                 return Ok(user);
             return null;
         }
+
         [HttpPost]
         [Route("application")]
         public async Task<IActionResult> createApplication([FromBody] ApplicationAttempt applicationAttempt)
@@ -68,9 +89,6 @@ namespace petrus.Controllers
             await dbContext.SaveChangesAsync();
             return Ok("success");
         }
-
-
-
 
     }
 }
