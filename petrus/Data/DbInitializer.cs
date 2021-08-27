@@ -101,7 +101,12 @@ namespace pwned_shop.Data
                 {
                     AdoptionRequestId = row[0],
                     Description = row[1],
-                    RequestDate = DateTime.Parse(row[2], new CultureInfo("en-SG"))
+                    residenceType = (Residence)Enum.Parse(typeof(Residence), row[2]),
+                    RequestDate = DateTime.Parse(row[3], new CultureInfo("en-SG")),
+                    requestStatus = (RequestStatus)Enum.Parse(typeof(RequestStatus), row[4]),
+                    OutcomeDateTime = row[5] == "" ? default(DateTime) : DateTime.Parse(row[5], new CultureInfo("en-SG")),
+                    User = db.Users.Find(row[6]),
+                    AdoptionListing = db.AdoptionListings.Find(row[7]),
                 };
 
                 db.AdoptionRequests.Add(ar);
