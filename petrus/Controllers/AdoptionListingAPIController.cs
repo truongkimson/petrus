@@ -38,7 +38,7 @@ namespace petrus.Controllers
         public async Task<IActionResult> GetAdoptionRequestByListing([FromBody] AdoptionRequestAPIBinding adoptionRequestApiBinding)
         {
             /*var listing = await dbContext.AdoptionRequests.Include(x => x.AdoptionListing).Where(u => u.AdoptionListing.AdoptionListingID == adoptionListingId && u.User.UserID=).ToListAsync();*/
-            var requests = await dbContext.AdoptionRequests.Where(u => u.User.UserID=="1").ToListAsync();
+            var requests = await dbContext.AdoptionRequests.Where(u => u.User.UserID==adoptionRequestApiBinding.userId).ToListAsync();
 
             if (requests != null)
             {
@@ -47,6 +47,19 @@ namespace petrus.Controllers
 
             return null;
         }
+
+        [HttpGet]
+        [Route("request/delete")]
+        public async Task<IActionResult> DeleteAdoptionRequestById([FromBody] AdoptionRequestDeleteBinding adoptionRequestDeleteBinding)
+        {
+            var request = await dbContext.AdoptionRequests.FirstOrDefaultAsync(u => u.AdoptionRequestId == adoptionRequestDeleteBinding.requestId);
+            dbContext.Remove(request);
+            await dbContext.SaveChangesAsync();
+            return Ok("success");
+        }
+
+
+
 
         [HttpPost]
         [Route("login")]

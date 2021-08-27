@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace petrus.BindingModel
 {
-    public class AdoptionRequestAPIBinding
+    public class AdoptionRequestDeleteBinding
     {
-        public string userId { get; set; }
+        public string requestId { get; set; }
     }
 }
