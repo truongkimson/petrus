@@ -58,10 +58,15 @@ namespace petrus.Models
         public string UserID { get; set; }
         public virtual User User { get; set; }
         public virtual ICollection<AdoptionRequest> AdoptionRequests { get; set; }
+
+        public int GetDaysElapsed()
+        {
+            return (DateTime.Now - ListingDate).Days;
+        }
     }
     public enum Species
     {
-        Cat, Dog
+        Cat, Dog, Others
     }
     public enum Breed
     {

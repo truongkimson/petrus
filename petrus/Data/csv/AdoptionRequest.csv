@@ -1,13 +1,13 @@
-AdoptionRequestId,Description,RequestDate
-1,justo nec condimentum neque sapien placerat ante nulla justo aliquam quis turpis eget elit,11/12/2020 23:35
-2,ultrices phasellus id sapien in sapien iaculis congue vivamus metus,21/12/2020 23:35
-3,ut blandit non interdum in ante vestibulum ante ipsum primis in faucibus orci luctus et,28/12/2020 23:31
-4,quam nec dui luctus rutrum nulla tellus in sagittis dui,29/12/2020 0:00
-5,ultrices libero non mattis pulvinar nulla pede ullamcorper augue a suscipit nulla elit,30/12/2020 16:00
-6,non quam nec dui luctus rutrum nulla tellus in sagittis dui vel,5/1/2021 18:31
-7,in magna bibendum imperdiet nullam orci pede venenatis non sodales sed tincidunt eu,5/1/2021 8:15
-8,erat curabitur gravida nisi at nibh in hac habitasse platea dictumst aliquam,6/1/2021 21:15
-9,semper est quam pharetra magna ac consequat metus sapien ut nunc vestibulum ante ipsum,7/2/2021 12:15
-10,odio odio elementum eu interdum eu tincidunt in leo maecenas pulvinar lobortis,11/12/2020 23:35
-11,vulputate justo in blandit ultrices enim lorem ipsum dolor sit,21/12/2020 23:35
-12,pretium quis lectus suspendisse potenti in eleifend quam a odio in hac habitasse platea dictumst maecenas,28/12/2020 23:31
+AdoptionRequestId,Description,residenceType,RequestDate,requestStatus,OutcomeDateTime,UserID,AdoptionListingID
+1,justo nec condimentum neque sapien placerat ante nulla justo aliquam quis turpis eget elit,HDB,11/12/2020 23:35,Accepted,14/3/2021 23:35,2,1
+2,ultrices phasellus id sapien in sapien iaculis congue vivamus metus,HDB,21/12/2020 23:35,Accepted,29/3/2021 23:35,10,9
+3,ut blandit non interdum in ante vestibulum ante ipsum primis in faucibus orci luctus et,Private,28/12/2020 23:31,Pending,,5,25
+4,quam nec dui luctus rutrum nulla tellus in sagittis dui,Private,29/12/2020 0:00,Pending,,4,13
+5,ultrices libero non mattis pulvinar nulla pede ullamcorper augue a suscipit nulla elit,Private,30/12/2020 16:00,Accepted,30/4/2021 16:00,12,21
+6,non quam nec dui luctus rutrum nulla tellus in sagittis dui vel,HDB,5/1/2021 18:31,Accepted,2/4/2021 16:00,15,2
+7,in magna bibendum imperdiet nullam orci pede venenatis non sodales sed tincidunt eu,HDB,5/1/2021 8:15,Accepted,15/4/2021 16:00,17,17
+8,erat curabitur gravida nisi at nibh in hac habitasse platea dictumst aliquam,Private,6/1/2021 21:15,Pending,,3,13
+9,semper est quam pharetra magna ac consequat metus sapien ut nunc vestibulum ante ipsum,HDB,7/2/2021 12:15,Pending,,19,30
+10,odio odio elementum eu interdum eu tincidunt in leo maecenas pulvinar lobortis,Private,11/12/2020 23:35,Accepted,22/7/2021 23:35,5,4
+11,vulputate justo in blandit ultrices enim lorem ipsum dolor sit,HDB,21/12/2020 23:35,Pending,,11,14
+12,pretium quis lectus suspendisse potenti in eleifend quam a odio in hac habitasse platea dictumst maecenas,Private,28/12/2020 23:31,Accepted,1/7/2021 23:35,7,28
