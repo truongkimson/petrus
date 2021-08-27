@@ -66,6 +66,7 @@ namespace petrus.Controllers
             //this boolean can be used in the future if we want to have separate views for acceptance or not
             bool approve = true;
             string id = application.listingId;
+            string userId = "1";
             if (id != null)
             {
                 AdoptionListing listing = dbContext.AdoptionListings.FirstOrDefault(x => x.AdoptionListingID == id);
@@ -85,7 +86,7 @@ namespace petrus.Controllers
                         }
                         else if (application.residenceType == Residence.Private && (int)application.dogsOwned > 2)
                         {
-                            ViewData["reject"] = "Unfortunately for private residence you can only own a maximum of three dogs";
+                            ViewData["reject"] = "Unfortunately for private residences you can only own a maximum of three dogs";
                             approve = false;
                         }
                     }
@@ -95,7 +96,7 @@ namespace petrus.Controllers
                         approve = false;
                     }
                 }
-                User user = dbContext.Users.FirstOrDefault(x => x.UserID == "1");
+                User user = dbContext.Users.FirstOrDefault(x => x.UserID == userId);
                 if (user.AdoptionRequests.Any(o => o.AdoptionListing == listing))
                 {
                     ViewData["reject"] = "You have already applied to this listing";
