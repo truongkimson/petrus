@@ -86,7 +86,7 @@ namespace petrus.Controllers
                         }
                         else if (application.residenceType == Residence.Private && (int)application.dogsOwned > 2)
                         {
-                            ViewData["reject"] = "Unfortunately for private residence you can only own a maximum of three dogs";
+                            ViewData["reject"] = "Unfortunately for private residences you can only own a maximum of three dogs";
                             approve = false;
                         }
                     }

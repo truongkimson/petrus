@@ -22,7 +22,15 @@
                         <div class="d-md-block col-3 col-md-3">
                             @foreach (var details in item.AdoptionListing)
                             {
-                                <img src="~/images/@details.Image" class="rounded" width="100%" />
+                                if (details.Image != null)
+                                {
+                                    <img src="~/images/@details.Image" class="rounded" width="100%" />
+                                }
+
+                                else
+                                {
+                                    <img src="~/images/noimage2.png" class="rounded" width="100%" />
+                                }
                             }
                         </div>
                         <div class="col-9 col-md-9">
@@ -32,8 +40,8 @@
                                     <div class="col-6 col-md-6 text-left text-md-left">
                                         <h4 class="primary-color font-roboto"><b>@details.Name </b></h4>
                                     </div>
-                                    <div class="col-6 col-md-6 text-right text-md-right">
-                                        <p class="card-title h5 text-right font-roboto"><span class="badge badge-pill badge-primary pt-2" style="height:30px; width:130px">@item.AdoptionRequest.requestStatus</span></p>
+                                    <div class="col-6 col-md-6" style="margin-right:auto">
+                                        <p class="card-title h5 text-right font-roboto"><span class="badge badge-pill badge-primary pt-2" style="height:30px; width:100px">@item.AdoptionRequest.requestStatus</span></p>
                                     </div>
                                 </div>
                                 <h5 class="font-roboto">Species: @details.Species</h5>
