@@ -59,6 +59,19 @@ namespace petrus.Controllers
         }
 
 
+        [HttpPost]
+        [Route("request/edit")]
+        public async Task<IActionResult> EditAdoptionRequestById([FromBody] AdoptionRequestEditBinding adoptionRequestEditBinding)
+        {
+            var request = await dbContext.AdoptionRequests.FirstOrDefaultAsync(a =>
+                a.AdoptionRequestId == adoptionRequestEditBinding.adoptionRequestId);
+            request.dogsOwned = adoptionRequestEditBinding.dogsOwned;
+            request.residenceType = (Residence) Enum.Parse(typeof(Residence), adoptionRequestEditBinding.residenceType);
+            request.requestStatus = RequestStatus.Pending;
+            request.Description = adoptionRequestEditBinding.description;
+            await dbContext.SaveChangesAsync();
+            return Ok("success");
+        }
 
 
         [HttpPost]

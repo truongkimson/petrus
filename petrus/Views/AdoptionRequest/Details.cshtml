@@ -4,7 +4,7 @@
 }
 
 <br />
-<form method="post" name="myForm" onsubmit="return ValidateForm()">
+<form asp-action="Details">
     <div class="container pt-4">
         <div style="text-overflow: ellipsis; overflow: hidden;">
             <div class="row">
@@ -94,36 +94,7 @@
                                         </div>
                                         <div class="col-12 col-md-6 pt-md-3">
                                             <h5 class="font-roboto">
-                                                @{
-                                                    Residence r = request.residenceType;
-
-                                                    switch (r)
-                                                    {
-                                                        case Residence.HDB:
-                                                            @:<input type="radio" class="text-muted" id="hdb" name="residenceType" value="@Residence.HDB" checked>
-                                                            <label for="hdb">HDB</label>
-                                                            <text>&nbsp;</text>
-                                                            <input type="radio" class="text-muted" id="private" name="residenceType" value="@Residence.Private">
-                                                            <label for="private">Private</label>
-                                                            break;
-
-                                                        case Residence.Private:
-                                                            @:<input type="radio" class="text-muted" id="hdb" name="residenceType" value="@Residence.HDB">
-                                                            <label for="hdb">HDB</label>
-                                                            <text>&nbsp;</text>
-                                                            <input type="radio" class="text-muted" id="private" name="residenceType" value="@Residence.Private" checked>
-                                                            <label for="private">Private</label>
-                                                            break;
-
-                                                        default:
-                                                            @:<input type="radio" class="text-muted" id="hdb" name="residenceType" value="@Residence.HDB">
-                                                            <label for="hdb">HDB</label>
-                                                            <text>&nbsp;</text>
-                                                            <input type="radio" class="text-muted" id="private" name="residenceType" value="@Residence.Private">
-                                                            <label for="private">Private</label>
-                                                            break;
-                                                    }
-                                                }
+                                                @request.residenceType
                                             </h5>
                                         </div>
                                     </div>
@@ -135,114 +106,7 @@
                                         </div>
                                         <div class="col-12 col-md-6 pt-md-3">
                                             <h5 class="font-roboto">
-                                                @{
-                                                    int x = request.dogsOwned;
-
-                                                    switch (x)
-                                                    {
-                                                        case 0:
-                                                            @:<input type="radio" class="text-muted" id="0" name="dogsOwned" value="0" checked>
-                                                            <label for="0">0</label>
-                                                            <text>&nbsp;</text>
-                                                            <input type="radio" class="text-muted" id="1" name="dogsOwned" value="1">
-                                                            <label for="1">1</label>
-                                                            <text>&nbsp;</text>
-                                                            <input type="radio" class="text-muted" id="2" name="dogsOwned" value="2">
-                                                            <label for="2">2</label>
-                                                            <text>&nbsp;</text>
-                                                            <input type="radio" class="text-muted" id="3" name="dogsOwned" value="3">
-                                                            <label for="3">3</label>
-                                                            <text>&nbsp;</text>
-                                                            <input type="radio" class="text-muted" id="3more" name="dogsOwned" value="4">
-                                                            <label for="3more">	&gt; 3</label>
-                                                            break;
-
-                                                        case 1:
-                                                            @:<input type="radio" class="text-muted" id="0" name="dogsOwned" value="0">
-                                                            <label for="0">0</label>
-                                                            <text>&nbsp;</text>
-                                                            <input type="radio" class="text-muted" id="1" name="dogsOwned" value="1" checked>
-                                                            <label for="1">1</label>
-                                                            <text>&nbsp;</text>
-                                                            <input type="radio" class="text-muted" id="2" name="dogsOwned" value="2">
-                                                            <label for="2">2</label>
-                                                            <text>&nbsp;</text>
-                                                            <input type="radio" class="text-muted" id="3" name="dogsOwned" value="3">
-                                                            <label for="3">3</label>
-                                                            <text>&nbsp;</text>
-                                                            <input type="radio" class="text-muted" id="3more" name="dogsOwned" value="4">
-                                                            <label for="3more">	&gt; 3</label>
-                                                            break;
-
-                                                        case 2:
-                                                            @:<input type="radio" class="text-muted" id="0" name="dogsOwned" value="0">
-                                                            <label for="0">0</label>
-                                                            <text>&nbsp;</text>
-                                                            <input type="radio" class="text-muted" id="1" name="dogsOwned" value="1">
-                                                            <label for="1">1</label>
-                                                            <text>&nbsp;</text>
-                                                            <input type="radio" class="text-muted" id="2" name="dogsOwned" value="2" checked>
-                                                            <label for="2">2</label>
-                                                            <text>&nbsp;</text>
-                                                            <input type="radio" class="text-muted" id="3" name="dogsOwned" value="3">
-                                                            <label for="3">3</label>
-                                                            <text>&nbsp;</text>
-                                                            <input type="radio" class="text-muted" id="3more" name="dogsOwned" value="4">
-                                                            <label for="3more">	&gt; 3</label>
-                                                            break;
-
-                                                        case 3:
-                                                            @:<input type="radio" class="text-muted" id="0" name="dogsOwned" value="0">
-                                                            <label for="0">0</label>
-                                                            <text>&nbsp;</text>
-                                                            <input type="radio" class="text-muted" id="1" name="dogsOwned" value="1">
-                                                            <label for="1">1</label>
-                                                            <text>&nbsp;</text>
-                                                            <input type="radio" class="text-muted" id="2" name="dogsOwned" value="2">
-                                                            <label for="2">2</label>
-                                                            <text>&nbsp;</text>
-                                                            <input type="radio" class="text-muted" id="3" name="dogsOwned" value="3" checked>
-                                                            <label for="3">3</label>
-                                                            <text>&nbsp;</text>
-                                                            <input type="radio" class="text-muted" id="3more" name="dogsOwned" value="4">
-                                                            <label for="3more">	&gt; 3</label>
-                                                            break;
-
-                                                        case 4:
-                                                            @:<input type="radio" class="text-muted" id="0" name="dogsOwned" value="0">
-                                                            <label for="0">0</label>
-                                                            <text>&nbsp;</text>
-                                                            <input type="radio" class="text-muted" id="1" name="dogsOwned" value="1">
-                                                            <label for="1">1</label>
-                                                            <text>&nbsp;</text>
-                                                            <input type="radio" class="text-muted" id="2" name="dogsOwned" value="2">
-                                                            <label for="2">2</label>
-                                                            <text>&nbsp;</text>
-                                                            <input type="radio" class="text-muted" id="3" name="dogsOwned" value="3">
-                                                            <label for="3">3</label>
-                                                            <text>&nbsp;</text>
-                                                            <input type="radio" class="text-muted" id="3more" name="dogsOwned" value="4" checked>
-                                                            <label for="3more">	&gt; 3</label>
-                                                            break;
-
-                                                        default:
-                                                            @:<input type="radio" class="text-muted" id="0" name="dogsOwned" value="0">
-                                                            <label for="0">0</label>
-                                                            <text>&nbsp;</text>
-                                                            <input type="radio" class="text-muted" id="1" name="dogsOwned" value="1">
-                                                            <label for="1">1</label>
-                                                            <text>&nbsp;</text>
-                                                            <input type="radio" class="text-muted" id="2" name="dogsOwned" value="2">
-                                                            <label for="2">2</label>
-                                                            <text>&nbsp;</text>
-                                                            <input type="radio" class="text-muted" id="3" name="dogsOwned" value="3">
-                                                            <label for="3">3</label>
-                                                            <text>&nbsp;</text>
-                                                            <input type="radio" class="text-muted" id="3more" name="dogsOwned" value="4">
-                                                            <label for="3more">	&gt; 3</label>
-                                                            break;
-                                                    }
-                                                }
+                                                @request.dogsOwned
                                             </h5>
                                         </div>
                                     </div>
@@ -257,29 +121,8 @@
                                             <label for="description"></label>
                                         </div>
                                     </div>
+                                    <div> <input type="hidden" id="requestId" name="requestId" value="@request.AdoptionRequestId"> </div>
                                     <div> <input type="hidden" id="listingId" name="listingId" value="@request.AdoptionListing.AdoptionListingID"> </div>
-                                    <div class="row">
-                                        <div class="col-12 col-md-12 pt-1 pt-md-3">
-                                            <h5 class="font-roboto">
-                                                <input type="checkbox" id="acceptConditions" name="acceptConditions" value="Accept">
-                                                <label for="acceptConditions">I fully understand the conditions required to own a dog in Singapore and have fulfilled all the requisites. </label><br>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12 col-md-12 pt-1 pt-md-1">
-                                            <h5 class="font-roboto">
-                                                <a href="https://www.hdb.gov.sg/residential/living-in-an-hdb-flat/keeping-pets" target="_blank">HDB Approved Small Breeds</a>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12 col-md-12">
-                                            <h5 class="font-roboto">
-                                                <a href="https://www.nparks.gov.sg/avs/pets/owning-a-pet/licensing-a-pet/dog-licensing" target="_blank">NParks Dogs Licensing</a>
-                                            </h5>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -293,7 +136,7 @@
                         <a asp-action="Index" class="details-button btn btn-primary form-control btn-square btn-lg" style="height:50px;"><b>Back</b></a>
                     </div>
                     <div class="col-12 col-md-6 pb-1 text-right font-roboto">
-                        <button type="submit" asp-action="UpdateAdoptionRequest" onsubmit="return ValidateForm()" value="Adoption Request" class="details-button btn btn-primary btn-square form-control btn-lg" style="height:50px;"><b>Update Request</b></button>
+                        <button type="submit" asp-action="UpdateAdoptionRequest" asp-controller="AdoptionRequest" value="Adoption Request" class="details-button btn btn-primary btn-square form-control btn-lg" style="height:50px;"><b>Update Request</b></button>
                     </div>
                 </div>
             </div>
@@ -302,17 +145,3 @@
 </form>
 <br />
 
-@section Scripts {
-    <script src="/js/ValidateAdoptionApplication.js"></script>
-    <script>
-        $(function () {
-            var current = location.pathname;
-            $('.nav-tabs li a').each(function () {
-                var $this = $(this);
-                if (current.indexOf($this.attr('href')) !== -1) {
-                    $this.addClass('active');
-                }
-            })
-        })
-    </script>
-}
