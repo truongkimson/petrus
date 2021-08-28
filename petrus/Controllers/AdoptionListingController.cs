@@ -20,12 +20,13 @@ namespace petrus.Controllers
         public AdoptionListingController(petrusDb context, IWebHostEnvironment hostEnvironment)
         {
             dbContext = context;
+            //hard coded for now, have to retrieve user data from login details to determine id.
+            this.userId = "10";
             webHostEnvironment = hostEnvironment;
         }
         public IActionResult Index()
         {
-            //hard coded for now, have to retrieve user data from login details to determine id.
-            userId = "10";
+            
             var listings = dbContext.AdoptionListings.Where(x=>x.UserID==userId).OrderBy(o=>o.AdoptionListingID.Length).ThenBy(a=>a.AdoptionListingID).ToList();
 
             return View(listings);
@@ -43,6 +44,7 @@ namespace petrus.Controllers
                 string[] uniqueFileNames = UploadedFile(model);
                 AdoptionListing myListing = new AdoptionListing
                 {
+                    UserID=userId,
                     Species = model.Species,
                     Name = model.Name,
                     Breed1 = model.Breed1,
@@ -106,7 +108,7 @@ namespace petrus.Controllers
                 AdoptionListing listing = dbContext.AdoptionListings.FirstOrDefault(x => x.AdoptionListingID == id);
                 if (listing != null)
                 {
-                    var requests = dbContext.AdoptionRequests.Where(x => x.AdoptionListing.AdoptionListingID == id);
+                    var requests = dbContext.AdoptionRequests.Where(x => x.AdoptionListing.AdoptionListingID ==id);
                     
                     foreach (AdoptionRequest request in requests)
                     {
@@ -225,8 +227,6 @@ namespace petrus.Controllers
             AdoptionListing myOldListing = dbContext.AdoptionListings.FirstOrDefault(x => x.AdoptionListingID == Convert.ToString(model.id));
             if (ModelState.IsValid)
             {
-                deleteFile(myOldListing.Image);
-                deleteFile(myOldListing.Video);
                 string[] uniqueFileNames = UploadedFile(model);
                 myOldListing.Species = model.Species;
                 myOldListing.Name = model.Name;
@@ -256,6 +256,7 @@ namespace petrus.Controllers
             }
             
         }
+        /*
         protected void deleteFile(String name)
         {
             if (name.Contains("png") || name.Contains("jpg"))
@@ -279,6 +280,7 @@ namespace petrus.Controllers
                 }
             }
         }
+        */
     }
             
 }
