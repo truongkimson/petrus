@@ -52,6 +52,7 @@
                 <tr>
                     <th>Select</th>
                     <th>Name of Adopter</th>
+                    <th>Contact Number</th>
                     <th>Residence Type</th>
                     <th>Description</th>
                     <th>Requested Date</th>
@@ -61,14 +62,15 @@
             <tbody>
                 @foreach (var request in adoptionRequests)
                 {
-                    <tr>
-                        <td><input type="radio" id="@request.AdoptionRequestId" name="selected" value="@request.AdoptionRequestId" required></td>
-                        <td>@request.User.Name</td>
-                        <td>@request.residenceType</td>
-                        <td>@request.Description</td>
-                        <td>@request.RequestDate</td>
-                        <td>@request.requestStatus</td>
-                    </tr>
+                <tr>
+                    <td><input type="radio" id="@request.AdoptionRequestId" name="selected" value="@request.AdoptionRequestId" required></td>
+                    <td>@request.User.Name</td>
+                    <td>@request.User.PhoneNumber</td>
+                    <td>@request.residenceType</td>
+                    <td>@request.Description</td>
+                    <td>@request.RequestDate</td>
+                    <td>@request.requestStatus</td>
+                </tr>
                 }
             </tbody>
         </table>
