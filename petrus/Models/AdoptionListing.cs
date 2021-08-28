@@ -86,9 +86,7 @@ namespace petrus.Models
         [Display(Name = "American Hairless Terrier")]
         AmericanHairlessTerrier,
         [Display(Name = "American StaffordShire Terrier")]
-        AmericanStaffordshireTerrier,
-        [Display(Name = "Others")]
-        Others
+        AmericanStaffordshireTerrier     
     }
 
     public enum Gender
