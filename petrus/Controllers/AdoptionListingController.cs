@@ -106,6 +106,12 @@ namespace petrus.Controllers
                 AdoptionListing listing = dbContext.AdoptionListings.FirstOrDefault(x => x.AdoptionListingID == id);
                 if (listing != null)
                 {
+                    var requests = dbContext.AdoptionRequests.Where(x => x.AdoptionListing.AdoptionListingID == id);
+                    
+                    foreach (AdoptionRequest request in requests)
+                    {
+                        dbContext.AdoptionRequests.Remove(request);
+                    }
                     dbContext.AdoptionListings.Remove(listing);
                     dbContext.SaveChanges();
                 }
