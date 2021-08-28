@@ -17,6 +17,7 @@ using petrus.BindingModel;
 
 namespace petrus.Controllers
 {
+    [Authorize]
     public class AdoptionRequestController : Controller
     {
         private readonly petrusDb dbContext;

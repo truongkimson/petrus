@@ -67,7 +67,7 @@
                         <div class="nav-item mx-2 user-icon font-roboto">
                             @if (SignInManager.IsSignedIn(User))
                             {
-                                <a class="nav-link nav-link1" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><b>Hello, @User.Identity.Name!</b></a>
+                                <a class="nav-link nav-link1" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><b>Hello, @User.FindFirst("DisplayName").Value!</b></a>
                             }
 
                             else

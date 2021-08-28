@@ -17,7 +17,6 @@ namespace petrus.Data
         public petrusDb(DbContextOptions<petrusDb> options) : base(options)
         {
         }
-        public DbSet<Admin>Admins { get; set; }
         public DbSet<AdoptionListing>AdoptionListings { get; set; }
         public DbSet<AdoptionRequest> AdoptionRequests { get; set; }
 
@@ -27,8 +26,6 @@ namespace petrus.Data
             modelBuilder.Entity<User>().Property(e => e.Id).ValueGeneratedOnAdd();
             modelBuilder.Entity<User>().HasMany(u => u.AdoptionRequests);
             modelBuilder.Entity<User>().HasMany(u => u.AdoptionListings);
-
-            modelBuilder.Entity<Admin>().HasIndex(a => a.AdminId).IsUnique();
 
             modelBuilder.Entity<AdoptionListing>().HasIndex(al => al.AdoptionListingID);
             //modelBuilder.Entity<AdoptionListing>().HasOne(al => al.User);

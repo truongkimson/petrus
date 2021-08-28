@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using petrus.Models;
+using petrus.Security;
 using petrus.Services;
 
 namespace petrus
@@ -43,8 +44,10 @@ namespace petrus
                 options.SignIn.RequireConfirmedAccount = false;
                 options.User.RequireUniqueEmail = true;
             }).AddDefaultTokenProviders()
+                .AddRoles<IdentityRole>()
                 .AddDefaultUI()
-                .AddEntityFrameworkStores<petrusDb>();
+                .AddEntityFrameworkStores<petrusDb>()
+                .AddClaimsPrincipalFactory<MyUserClaimsPrincipalFactory>();
 
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddSession();
@@ -70,7 +73,6 @@ namespace petrus
                 app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
-                app.UseHttpsRedirection();
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();

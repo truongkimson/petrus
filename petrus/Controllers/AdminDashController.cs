@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace petrus.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class AdminDashController : Controller
     {
         public IActionResult Index()

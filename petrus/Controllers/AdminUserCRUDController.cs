@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -54,10 +55,11 @@ namespace petrus.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UserID,Password,Name,PhoneNumber,EmailAddress,SearchTerms")] User user)
+        public async Task<IActionResult> Create([Bind("Name,PhoneNumber,Email")] User user)
         {
             if (ModelState.IsValid)
             {
+                user.Id = Guid.NewGuid().ToString();
                 _context.Add(user);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -86,7 +88,7 @@ namespace petrus.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("UserID,Password,Name,PhoneNumber,EmailAddress,SearchTerms")] User user)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,ConcurrencyStamp, Name,PhoneNumber,Email")] User user)
         {
             if (id != user.Id)
             {

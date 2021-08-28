@@ -8,23 +8,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Identity;
 using petrus.Data;
+using petrus.Models;
 using pwned_shop.Data;
 
 namespace petrus
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
 
-            CreateDb(host);
+            await CreateDb(host);
 
-            host.Run();
+            await host.RunAsync();
         }
 
-        private static void CreateDb(IHost host)
+        private static async Task CreateDb(IHost host)
         {
             using (var scope = host.Services.CreateScope())
             {
@@ -32,7 +34,9 @@ namespace petrus
                 try
                 {
                     var db = services.GetRequiredService<petrusDb>();
-                    DbInitializer.Initialize(db);
+                    var userManager = services.GetRequiredService<UserManager<User>>();
+                    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+                    await DbInitializer.InitializeAsync(db, userManager, roleManager);
                 }
                 catch (Exception ex)
                 {
