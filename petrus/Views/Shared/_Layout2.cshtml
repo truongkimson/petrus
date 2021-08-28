@@ -1,6 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
 
 <!DOCTYPE html>
 <html lang="en">
@@ -64,7 +64,7 @@
                         </ul>
                     </div>
                     <div class="navbar-nav font-roboto" style="font-size: 0.9em; margin-right: auto !important; color: #0064a4">
-                        <li class="nav-item mx-2 user-icon font-roboto">
+                        <div class="nav-item mx-2 user-icon font-roboto">
                             @if (SignInManager.IsSignedIn(User))
                             {
                                 <a class="nav-link nav-link1" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><b>Hello, @User.Identity.Name!</b></a>
@@ -74,7 +74,7 @@
                             {
                                 <b>Hello, Guest!</b>
                             }
-                        </li>
+                        </div>
                     </div>
                 </div>
             </nav>

@@ -21,22 +21,22 @@ namespace pwned_shop.Data
                 return;
 
             // populate Users table using data from csv/UserProfile.csv
-            var rows = ReadCsv("Data/csv/Users.csv");
-            for (int i = 1; i < rows.Count; i++)
-            {
-                var row = rows[i];
-                User u = new User()
-                {
-                    UserID = row[0],
-                    Password = row[1],
-                    Name = row[2],
-                    PhoneNumber = Convert.ToInt32(row[3]),
-                    EmailAddress = row[4],
-                    SearchTerms = row[5]
-                };
+            //var rows = ReadCsv("Data/csv/Users.csv");
+            //for (int i = 1; i < rows.Count; i++)
+            //{
+            //    var row = rows[i];
+            //    User u = new User()
+            //    {
+            //        UserID = row[0],
+            //        Password = row[1],
+            //        Name = row[2],
+            //        PhoneNumber = Convert.ToInt32(row[3]),
+            //        EmailAddress = row[4],
+            //        SearchTerms = row[5]
+            //    };
 
-                db.Users.Add(u);
-            }
+            //    db.Users.Add(u);
+            //}
 
             // populate Ratings table using data from csv/RatingESRB.csv
             //rows = ReadCsv("Data/csv/Admin.csv");
@@ -59,7 +59,7 @@ namespace pwned_shop.Data
             
 
             // populate Products table using data from csv/Product.csv
-            rows = ReadCsv("Data/csv/AdoptionListing.csv");
+            var rows = ReadCsv("Data/csv/AdoptionListing.csv");
             for (int i = 1; i < rows.Count; i++)
             {
                 var row = rows[i];
@@ -105,7 +105,7 @@ namespace pwned_shop.Data
                     RequestDate = DateTime.Parse(row[3], new CultureInfo("en-SG")),
                     requestStatus = (RequestStatus)Enum.Parse(typeof(RequestStatus), row[4]),
                     OutcomeDateTime = row[5] == "" ? default(DateTime) : DateTime.Parse(row[5], new CultureInfo("en-SG")),
-                    User = db.Users.Find(row[6]),
+                    User = (User)db.Users.Find(row[6]),
                     AdoptionListing = db.AdoptionListings.Find(row[7]),
                 };
 

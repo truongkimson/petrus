@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using petrus.Data;
@@ -38,7 +37,7 @@ namespace petrus.Controllers
         public async Task<IActionResult> GetAdoptionRequestByListing([FromBody] AdoptionRequestAPIBinding adoptionRequestApiBinding)
         {
             /*var listing = await dbContext.AdoptionRequests.Include(x => x.AdoptionListing).Where(u => u.AdoptionListing.AdoptionListingID == adoptionListingId && u.User.UserID=).ToListAsync();*/
-            var requests = await dbContext.AdoptionRequests.Where(u => u.User.UserID==adoptionRequestApiBinding.userId).ToListAsync();
+            var requests = await dbContext.AdoptionRequests.Where(u => u.User.Id==adoptionRequestApiBinding.userId).ToListAsync();
 
             if (requests != null)
             {
@@ -78,7 +77,7 @@ namespace petrus.Controllers
         [Route("login")]
         public async Task<IActionResult> IsUserValid([FromBody] LoginAttempt loginAttempt)
         {
-            User user = await dbContext.Users.FirstOrDefaultAsync(x => x.EmailAddress == loginAttempt.username & x.Password == loginAttempt.password);
+            User user = await dbContext.Users.FirstOrDefaultAsync(x => x.Email == loginAttempt.username & x.PasswordHash == loginAttempt.password);
             if (user != null)
                 return Ok(user);
             return null;
@@ -89,7 +88,7 @@ namespace petrus.Controllers
         public async Task<IActionResult> createApplication([FromBody] ApplicationAttempt applicationAttempt)
         {
             AdoptionRequest newRequest = new AdoptionRequest();
-            User user= await dbContext.Users.FirstOrDefaultAsync(x => x.UserID == applicationAttempt.userId);
+            User user= await dbContext.Users.FirstOrDefaultAsync(x => x.Id == applicationAttempt.userId);
             newRequest.User = user;
             AdoptionListing listing = await dbContext.AdoptionListings.FirstOrDefaultAsync(x => x.AdoptionListingID == applicationAttempt.adoptionListingId);
             newRequest.AdoptionListing = listing;

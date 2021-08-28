@@ -34,7 +34,7 @@ namespace petrus.Controllers
             }
 
             var user = await _context.Users
-                .FirstOrDefaultAsync(m => m.UserID == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (user == null)
             {
                 return NotFound();
@@ -88,7 +88,7 @@ namespace petrus.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(string id, [Bind("UserID,Password,Name,PhoneNumber,EmailAddress,SearchTerms")] User user)
         {
-            if (id != user.UserID)
+            if (id != user.Id)
             {
                 return NotFound();
             }
@@ -102,7 +102,7 @@ namespace petrus.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UserExists(user.UserID))
+                    if (!UserExists(user.Id))
                     {
                         return NotFound();
                     }
@@ -125,7 +125,7 @@ namespace petrus.Controllers
             }
 
             var user = await _context.Users
-                .FirstOrDefaultAsync(m => m.UserID == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (user == null)
             {
                 return NotFound();
@@ -147,7 +147,7 @@ namespace petrus.Controllers
 
         private bool UserExists(string id)
         {
-            return _context.Users.Any(e => e.UserID == id);
+            return _context.Users.Any(e => e.Id == id);
         }
     }
 }

@@ -30,7 +30,7 @@ namespace petrus.Controllers
         {
             List<RequestDetailsViewModel> requestDetailsVM = new List<RequestDetailsViewModel>();
 
-            List<AdoptionRequest> adoptionRequestList = await dbContext.AdoptionRequests.Include(x => x.User).Where(u => u.User.UserID == "1").OrderByDescending(t => t.RequestDate).ToListAsync();
+            List<AdoptionRequest> adoptionRequestList = await dbContext.AdoptionRequests.Include(x => x.User).Where(u => u.User.Id == "1").OrderByDescending(t => t.RequestDate).ToListAsync();
 
             foreach (AdoptionRequest item in adoptionRequestList)
             {
@@ -64,7 +64,7 @@ namespace petrus.Controllers
 
         public IActionResult Details(string id)
         {
-            User user = dbContext.Users.FirstOrDefault(x => x.UserID == "1");
+            User user = dbContext.Users.FirstOrDefault(x => x.Id == "1");
 
             if (id != null)
             {
