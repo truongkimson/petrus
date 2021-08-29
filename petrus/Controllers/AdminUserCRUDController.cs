@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ using petrus.Models;
 
 namespace petrus.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AdminUserCRUDController : Controller
     {
         private readonly petrusDb _context;
