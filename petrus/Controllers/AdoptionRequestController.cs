@@ -13,24 +13,27 @@ using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using petrus.BindingModel;
 
 namespace petrus.Controllers
 {
+    [Authorize]
     public class AdoptionRequestController : Controller
     {
         private readonly petrusDb dbContext;
 
-        public AdoptionRequestController(petrusDb context)
+        public AdoptionRequestController(petrusDb dbContext, UserManager<User> userManager)
         {
-            dbContext = context;
+            this.dbContext = dbContext;
         }
 
         public async Task<IActionResult> Index()
         {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             List<RequestDetailsViewModel> requestDetailsVM = new List<RequestDetailsViewModel>();
 
-            List<AdoptionRequest> adoptionRequestList = await dbContext.AdoptionRequests.Include(x => x.User).Where(u => u.User.UserID == "1").OrderByDescending(t => t.RequestDate).ToListAsync();
+            List<AdoptionRequest> adoptionRequestList = await dbContext.AdoptionRequests.Include(x => x.User).Where(u => u.User.Id == userId).OrderByDescending(t => t.RequestDate).ToListAsync();
 
             foreach (AdoptionRequest item in adoptionRequestList)
             {
@@ -64,7 +67,8 @@ namespace petrus.Controllers
 
         public IActionResult Details(string id)
         {
-            User user = dbContext.Users.FirstOrDefault(x => x.UserID == "1");
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            User user = dbContext.Users.FirstOrDefault(x => x.Id == userId);
 
             if (id != null)
             {

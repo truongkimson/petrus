@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using petrus.Areas.Identity.Pages.Account.Manage;
 using petrus.Data;
 using petrus.BindingModel;
 using petrus.Models;
@@ -18,10 +20,15 @@ namespace petrus.Controllers
     {
         private readonly petrusDb dbContext;
         private readonly IWebHostEnvironment webHostEnvironment;
-        public AdoptionListingAPIController(petrusDb context, IWebHostEnvironment hostEnvironment)
+        private readonly SignInManager<User> _signInManager;
+        private readonly ILogger<ChangePasswordModel> _logger;
+
+        public AdoptionListingAPIController(petrusDb context, IWebHostEnvironment hostEnvironment, SignInManager<User> signInManager, ILogger<ChangePasswordModel>logger)
         {
             dbContext = context;
             webHostEnvironment = hostEnvironment;
+            _signInManager = signInManager;
+            _logger = logger;
         }
 
         [HttpGet]
@@ -38,7 +45,7 @@ namespace petrus.Controllers
         public async Task<IActionResult> GetAdoptionRequestByListing([FromBody] AdoptionRequestAPIBinding adoptionRequestApiBinding)
         {
             /*var listing = await dbContext.AdoptionRequests.Include(x => x.AdoptionListing).Where(u => u.AdoptionListing.AdoptionListingID == adoptionListingId && u.User.UserID=).ToListAsync();*/
-            var requests = await dbContext.AdoptionRequests.Where(u => u.User.UserID==adoptionRequestApiBinding.userId).ToListAsync();
+            var requests = await dbContext.AdoptionRequests.Where(u => u.User.Id==adoptionRequestApiBinding.userId).ToListAsync();
 
             if (requests != null)
             {
@@ -78,10 +85,20 @@ namespace petrus.Controllers
         [Route("login")]
         public async Task<IActionResult> IsUserValid([FromBody] LoginAttempt loginAttempt)
         {
-            User user = await dbContext.Users.FirstOrDefaultAsync(x => x.EmailAddress == loginAttempt.username & x.Password == loginAttempt.password);
+            /*User user = await dbContext.Users.FirstOrDefaultAsync(x => x.Email == loginAttempt.username & x.PasswordHash == loginAttempt.password);
             if (user != null)
                 return Ok(user);
+            return null;*/
+            var result = await _signInManager.PasswordSignInAsync(loginAttempt.username, loginAttempt.password, false,
+                lockoutOnFailure: false);
+            if (result.Succeeded)
+            {
+                User user = await dbContext.Users.FirstOrDefaultAsync(x => x.Email == loginAttempt.username);
+                return Ok(user);
+            }
+
             return null;
+
         }
 
         [HttpPost]
@@ -89,7 +106,7 @@ namespace petrus.Controllers
         public async Task<IActionResult> createApplication([FromBody] ApplicationAttempt applicationAttempt)
         {
             AdoptionRequest newRequest = new AdoptionRequest();
-            User user= await dbContext.Users.FirstOrDefaultAsync(x => x.UserID == applicationAttempt.userId);
+            User user= await dbContext.Users.FirstOrDefaultAsync(x => x.Id == applicationAttempt.userId);
             newRequest.User = user;
             AdoptionListing listing = await dbContext.AdoptionListings.FirstOrDefaultAsync(x => x.AdoptionListingID == applicationAttempt.adoptionListingId);
             newRequest.AdoptionListing = listing;

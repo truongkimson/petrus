@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Globalization;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using petrus.Data;
 using petrus.Models;
 
@@ -12,13 +14,20 @@ namespace pwned_shop.Data
 {
     public static class DbInitializer
     {
-        public static void Initialize(petrusDb db)
+        public static async Task InitializeAsync(petrusDb db, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
-            db.Database.EnsureDeleted();
-            db.Database.EnsureCreated();
+            await db.Database.EnsureDeletedAsync();
+            await db.Database.EnsureCreatedAsync();
 
             if (db.Users.Any())
                 return;
+
+
+            // create roles
+            var adminRole = new IdentityRole() {Name = "Admin"};
+            await roleManager.CreateAsync(adminRole);
+            var userRole = new IdentityRole() {Name = "User"};
+            await roleManager.CreateAsync(userRole);
 
             // populate Users table using data from csv/UserProfile.csv
             var rows = ReadCsv("Data/csv/Users.csv");
@@ -27,15 +36,17 @@ namespace pwned_shop.Data
                 var row = rows[i];
                 User u = new User()
                 {
-                    UserID = row[0],
-                    Password = row[1],
+                    Id = row[0],
                     Name = row[2],
-                    PhoneNumber = Convert.ToInt32(row[3]),
-                    EmailAddress = row[4],
+                    PhoneNumber = row[3],
+                    Email = row[4],
+                    UserName = row[4],
                     SearchTerms = row[5]
                 };
 
-                db.Users.Add(u);
+                await userManager.CreateAsync(u, row[1]);
+                await userManager.AddToRoleAsync(u, row[6]);
+                //db.Users.Add(u);
             }
 
             // populate Ratings table using data from csv/RatingESRB.csv
@@ -56,7 +67,7 @@ namespace pwned_shop.Data
 
             //    db.Admins.Add(a);
             //}
-            
+
 
             // populate Products table using data from csv/Product.csv
             rows = ReadCsv("Data/csv/AdoptionListing.csv");
@@ -88,9 +99,9 @@ namespace pwned_shop.Data
                     UserID = Convert.ToString(row[23])
                 };
 
-                db.AdoptionListings.Add(al);
+                await db.AdoptionListings.AddAsync(al);
             }
-            db.SaveChanges();
+            await db.SaveChangesAsync();
 
             // populate Discounts table using data from csv/Discount.csv
             rows = ReadCsv("Data/csv/AdoptionRequest.csv");
@@ -105,13 +116,13 @@ namespace pwned_shop.Data
                     RequestDate = DateTime.Parse(row[3], new CultureInfo("en-SG")),
                     requestStatus = (RequestStatus)Enum.Parse(typeof(RequestStatus), row[4]),
                     OutcomeDateTime = row[5] == "" ? default(DateTime) : DateTime.Parse(row[5], new CultureInfo("en-SG")),
-                    User = db.Users.Find(row[6]),
+                    User = (User)db.Users.Find(row[6]),
                     AdoptionListing = db.AdoptionListings.Find(row[7]),
                 };
 
-                db.AdoptionRequests.Add(ar);
+                await db.AdoptionRequests.AddAsync(ar);
             }
-            db.SaveChanges();
+            await db.SaveChangesAsync();
         }
 
         public static List<string[]> ReadCsv(string path)

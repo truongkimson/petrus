@@ -8,25 +8,28 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace petrus.Controllers
 {
+    [Authorize]
     public class AdoptionListingController : Controller
     {
         private readonly petrusDb dbContext;
         private readonly IWebHostEnvironment webHostEnvironment;
-        private string userId;
-        public AdoptionListingController(petrusDb context, IWebHostEnvironment hostEnvironment)
+
+        public AdoptionListingController(petrusDb dbContext, IWebHostEnvironment webHostEnvironment, UserManager<User> userManager)
         {
-            dbContext = context;
-            //hard coded for now, have to retrieve user data from login details to determine id.
-            this.userId = "10";
-            webHostEnvironment = hostEnvironment;
+            this.dbContext = dbContext;
+            this.webHostEnvironment = webHostEnvironment;
         }
+
         public IActionResult Index()
         {
-            
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var listings = dbContext.AdoptionListings.Where(x=>x.UserID==userId).OrderBy(o=>o.AdoptionListingID.Length).ThenBy(a=>a.AdoptionListingID).ToList();
 
             return View(listings);
@@ -41,6 +44,7 @@ namespace petrus.Controllers
         {
             if (ModelState.IsValid)
             {
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 string[] uniqueFileNames = UploadedFile(model);
                 AdoptionListing myListing = new AdoptionListing
                 {

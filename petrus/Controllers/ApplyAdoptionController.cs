@@ -4,8 +4,10 @@ using petrus.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using petrus.BindingModel;
+using Microsoft.AspNetCore.Authorization;
 
 namespace petrus.Controllers
 {
@@ -39,9 +41,11 @@ namespace petrus.Controllers
             return View();
         }
 
+        [Authorize]
         public IActionResult Application(String id)
         {
-            User user = dbContext.Users.FirstOrDefault(x => x.UserID == "1");
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            User user = dbContext.Users.FirstOrDefault(x => x.Id == userId);
 
             if (id != null)
             {
@@ -60,13 +64,14 @@ namespace petrus.Controllers
             return View();
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult ApplyAdoptionResult([FromForm] AdoptionApplicationBinding application)
         {
             //this boolean can be used in the future if we want to have separate views for acceptance or not
             bool approve = true;
             string id = application.listingId;
-            string userId = "1";
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (id != null)
             {
                 AdoptionListing listing = dbContext.AdoptionListings.FirstOrDefault(x => x.AdoptionListingID == id);
@@ -96,7 +101,7 @@ namespace petrus.Controllers
                         approve = false;
                     }
                 }
-                User user = dbContext.Users.FirstOrDefault(x => x.UserID == userId);
+                User user = dbContext.Users.FirstOrDefault(x => x.Id == userId);
                 if (user.AdoptionRequests.Any(o => o.AdoptionListing == listing))
                 {
                     ViewData["reject"] = "You have already applied to this listing";

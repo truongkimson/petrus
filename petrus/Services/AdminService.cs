@@ -196,7 +196,7 @@ namespace petrus.Services
                     age = r.AdoptionListing.Age,
                     breed = r.AdoptionListing.Breed1.ToString(),
                     adopter_name = r.User.Name,
-                    email = r.User.EmailAddress,
+                    email = r.User.Email,
                     img = r.AdoptionListing.Image
                 });
         }

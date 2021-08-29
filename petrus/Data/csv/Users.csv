@@ -1,21 +1,25 @@
-UserId,Password,Name,PhoneNumber,EmailAddress,SearchTerms
-1,W3LiiD,Rosabelle,82981728,rvitler0@squidoo.com,"Darter, african"
-2,uGEVKdD,Sax,87790504,sbelmont1@mediafire.com,"Puma, south american"
-3,wnuUZA,Den,97581197,dstegel2@ucoz.ru,Rhesus macaque
-4,Mld1oPtAP3,Sigmund,95011782,sjennick3@economist.com,Black-tailed prairie dog
-5,ito39HQF,Diarmid,89793746,dsavill4@is.gd,"Caiman, spectacled"
-6,OQ1aymsL9k,Bev,81741204,bbygraves5@si.edu,Scarlet macaw
-7,5Vwhlu,Nat,85130117,nalwin6@ucla.edu,"Deer, barasingha"
-8,enPLnx,Ailis,93973344,aoshiel7@biglobe.ne.jp,"Dragon, western bearded"
-9,SYVbAlQGtXUI,Urbano,88867996,uloughran8@nifty.com,Urial
-10,eomBjhoSsvM,Nikaniki,95670105,nnanson9@phoca.cz,Groundhog
-11,oEQUE7QcY,Oberon,94540491,ojeandona@imdb.com,"Wallaby, red-necked"
-12,cIEZKJ3oG,Abdul,89828853,ahasemanb@chicagotribune.com,"Deer, savannah"
-13,Yr9Dn3AEq,Brennan,80463136,bbehrensc@devhub.com,Four-striped grass mouse
-14,JhkfAWb8M6,Garold,86703077,galeshintsevd@imgur.com,Black swan
-15,Wqkvtn4,Charline,97987962,cmcraveye@answers.com,Flying fox (unidentified)
-16,XhO9XtSH,Viviyan,82970248,vcoverlyf@alexa.com,Malay squirrel (unidentified)
-17,SCuEbkd4AFsn,Rowe,85243569,rpaskeg@accuweather.com,"Nighthawk, common"
-18,IqdqLWw,Ruthi,96974646,rbottomleyh@cdc.gov,Asiatic jackal
-19,pM4eCVc9r,Warner,82882000,wfiveashi@qq.com,Springbok
-20,LUshg9tNUDf,Weylin,97357300,wlunckj@ebay.com,"Fox, pampa gray"
+UserId,Password,Name,PhoneNumber,EmailAddress,SearchTerms,Role
+1,P@ssw0rd,Rosabelle,82981728,rvitler0@squidoo.com,"Darter, african",User
+2,P@ssw0rd,Sax,87790504,sbelmont1@mediafire.com,"Puma, south american",User
+3,P@ssw0rd,Den,97581197,dstegel2@ucoz.ru,Rhesus macaque,User
+4,P@ssw0rd,Sigmund,95011782,sjennick3@economist.com,Black-tailed prairie dog,User
+5,P@ssw0rd,Diarmid,89793746,dsavill4@is.gd,"Caiman, spectacled",User
+6,P@ssw0rd,Bev,81741204,bbygraves5@si.edu,Scarlet macaw,User
+7,P@ssw0rd,Nat,85130117,nalwin6@ucla.edu,"Deer, barasingha",User
+8,P@ssw0rd,Ailis,93973344,aoshiel7@biglobe.ne.jp,"Dragon, western bearded",User
+9,P@ssw0rd,Urbano,88867996,uloughran8@nifty.com,Urial,User
+10,P@ssw0rd,Nikaniki,95670105,nnanson9@phoca.cz,Groundhog,User
+11,P@ssw0rd,Oberon,94540491,ojeandona@imdb.com,"Wallaby, red-necked",User
+12,P@ssw0rd,Abdul,89828853,ahasemanb@chicagotribune.com,"Deer, savannah",User
+13,P@ssw0rd,Brennan,80463136,bbehrensc@devhub.com,Four-striped grass mouse,User
+14,P@ssw0rd,Garold,86703077,galeshintsevd@imgur.com,Black swan,User
+15,P@ssw0rd,Charline,97987962,cmcraveye@answers.com,Flying fox (unidentified),User
+16,P@ssw0rd,Viviyan,82970248,vcoverlyf@alexa.com,Malay squirrel (unidentified),User
+17,P@ssw0rd,Rowe,85243569,rpaskeg@accuweather.com,"Nighthawk, common",User
+18,P@ssw0rd,Ruthi,96974646,rbottomleyh@cdc.gov,Asiatic jackal,User
+19,P@ssw0rd,Warner,82882000,wfiveashi@qq.com,Springbok,User
+20,P@ssw0rd,Weylin,97357300,wlunckj@ebay.com,"Fox, pampa gray",User
+21,P@ssw0rd,Tester Testson,12345678,test@test.com,cat,User
+22,P@ssw0rd,Admin1,82970248,admin1@petrus.com,,Admin
+23,P@ssw0rd,Admin2,85243569,admin2@petrus.com,,Admin
+24,P@ssw0rd,Admin3,96974646,admin3@petrus.com,,Admin
