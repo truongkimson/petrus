@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using petrus.BindingModel;
 using petrus.Data;
 using petrus.Models;
 
@@ -57,16 +58,23 @@ namespace petrus.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name,PhoneNumber,Email")] User user)
+        public async Task<IActionResult> Create([Bind("Name,PhoneNumber,Email")] UserDetails userDetails)
         {
             if (ModelState.IsValid)
             {
-                user.Id = Guid.NewGuid().ToString();
+                User user = new User()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Name = userDetails.Name,
+                    PhoneNumber = userDetails.PhoneNumber,
+                    Email = userDetails.PhoneNumber
+                };
+                
                 _context.Add(user);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(user);
+            return View(userDetails);
         }
 
         // GET: AdminUserCRUD/Edit/5
@@ -82,7 +90,15 @@ namespace petrus.Controllers
             {
                 return NotFound();
             }
-            return View(user);
+
+            return View(new UserDetails()
+            {
+                Id = user.Id,
+                ConcurrencyStamp =  user.ConcurrencyStamp,
+                Name = user.Name,
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber
+            });
         }
 
         // POST: AdminUserCRUD/Edit/5
@@ -90,12 +106,21 @@ namespace petrus.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,ConcurrencyStamp, Name,PhoneNumber,Email")] User user)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,ConcurrencyStamp, Name,PhoneNumber,Email")] UserDetails userDetails)
         {
-            if (id != user.Id)
+            if (id != userDetails.Id)
             {
                 return NotFound();
             }
+
+            User user = new User()
+            {
+                Id = userDetails.Id,
+                ConcurrencyStamp = userDetails.ConcurrencyStamp,
+                Name = userDetails.Name,
+                PhoneNumber = userDetails.PhoneNumber,
+                Email = userDetails.Email
+            };
 
             if (ModelState.IsValid)
             {
@@ -117,7 +142,7 @@ namespace petrus.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(user);
+            return View(userDetails);
         }
 
         // GET: AdminUserCRUD/Delete/5
@@ -144,6 +169,12 @@ namespace petrus.Controllers
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
             var user = await _context.Users.FindAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            _context.AdoptionListings.RemoveRange(_context.AdoptionListings.Where(l => l.UserId == id));
             _context.Users.Remove(user);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

@@ -30,7 +30,7 @@ namespace petrus.Controllers
         public IActionResult Index()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var listings = dbContext.AdoptionListings.Where(x=>x.UserID==userId).OrderBy(o=>o.AdoptionListingID.Length).ThenBy(a=>a.AdoptionListingID).ToList();
+            var listings = dbContext.AdoptionListings.Where(x=>x.UserId==userId).OrderBy(o=>o.AdoptionListingID.Length).ThenBy(a=>a.AdoptionListingID).ToList();
 
             return View(listings);
         }
@@ -48,7 +48,6 @@ namespace petrus.Controllers
                 string[] uniqueFileNames = UploadedFile(model);
                 AdoptionListing myListing = new AdoptionListing
                 {
-                    UserID=userId,
                     Species = model.Species,
                     Name = model.Name,
                     Breed1 = model.Breed1,
@@ -67,7 +66,8 @@ namespace petrus.Controllers
                     Image = uniqueFileNames[0],
                     Video = uniqueFileNames[1],
                     ListingDate = DateTime.Now,
-                    ApplicationStatus = ApplicationStatus.Open
+                    ApplicationStatus = ApplicationStatus.Open,
+                    UserId = userId
                 };
                 dbContext.AdoptionListings.Add(myListing);
                 await dbContext.SaveChangesAsync();

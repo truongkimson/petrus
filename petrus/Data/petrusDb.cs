@@ -24,19 +24,22 @@ namespace petrus.Data
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<User>().Property(e => e.Id).ValueGeneratedOnAdd();
-            modelBuilder.Entity<User>().HasMany(u => u.AdoptionRequests);
-            modelBuilder.Entity<User>().HasMany(u => u.AdoptionListings);
+            modelBuilder.Entity<User>().HasMany(u => u.AdoptionRequests)
+                .WithOne(r => r.User)
+                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<User>().HasMany(u => u.AdoptionListings)
+                .WithOne(l => l.User)
+                .OnDelete(DeleteBehavior.ClientCascade);
 
             modelBuilder.Entity<AdoptionListing>().HasIndex(al => al.AdoptionListingID);
             //modelBuilder.Entity<AdoptionListing>().HasOne(al => al.User);
-            modelBuilder.Entity<AdoptionListing>().HasMany(al => al.AdoptionRequests);
+            modelBuilder.Entity<AdoptionListing>().HasMany(al => al.AdoptionRequests)
+                .WithOne(r => r.AdoptionListing)
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<AdoptionRequest>().HasIndex(ar => ar.AdoptionRequestId).IsUnique();
-            modelBuilder.Entity<AdoptionRequest>().HasOne(ar => ar.AdoptionListing);
-            modelBuilder.Entity<AdoptionRequest>().HasOne(ar => ar.User);
-
-
-
+            //modelBuilder.Entity<AdoptionRequest>().HasOne(ar => ar.AdoptionListing);
+            //modelBuilder.Entity<AdoptionRequest>().HasOne(ar => ar.User);
         }
     }
     

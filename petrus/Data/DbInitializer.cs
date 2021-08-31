@@ -96,7 +96,8 @@ namespace pwned_shop.Data
                     Description = row[20],
                     ListingDate = DateTime.Parse(row[21], new CultureInfo("en-SG")),
                     ApplicationStatus = (ApplicationStatus)Enum.Parse(typeof(ApplicationStatus), row[22]),
-                    UserID = Convert.ToString(row[23])
+                    UserId = row[23],
+                    User = await db.Users.FindAsync(row[23])
                 };
 
                 await db.AdoptionListings.AddAsync(al);
@@ -116,7 +117,7 @@ namespace pwned_shop.Data
                     RequestDate = DateTime.Parse(row[3], new CultureInfo("en-SG")),
                     requestStatus = (RequestStatus)Enum.Parse(typeof(RequestStatus), row[4]),
                     OutcomeDateTime = row[5] == "" ? default(DateTime) : DateTime.Parse(row[5], new CultureInfo("en-SG")),
-                    User = (User)db.Users.Find(row[6]),
+                    User = db.Users.Find(row[6]),
                     AdoptionListing = db.AdoptionListings.Find(row[7]),
                 };
 
